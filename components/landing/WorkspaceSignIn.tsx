@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const ROOT_DOMAIN = 'pathment.me';
+const APP_URL = 'https://app.pathment.me';
 
 function slugify(value: string) {
   return value
@@ -50,7 +51,7 @@ export function WorkspaceSignIn() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!slug) return;
-    window.location.href = `https://${slug}.${ROOT_DOMAIN}/login`;
+    window.location.href = `${APP_URL}/w/${slug}/login`;
   }
 
   return (
@@ -87,9 +88,7 @@ export function WorkspaceSignIn() {
                 spellCheck={false}
                 className="min-w-0 flex-1 bg-white px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
               />
-              <span className="flex items-center bg-zinc-50 px-3 text-xs font-medium text-zinc-500">
-                .{ROOT_DOMAIN}
-              </span>
+              <span className="flex items-center bg-zinc-50 px-3 text-xs font-medium text-zinc-500">workspace</span>
             </div>
             <button
               type="submit"
@@ -101,8 +100,8 @@ export function WorkspaceSignIn() {
           </form>
           <p className="mt-3 text-xs text-zinc-500">
             Don&apos;t have a workspace yet?{' '}
-            <a href="#request-access" onClick={() => setOpen(false)} className="font-medium text-zinc-900 underline">
-              Request access
+            <a href="/pricing" onClick={() => setOpen(false)} className="font-medium text-zinc-900 underline">
+              Browse plans
             </a>
           </p>
         </div>

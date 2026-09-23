@@ -1,0 +1,14 @@
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { PublicPlans } from '../../components/landing/PublicPlans';
+
+export const metadata: Metadata = { title: 'Plans | Pathment', description: 'Compare workspace plans before creating a Pathment workspace.' };
+
+export default function PricingPage() {
+  return <main className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
+    <nav aria-label="Pricing navigation" className="flex flex-wrap justify-between gap-4 text-sm font-semibold"><Link href="/">← Pathment home</Link><a href="#getting-started">How to get started</a></nav>
+    <header className="max-w-3xl py-14"><p className="font-semibold text-brand-600">Workspace plans</p><h1 className="mt-3 text-4xl font-semibold sm:text-5xl">Find the right fit before you create a workspace.</h1><p className="mt-5 text-lg text-zinc-600">Compare published prices, limits, and features. No account or workspace is needed to browse.</p><p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">Online checkout is not available. Owners and admins can request a plan change in their workspace. Pathment arranges a manual invoice after your request. An operator confirms and activates the plan; requesting alone does not charge you or change your limits.</p></header>
+    <PublicPlans />
+    <section id="getting-started" className="mt-14 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8"><h2 className="text-2xl font-semibold">Getting started</h2><div className="mt-6 grid gap-8 md:grid-cols-2"><div><h3 className="font-semibold">New to Pathment?</h3><p className="mt-2 text-sm leading-6 text-zinc-600">Admin self-registration is not available yet. Account registration currently requires an invitation or a clan joining link. Contact the team about setting up your first workspace.</p><a href="mailto:enterprise@pathment.com?subject=Pathment%20workspace%20setup" className="mt-4 inline-block rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">Email about workspace setup</a><p className="mt-2 text-xs text-zinc-500">Opens your email app; no request is submitted on this website.</p></div><div><h3 className="font-semibold">Already have a workspace?</h3><p className="mt-2 text-sm leading-6 text-zinc-600">Sign in from the home page. Owners and admins can open Settings → Plans to request a change. Pathment arranges an invoice, then an operator confirms and activates the change. Your current plan and limits remain in effect until activation.</p><p className="mt-3 text-sm leading-6 text-zinc-600">Additional workspace creation is not available yet. When enabled, Settings → Organization will let you create a workspace on Starter with you as owner, without importing another workspace’s member directory or data.</p><Link href="/" className="mt-4 inline-block text-sm font-semibold text-brand-700 underline">Go to workspace sign-in</Link></div></div></section>
+  </main>;
+}

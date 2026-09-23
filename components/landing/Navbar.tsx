@@ -7,6 +7,7 @@ import { WorkspaceSignIn } from './WorkspaceSignIn';
 import { navItems } from './content';
 
 const ROOT_DOMAIN = 'pathment.me';
+const APP_URL = 'https://app.pathment.me';
 
 function slugify(value: string) {
   return value
@@ -27,7 +28,7 @@ function MobileSignIn({ onNavigate }: { onNavigate: () => void }) {
     event.preventDefault();
     if (!slug) return;
     onNavigate();
-    window.location.href = `https://${slug}.${ROOT_DOMAIN}/login`;
+    window.location.href = `${APP_URL}/w/${slug}/login`;
   }
 
   return (
@@ -43,9 +44,7 @@ function MobileSignIn({ onNavigate }: { onNavigate: () => void }) {
           spellCheck={false}
           className="min-w-0 flex-1 px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
         />
-        <span className="flex items-center bg-zinc-50 px-2.5 text-[11px] font-medium text-zinc-500">
-          .{ROOT_DOMAIN}
-        </span>
+        <span className="flex items-center bg-zinc-50 px-2.5 text-[11px] font-medium text-zinc-500">workspace</span>
       </div>
       <button
         type="submit"

@@ -57,6 +57,7 @@ export const platformHighlights = [
 ] as const;
 
 export const navItems = [
+  { label: 'Plans', href: '/pricing' },
   { href: '#solutions', label: 'Solutions' },
   { href: '#features', label: 'Features' },
   { href: '#how-it-works', label: 'How It Works' },
