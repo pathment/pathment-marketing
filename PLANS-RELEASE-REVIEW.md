@@ -1,5 +1,15 @@
 # Plans UX release review
 
+## September 23 marketing refresh update
+
+The public production catalog now responds successfully and has been verified through the marketing UI. The marketing client reads `/api/plans`; this server route fetches the upstream public catalog without credentials and avoids browser cross-origin dependencies. Current published monthly plans are Starter (free), Growth (USD 99), and Scale (USD 299). Prices remain API-driven.
+
+The nonfunctional newsletter, placeholder social/navigation links, and unsupported operational-status claim have been removed. Workspace URL parsing and the Dev Weekends login handoff have been checked. This does not verify authenticated invoice activation, workspace creation, or cross-tenant isolation. The original review below records the earlier rollout state; its endpoint deployment/CORS and placeholder-control notes are superseded by this update.
+
+The latest design pass removes client attribution, adds green logo assets and light/dark themes, and includes admin, mentor, and mentee captures in a 32-second tour. The second design pass uses real demo screenshots, the product green palette, and a captioned visual tour. Plan cards now distinguish amount, currency, and workspace capacity; selecting a plan carries it into the team-assisted setup enquiry.
+
+## Earlier review
+
 UX implementation complete; production rollout remains pending.
 
 Implemented public `/pricing`, linked from desktop/mobile navigation and the no-workspace sign-in prompt. Published monthly prices, currencies, limits and enabled features come only from `GET /api/organizations/plans`; there are no fallback prices or checkout controls. Loading, empty, malformed-response, timeout and retry states are included. Fetch sends no credentials.

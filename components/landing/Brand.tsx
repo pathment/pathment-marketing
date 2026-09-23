@@ -1,26 +1,28 @@
-import Image from 'next/image';
-import Link from 'next/link';
-
-interface BrandProps {
+import Image from "next/image";
+import Link from "next/link";
+export function Brand({
+  compact = false,
+  href = "/",
+  inverse = false,
+}: {
   compact?: boolean;
   href?: string;
   inverse?: boolean;
-}
-
-export function Brand({ compact = false, href = '#', inverse = false }: BrandProps) {
-  const height = compact ? 24 : 28;
-
+}) {
   return (
-    <Link href={href} aria-label="Pathment home" className="inline-flex min-w-0 items-center">
+    <Link
+      href={href}
+      aria-label="Pathment home"
+      className={`inline-flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight ${inverse ? "text-white" : "text-ink"}`}
+    >
       <Image
-        src={inverse ? '/logo-inverse.svg' : '/logo.svg'}
-        alt="Pathment"
-        width={Math.round(height * 5.17)}
-        height={height}
+        src="/logo-mark.svg"
+        alt=""
+        width={compact ? 30 : 34}
+        height={compact ? 30 : 34}
         priority
-        className="h-auto w-auto"
-        style={{ height, width: 'auto' }}
       />
+      Pathment
     </Link>
   );
 }

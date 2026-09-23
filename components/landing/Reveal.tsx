@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion, type Variants } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { motion, type Variants } from "framer-motion";
+import type { ReactNode } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -26,9 +26,9 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial="hidden"
+      initial={false}
       whileInView="visible"
-      viewport={{ once, margin: '-60px' }}
+      viewport={{ once, margin: "-60px" }}
       variants={fadeUp}
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -47,9 +47,9 @@ export function Stagger({ children, className, stagger = 0.08 }: StaggerProps) {
   return (
     <motion.div
       className={className}
-      initial="hidden"
+      initial={false}
       whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true, margin: "-40px" }}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: stagger } },
@@ -60,7 +60,13 @@ export function Stagger({ children, className, stagger = 0.08 }: StaggerProps) {
   );
 }
 
-export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
+export function StaggerItem({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <motion.div
       className={className}

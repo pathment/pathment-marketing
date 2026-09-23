@@ -1,16 +1,22 @@
-'use client';
+"use client";
 
-import { ArrowRight, GitBranch, LineChart, MessageSquare, Users } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
-import { solutionTabs } from './content';
-import { SectionShell } from './SectionShell';
+import {
+  ArrowRight,
+  GitBranch,
+  LineChart,
+  MessageSquare,
+  Users,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { solutionTabs } from "./content";
+import { SectionShell } from "./SectionShell";
 
 const icons: Record<string, LucideIcon> = {
   users: Users,
-  'git-branch': GitBranch,
-  'line-chart': LineChart,
+  "git-branch": GitBranch,
+  "line-chart": LineChart,
   messages: MessageSquare,
 };
 
@@ -25,15 +31,32 @@ function MatchingPanel() {
       </div>
       <div className="space-y-2">
         {[
-          { pair: 'Alex K. → Sarah M.', track: 'Staff Engineer', status: 'Approved' },
-          { pair: 'Jordan L. → Marcus W.', track: 'Engineering Mgr', status: 'Review' },
-          { pair: 'Sam R. → Elena P.', track: 'Platform Lead', status: 'Review' },
+          {
+            pair: "Alex K. → Sarah M.",
+            track: "Staff Engineer",
+            status: "Approved",
+          },
+          {
+            pair: "Jordan L. → Marcus W.",
+            track: "Engineering Mgr",
+            status: "Review",
+          },
+          {
+            pair: "Sam R. → Elena P.",
+            track: "Platform Lead",
+            status: "Review",
+          },
         ].map((row, i) => (
-          <div key={row.pair} className="rounded-xl border border-zinc-100 bg-zinc-50 px-3 py-2.5">
+          <div
+            key={row.pair}
+            className="rounded-xl border border-zinc-100 bg-zinc-50 px-3 py-2.5"
+          >
             <div className="flex items-center justify-between gap-2">
-              <span className="truncate text-xs font-medium text-brand-900">{row.pair}</span>
+              <span className="truncate text-xs font-medium text-brand-900">
+                {row.pair}
+              </span>
               <span
-                className={`flex-shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${i === 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}
+                className={`flex-shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${i === 0 ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}
               >
                 {row.status}
               </span>
@@ -54,9 +77,9 @@ function RoadmapPanel() {
       </div>
       <div className="space-y-3">
         {[
-          { name: 'System Design', pct: 100 },
-          { name: 'Technical Leadership', pct: 72 },
-          { name: 'Org Influence', pct: 48 },
+          { name: "System Design", pct: 100 },
+          { name: "Technical Leadership", pct: 72 },
+          { name: "Org Influence", pct: 48 },
         ].map((item) => (
           <div key={item.name}>
             <div className="mb-1 flex justify-between text-[11px]">
@@ -64,7 +87,10 @@ function RoadmapPanel() {
               <span className="font-mono text-zinc-400">{item.pct}%</span>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-zinc-100">
-              <div className="h-full rounded-full bg-brand-500" style={{ width: `${item.pct}%` }} />
+              <div
+                className="h-full rounded-full bg-brand-500"
+                style={{ width: `${item.pct}%` }}
+              />
             </div>
           </div>
         ))}
@@ -86,11 +112,14 @@ function InsightsPanel() {
       </div>
       <div className="grid grid-cols-3 gap-2">
         {[
-          { label: 'On Track', value: '82%' },
-          { label: 'At Risk', value: '6' },
-          { label: 'Completed', value: '34' },
+          { label: "On Track", value: "82%" },
+          { label: "At Risk", value: "6" },
+          { label: "Completed", value: "34" },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-lg border border-zinc-100 bg-zinc-50 p-2.5 text-center">
+          <div
+            key={stat.label}
+            className="rounded-lg border border-zinc-100 bg-zinc-50 p-2.5 text-center"
+          >
             <div className="text-lg font-bold text-brand-900">{stat.value}</div>
             <div className="text-[10px] text-zinc-500">{stat.label}</div>
           </div>
@@ -111,20 +140,26 @@ function OperationsPanel() {
       </div>
       <div className="space-y-2">
         {[
-          { task: 'Weekly check-in', mentor: 'Sarah M.', status: 'Complete' },
-          { task: 'Milestone review', mentor: 'Marcus W.', status: 'Due today' },
-          { task: 'Async feedback', mentor: 'Elena P.', status: 'Scheduled' },
+          { task: "Weekly check-in", mentor: "Sarah M.", status: "Complete" },
+          {
+            task: "Milestone review",
+            mentor: "Marcus W.",
+            status: "Due today",
+          },
+          { task: "Async feedback", mentor: "Elena P.", status: "Scheduled" },
         ].map((row, i) => (
           <div
             key={row.task}
             className="flex items-center justify-between gap-2 rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2"
           >
             <div>
-              <div className="text-xs font-medium text-brand-900">{row.task}</div>
+              <div className="text-xs font-medium text-brand-900">
+                {row.task}
+              </div>
               <div className="text-[10px] text-zinc-500">{row.mentor}</div>
             </div>
             <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${i === 0 ? 'bg-emerald-50 text-emerald-700' : i === 1 ? 'bg-amber-50 text-amber-700' : 'bg-brand-50 text-brand-700'}`}
+              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${i === 0 ? "bg-emerald-50 text-emerald-700" : i === 1 ? "bg-amber-50 text-amber-700" : "bg-brand-50 text-brand-700"}`}
             >
               {row.status}
             </span>
@@ -135,7 +170,10 @@ function OperationsPanel() {
   );
 }
 
-const panels: Record<(typeof solutionTabs)[number]['visual'], React.ComponentType> = {
+const panels: Record<
+  (typeof solutionTabs)[number]["visual"],
+  React.ComponentType
+> = {
   matching: MatchingPanel,
   roadmap: RoadmapPanel,
   insights: InsightsPanel,
@@ -155,7 +193,7 @@ export function Solutions() {
           id="solutions-title"
           className="font-display text-3xl font-semibold tracking-tight text-brand-950 sm:text-4xl md:text-5xl"
         >
-          Packed with tools for structured mentorship
+          The right support. At every step.
         </h2>
       </div>
 
@@ -164,6 +202,7 @@ export function Solutions() {
         <div className="mb-5 rounded-2xl border border-zinc-200 bg-zinc-100/90 p-1.5 sm:mb-6 sm:p-2">
           <div
             role="tablist"
+            aria-label="Platform capabilities"
             className="grid grid-cols-2 gap-1 sm:grid-cols-4"
           >
             {solutionTabs.map((item, index) => {
@@ -176,10 +215,33 @@ export function Solutions() {
                   onClick={() => setActive(index)}
                   aria-selected={isActive}
                   role="tab"
+                  id={`solution-tab-${item.id}`}
+                  aria-controls="solution-panel"
+                  tabIndex={isActive ? 0 : -1}
+                  onKeyDown={(event) => {
+                    const next =
+                      event.key === "ArrowRight"
+                        ? (index + 1) % solutionTabs.length
+                        : event.key === "ArrowLeft"
+                          ? (index - 1 + solutionTabs.length) %
+                            solutionTabs.length
+                          : event.key === "Home"
+                            ? 0
+                            : event.key === "End"
+                              ? solutionTabs.length - 1
+                              : null;
+                    if (next !== null) {
+                      event.preventDefault();
+                      setActive(next);
+                      document
+                        .getElementById(`solution-tab-${solutionTabs[next].id}`)
+                        ?.focus();
+                    }
+                  }}
                   className={`flex w-full items-center justify-center gap-1.5 rounded-xl px-2 py-2.5 text-center text-[11px] font-medium transition-all duration-300 sm:gap-2 sm:px-3 sm:text-sm ${
                     isActive
-                      ? 'border border-zinc-200/80 bg-white text-brand-900 shadow-sm-soft'
-                      : 'text-zinc-600 hover:bg-white/60 hover:text-brand-900'
+                      ? "border border-zinc-200/80 bg-white text-brand-900 shadow-sm-soft"
+                      : "text-zinc-600 hover:bg-white/60 hover:text-brand-900"
                   }`}
                 >
                   <TabIcon className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" />
@@ -193,6 +255,8 @@ export function Solutions() {
         {/* Split content card */}
         <div
           role="tabpanel"
+          id="solution-panel"
+          aria-labelledby={`solution-tab-${tab.id}`}
           className="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-lg-soft"
         >
           <AnimatePresence mode="wait">
@@ -202,7 +266,7 @@ export function Solutions() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-2"
+              className="grid grid-cols-1 md:grid-cols-2"
             >
               <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
                 <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-brand-100 bg-brand-50 text-brand-600">
@@ -223,7 +287,7 @@ export function Solutions() {
                 </a>
               </div>
 
-              <div className="border-t border-zinc-100 bg-zinc-50/60 p-6 sm:p-8 lg:border-t-0 lg:border-l lg:p-10">
+              <div className="border-t border-zinc-100 bg-zinc-50/60 p-6 sm:p-8 md:border-t-0 md:border-l lg:p-10">
                 <Panel />
               </div>
             </motion.div>

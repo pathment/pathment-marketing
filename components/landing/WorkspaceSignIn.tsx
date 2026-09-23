@@ -1,27 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
-const ROOT_DOMAIN = 'pathment.me';
-const APP_URL = 'https://app.pathment.me';
-
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/^https?:\/\//, '')
-    .replace(new RegExp(`\\.${ROOT_DOMAIN}.*$`), '')
-    .replace(/[^a-z0-9-]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
+import { workspaceSlug, workspaceLoginUrl } from "../../lib/workspace";
 
 export function WorkspaceSignIn() {
   const [open, setOpen] = useState(false);
-  const [workspace, setWorkspace] = useState('');
+  const [workspace, setWorkspace] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (open) {
@@ -31,27 +20,34 @@ export function WorkspaceSignIn() {
 
   useEffect(() => {
     function onPointerDown(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setOpen(false);
       }
     }
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     }
-    document.addEventListener('mousedown', onPointerDown);
-    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.removeEventListener('mousedown', onPointerDown);
-      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
     };
-  }, []);
+  }, [open]);
 
-  const slug = slugify(workspace);
+  const slug = workspaceSlug(workspace);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!slug) return;
-    window.location.href = `${APP_URL}/w/${slug}/login`;
+    const destination = workspaceLoginUrl(workspace);
+    if (destination) window.location.href = destination;
   }
 
   return (
@@ -59,9 +55,10 @@ export function WorkspaceSignIn() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
+        ref={triggerRef}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-700"
+        className="text-sm font-medium text-muted transition-colors hover:text-accent"
       >
         Sign In
       </button>
@@ -70,25 +67,31 @@ export function WorkspaceSignIn() {
         <div
           role="dialog"
           aria-label="Sign in to your workspace"
-          className="absolute right-0 top-full z-50 mt-3 w-80 rounded-xl border border-zinc-200 bg-white p-4 shadow-lg-soft"
+          className="absolute right-0 top-full z-50 mt-3 w-80 rounded-xl border border-line bg-surface p-4 shadow-lg-soft"
         >
-          <p className="mb-1 text-sm font-semibold text-zinc-900">Sign in to your workspace</p>
-          <p className="mb-3 text-xs text-zinc-500">
-            Enter your workspace name to continue to your team&apos;s sign-in page.
+          <p className="mb-1 text-sm font-semibold text-ink">
+            Sign in to your workspace
+          </p>
+          <p className="mb-3 text-xs text-muted">
+            Enter your workspace name to continue to your team&apos;s sign-in
+            page.
           </p>
           <form onSubmit={handleSubmit} className="space-y-2.5">
-            <div className="flex items-stretch overflow-hidden rounded-xl border border-zinc-200 transition-all focus-within:border-brand-300 focus-within:ring-4 focus-within:ring-brand-500/10">
+            <div className="flex items-stretch overflow-hidden rounded-xl border border-line transition-all focus-within:border-brand-300 focus-within:ring-4 focus-within:ring-brand-500/10">
               <input
                 ref={inputRef}
                 type="text"
                 value={workspace}
                 onChange={(event) => setWorkspace(event.target.value)}
+                aria-label="Workspace name or URL"
                 placeholder="your-workspace"
                 autoComplete="off"
                 spellCheck={false}
-                className="min-w-0 flex-1 bg-white px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
+                className="min-w-0 flex-1 bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none"
               />
-              <span className="flex items-center bg-zinc-50 px-3 text-xs font-medium text-zinc-500">workspace</span>
+              <span className="flex items-center bg-canvas px-3 text-xs font-medium text-muted">
+                workspace
+              </span>
             </div>
             <button
               type="submit"
@@ -98,9 +101,18 @@ export function WorkspaceSignIn() {
               Continue <ArrowRight className="h-4 w-4" />
             </button>
           </form>
-          <p className="mt-3 text-xs text-zinc-500">
-            Don&apos;t have a workspace yet?{' '}
-            <a href="/pricing" onClick={() => setOpen(false)} className="font-medium text-zinc-900 underline">
+          {workspace.trim() && !slug ? (
+            <p role="status" className="mt-2 text-xs text-red-700">
+              Enter a valid workspace name or Pathment workspace URL.
+            </p>
+          ) : null}
+          <p className="mt-3 text-xs text-muted">
+            Don&apos;t have a workspace yet?{" "}
+            <a
+              href="/pricing"
+              onClick={() => setOpen(false)}
+              className="font-medium text-ink underline"
+            >
               Browse plans
             </a>
           </p>
