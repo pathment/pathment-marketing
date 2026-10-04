@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-surface">
       <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
-        <div className="grid gap-10 sm:grid-cols-[2fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
             <Brand />
             <p className="mt-4 max-w-xs text-sm leading-6 text-muted">
@@ -41,6 +41,18 @@ export function Footer() {
           </div>
           <div>
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted">
+              Legal
+            </h2>
+            <ul className="space-y-3 text-sm text-muted">
+              <li>
+                <Link href="/privacy" className="hover:text-accent">
+                  Privacy policy
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted">
               Let’s connect
             </h2>
             <ul className="space-y-3 text-sm text-muted">
@@ -62,7 +74,12 @@ export function Footer() {
         </div>
         <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-line pt-6 text-xs text-muted">
           <p>© {new Date().getFullYear()} Pathment. All rights reserved.</p>
-          <p>Built around people. Designed for progress.</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/privacy" className="hover:text-accent">
+              Privacy
+            </Link>
+            <p>Built around people. Designed for progress.</p>
+          </div>
         </div>
       </div>
     </footer>
