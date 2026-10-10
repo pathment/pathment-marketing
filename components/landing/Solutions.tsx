@@ -279,7 +279,7 @@ export function Solutions() {
                   {tab.description}
                 </p>
                 <a
-                  href="#request-access"
+                  href="/contact"
                   className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
                 >
                   Request Access

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { Check, ArrowRight, Users, Layers, Network } from "lucide-react";
 import Link from "next/link";
+import { APP_REGISTER_URL } from "../../lib/links";
+import { track } from "../../lib/analytics";
 
 interface Plan {
   id: string;
@@ -122,7 +124,7 @@ export function PublicPlans({
         </h2>
         <p className="mt-2 min-h-12 text-sm leading-6 text-muted">
           We cannot show current prices right now. Try again or contact our team
-          for workspace setup.
+          for pricing guidance.
         </p>
         <button
           onClick={() => {
@@ -133,12 +135,12 @@ export function PublicPlans({
         >
           Try again
         </button>
-        <a
-          href="mailto:enterprise@pathment.com?subject=Pathment%20plans"
+        <Link
+          href="/contact"
           className="ml-4 text-sm font-semibold text-accent underline"
         >
           Contact the team
-        </a>
+        </Link>
       </div>
     );
   return (
@@ -149,7 +151,7 @@ export function PublicPlans({
       {plans.map((plan) => {
         const featured = plan.name.toLowerCase() === "growth";
         const [base, hash] = setupHref.split("#");
-        const href = `${base || "/pricing"}?plan=${encodeURIComponent(plan.name)}#${hash || "getting-started"}`;
+        const href = plan.monthlyPriceCents === 0 ? APP_REGISTER_URL : `${base || "/contact"}?plan=${encodeURIComponent(plan.name)}${hash ? `#${hash}` : ""}`;
         return (
           <article
             key={plan.id}
@@ -194,11 +196,14 @@ export function PublicPlans({
             </div>
             <Link
               href={href}
+              onClick={() => {
+                if (plan.monthlyPriceCents === 0) track("organization_signup_clicked", { source: "pricing_plan" });
+              }}
               className={`mb-7 inline-flex items-center justify-center gap-2 rounded-lg px-3 py-3 text-sm font-semibold ${featured ? "bg-[#d9edbd] text-[#183a37] hover:bg-[#e4f3d0]" : "border border-line bg-surface text-accent hover:bg-soft"}`}
             >
               {plan.monthlyPriceCents === 0
-                ? "Start with Starter"
-                : `Choose ${plan.name}`}
+                ? "Create an organization"
+                : `Request ${plan.name} guidance`}
               <ArrowRight size={15} />
             </Link>
             <div

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { PublicPlans } from "../../components/landing/PublicPlans";
 import { Navbar } from "../../components/landing/Navbar";
 import { Footer } from "../../components/landing/Footer";
-import { Check, Mail, ArrowRight } from "lucide-react";
+import { Check, Building2, ArrowRight } from "lucide-react";
+import { APP_LOGIN_URL, APP_REGISTER_URL } from "../../lib/links";
+import { TrackedLink } from "../../components/landing/TrackedLink";
 
 export const metadata: Metadata = {
   title: "Pricing | Pathment",
@@ -50,7 +52,7 @@ export default async function PricingPage({
             ))}
           </div>
         </header>
-        <PublicPlans setupHref="#getting-started" />
+        <PublicPlans setupHref="/contact" />
         <aside className="mt-6 rounded-xl border border-line bg-soft px-5 py-4 text-sm leading-6 text-ink">
           <strong>Simple, manual billing.</strong> Paid plans are invoiced by
           the Pathment team. A plan request does not charge you or change your
@@ -78,20 +80,19 @@ export default async function PricingPage({
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             <article className="rounded-2xl border border-line bg-surface p-7 sm:p-9">
-              <Mail size={24} className="mb-5 text-accent" />
-              <h3 className="text-xl font-semibold">New to Pathment?</h3>
+              <Building2 size={24} className="mb-5 text-accent" />
+              <h3 className="text-xl font-semibold">Create a new organization</h3>
               <p className="mt-3 text-sm leading-7 text-muted">
-                Contact our team to set up your first workspace. Member
-                registration requires an invitation or a clan joining link;
-                first-admin self-registration is not available yet.
+                Organization owners can start through public registration. Existing-organization members join separately through a secure invitation link from their administrator.
               </p>
-              <a
-                href={`mailto:enterprise@pathment.com?subject=${encodeURIComponent(selectedPlan ? `Pathment ${selectedPlan} workspace setup` : "Pathment workspace setup")}`}
+              <TrackedLink
+                href={APP_REGISTER_URL}
+                eventName="organization_signup_clicked"
+                eventProperties={{ source: "pricing" }}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent"
               >
-                Talk about your workspace <ArrowRight size={16} />
-              </a>
-              <p className="mt-2 text-xs text-muted">Opens your email app.</p>
+                Create your organization <ArrowRight size={16} />
+              </TrackedLink>
             </article>
             <article className="rounded-2xl border border-line bg-surface p-7 sm:p-9">
               <ArrowRight size={24} className="mb-5 text-accent" />
@@ -99,14 +100,12 @@ export default async function PricingPage({
                 Already part of a workspace?
               </h3>
               <p className="mt-3 text-sm leading-7 text-muted">
-                Use Sign In above to open your workspace. Owners and admins can
-                request a plan change in Settings → Plans. Your existing plan
-                stays active until our team confirms the change.
+                Use the global sign-in page to access your account. If your organization invited you, use the secure invitation link they sent so you join the correct workspace and role.
               </p>
               <p className="mt-4 text-sm leading-7 text-muted">
-                Additional workspace creation depends on availability for your
-                account. Contact the team if you need another workspace.
+                Owners and admins can manage plan requests from their workspace after signing in.
               </p>
+              <TrackedLink href={APP_LOGIN_URL} eventName="login_clicked" eventProperties={{ source: "pricing" }} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent">Sign in to Pathment <ArrowRight size={16} /></TrackedLink>
             </article>
           </div>
         </section>

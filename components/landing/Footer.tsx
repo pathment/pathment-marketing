@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Brand } from "./Brand";
+import { APP_LOGIN_URL, APP_REGISTER_URL } from "../../lib/links";
+import { TrackedLink } from "./TrackedLink";
 export function Footer() {
   return (
     <footer className="border-t border-line bg-surface">
@@ -8,8 +10,7 @@ export function Footer() {
           <div>
             <Brand />
             <p className="mt-4 max-w-xs text-sm leading-6 text-muted">
-              Good people. Shared knowledge.
-              <br />A clearer path forward.
+              Mentorship program operations for organizations that need a clear path from learning to outcomes.
             </p>
           </div>
           <div>
@@ -18,13 +19,13 @@ export function Footer() {
             </h2>
             <ul className="space-y-3 text-sm text-muted">
               <li>
-                <Link href="/#solutions" className="hover:text-accent">
-                  The platform
+                <Link href="/#outcomes" className="hover:text-accent">
+                  Outcomes
                 </Link>
               </li>
               <li>
-                <Link href="/#features" className="hover:text-accent">
-                  Features
+                <Link href="/#roles" className="hover:text-accent">
+                  Role experiences
                 </Link>
               </li>
               <li>
@@ -37,6 +38,7 @@ export function Footer() {
                   Pricing
                 </Link>
               </li>
+              <li><Link href="/demo" className="hover:text-accent">Interactive demo</Link></li>
             </ul>
           </div>
           <div>
@@ -57,18 +59,12 @@ export function Footer() {
             </h2>
             <ul className="space-y-3 text-sm text-muted">
               <li>
-                <Link href="/#request-access" className="hover:text-accent">
-                  Set up a workspace
-                </Link>
+                <TrackedLink href={APP_REGISTER_URL} eventName="organization_signup_clicked" eventProperties={{ source: "footer" }} className="hover:text-accent">Create an organization</TrackedLink>
               </li>
               <li>
-                <Link
-                  href="mailto:hello@pathment.me"
-                  className="hover:text-accent"
-                >
-                  Contact support
-                </Link>
+                <Link href="/contact" className="hover:text-accent">Talk to the team</Link>
               </li>
+              <li><TrackedLink href={APP_LOGIN_URL} eventName="login_clicked" eventProperties={{ source: "footer" }} className="hover:text-accent">Sign in</TrackedLink></li>
             </ul>
           </div>
         </div>

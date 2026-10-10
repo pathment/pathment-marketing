@@ -289,7 +289,7 @@ export const footerColumns = [
     title: "Resources",
     links: [
       { href: "#", label: "Documentation" },
-      { href: "#request-access", label: "Request Access" },
+      { href: "/contact", label: "Talk to the team" },
       { href: "mailto:hello@pathment.me", label: "Contact Support" },
     ],
   },

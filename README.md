@@ -5,7 +5,7 @@ This app powers the public marketing experience for Pathment on the apex domain.
 ## Goal
 
 - `pathment.me` and `www.pathment.me` -> this app
-- `app.pathment.me/w/devweekends` (and other workspace paths) -> product app (`client-interface`)
+- `app.pathment.me/w/<workspace>` -> product app (`client-interface`)
 - `api.pathment.me` -> the shared backend
 
 ## Local development
@@ -22,6 +22,8 @@ npm install
 ```bash
 npm run dev
 ```
+
+Copy `.env.example` to `.env.local` and add server-only lead-delivery values, or use `vercel env pull .env.local` after linking the project. Never commit `.env.local`.
 
 3. Open `http://localhost:3000`.
 
@@ -53,25 +55,32 @@ Use this split so marketing and product remain independent:
 ## Deployment sanity checks
 
 1. `https://pathment.me` shows the landing page from this folder.
-2. `https://app.pathment.me/w/devweekends` opens the tenant app.
-3. `https://devweekends.pathment.me` redirects to the canonical workspace path.
+2. `https://app.pathment.me/login` opens global product sign-in.
+3. `https://app.pathment.me/register` opens public organization registration.
 4. `https://api.pathment.me/api/health` returns a healthy response.
 5. No host resolves to the default Nginx welcome page.
 
-## Public pricing and workspace access
+## Public pricing, signup, and workspace access
 
 The homepage and `/pricing` load published plans from `/api/plans`. This server route reads the public product endpoint `/api/organizations/plans`, forwards no cookies or authorization, and projects only public display fields. Browser clients no longer depend on product API CORS. `NEXT_PUBLIC_API_URL` can override the upstream API base (including `/api`); the default is `https://api.pathment.me/api`. A Next.js server runtime is required for this route.
 
-Pricing uses published monthly amounts and currencies; there are no hardcoded fallback prices. Billing remains manual, and new workspace setup is assisted by the team. The contact link opens an email client; it does not submit a request on this site.
+Pricing uses published monthly amounts and currencies; there are no hardcoded fallback prices. Public organization creation goes to `https://app.pathment.me/register`; existing members use invitation links. Global sign-in always goes to `https://app.pathment.me/login` and never to a customer-specific workspace.
 
-Workspace sign-in accepts a slug, a legacy Pathment subdomain, or an `app.pathment.me/w/<slug>` URL. It always navigates to the canonical product login route. It does not authenticate users or enforce tenant isolation; those remain responsibilities of the product backend.
+## Buyer-interest delivery
+
+`POST /api/buyer-interest` validates leads on the server, uses a honeypot and minimum-fill-time check, applies a per-instance rate limit, and reports duplicate, validation, rate-limit, and delivery failures explicitly. A request is only shown as successful after one of these server-only delivery options accepts it:
+
+- `LEADS_WEBHOOK_URL` and optional `LEADS_WEBHOOK_TOKEN` for a CRM or durable lead service (preferred).
+- `RESEND_API_KEY`, `LEAD_NOTIFICATION_TO`, and `LEAD_NOTIFICATION_FROM` for recoverable email delivery.
+
+Private recipients and tokens must never use a `NEXT_PUBLIC_` prefix. Configure at least one delivery option before production; without one, the endpoint returns `503` and the form accurately says the lead was not delivered. The in-memory duplicate and rate-limit guard is a baseline for serverless instances; connect the webhook to a durable store for cross-region deduplication and abuse controls.
 
 ## Validation
 
 ```bash
 npx tsc --noEmit
 npx eslint .
-node scripts/check-workspace-routing.cjs
+npm test
 npm run build
 ```
 
@@ -89,4 +98,6 @@ Plan selection carries the published plan name to the setup section and email su
 
 The header theme switch follows the system preference initially and persists explicit light/dark selection in local storage. Semantic color tokens cover both pages, menus, pricing, dialogs, and footer. Motion is restrained and disabled for reduced-motion preferences. Pricing reserves loading space.
 
-The September 23 role captures use a neutral Pathment Demo workspace label and the new green logo in a temporary local preview. The demo mentee received a temporary initials avatar to complete its photo prerequisite. These local presentation changes were restored after capture; no production data or product source changes were retained. Dev Weekends attribution and customer story have been removed from the marketing content.
+The September 23 role captures use a neutral Pathment Demo workspace label and the new green logo in a temporary local preview. The demo mentee received a temporary initials avatar to complete its photo prerequisite. These local presentation changes were restored after capture; no production data or product source changes were retained.
+
+The interactive `/demo` route intentionally uses the fictional Dev Weekends seed scenario to mirror the current product source, role navigation, workspace tabs, and sample workflows. Its 31 Admin and 23 Mentor destinations use route-specific product screens—including admissions, people, curriculum, recognition, community, insights, settings, clan review, approvals, schedule, and mentor tools—rather than generic fallback cards. Mentee currently retains the earlier 14-page preview and is the next fidelity pass. The demo does not authenticate, use cookies, call the application API, or write to any workspace.

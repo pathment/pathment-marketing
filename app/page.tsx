@@ -1,28 +1,26 @@
-import { PageMotion } from "../components/landing/PageMotion";
-import { PricingSection } from "../components/landing/PricingSection";
-import { FAQ } from "../components/landing/FAQ";
-import { Features } from "../components/landing/Features";
 import { FinalCta } from "../components/landing/FinalCta";
 import { Footer } from "../components/landing/Footer";
 import { Hero } from "../components/landing/Hero";
-import { LogoMarquee } from "../components/landing/LogoMarquee";
-import { Workflow } from "../components/landing/Workflow";
 import { Navbar } from "../components/landing/Navbar";
-import { ProductTour } from "../components/landing/ProductTour";
+import { CustomerJourney } from "../components/landing/CustomerJourney";
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Pathment",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: "https://pathment.me",
+    description: "Mentorship and learning program operations for organizations, admins, mentors, and mentees.",
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <Navbar />
-      <PageMotion />
       <main id="main-content">
         <Hero />
-        <LogoMarquee />
-        <ProductTour />
-        <Features />
-        <Workflow />
-        <PricingSection />
-        <FAQ />
+        <CustomerJourney />
         <FinalCta />
       </main>
       <Footer />

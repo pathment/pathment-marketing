@@ -24,9 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pathment | Mentorship with a clear path forward",
+  title: "Pathment | Mentorship program operations",
   description:
-    "Give mentorship a home. Bring mentors, learning roadmaps, reviews, and your community together with Pathment.",
+    "Run mentorship and learning programs without losing track of people, progress, evidence, or decisions.",
   metadataBase: new URL("https://pathment.me"),
   icons: {
     icon: [
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Pathment | Mentorship for growing communities",
+    title: "Pathment | Mentorship program operations",
     description:
-      "Help people grow with clear learning paths, meaningful feedback, and a community that supports them.",
+      "Run structured mentorship and learning programs with clear workflows for admins, mentors, and mentees.",
     url: "https://pathment.me",
     siteName: "Pathment",
     locale: "en_US",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pathment",
     description:
-      "Bring mentors, roadmaps, reviews, and your community together in one place.",
+      "Run mentorship programs without losing track of people, progress, or decisions.",
   },
 };
 
