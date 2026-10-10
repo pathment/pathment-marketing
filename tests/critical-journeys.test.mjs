@@ -9,7 +9,21 @@ test("canonical application destinations are centralized and correct", async () 
   const links = await source("lib/links.ts");
   assert.match(links, /https:\/\/app\.pathment\.me\/login/);
   assert.match(links, /https:\/\/app\.pathment\.me\/register/);
+  assert.match(links, /https:\/\/play\.google\.com\/apps\/testing\/me\.pathment\.app/);
   assert.doesNotMatch(links, /devweekends/i);
+});
+
+test("homepage presents the authentic Android app without claiming public availability", async () => {
+  const page = await source("app/page.tsx");
+  const mobile = await source("components/landing/MobileExperience.tsx");
+  assert.match(page, /MobileExperience/);
+  assert.match(mobile, /real screens captured from the seeded product/i);
+  assert.match(mobile, /Android closed testing/);
+  assert.match(mobile, /invited testers through Google Play/i);
+  for (const asset of ["admin-home.webp", "admin-intake.webp", "mentor-home.webp", "mentor-review.webp", "mentee-home.webp"]) {
+    assert.match(mobile, new RegExp(asset.replace(".", "\\.")));
+  }
+  assert.doesNotMatch(mobile, /available now on (the )?play store/i);
 });
 
 test("homepage exposes demo, registration, sign-in, and contact journeys", async () => {

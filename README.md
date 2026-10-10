@@ -101,3 +101,9 @@ The header theme switch follows the system preference initially and persists exp
 The September 23 role captures use a neutral Pathment Demo workspace label and the new green logo in a temporary local preview. The demo mentee received a temporary initials avatar to complete its photo prerequisite. These local presentation changes were restored after capture; no production data or product source changes were retained.
 
 The interactive `/demo` route intentionally uses the fictional Dev Weekends seed scenario to mirror the current product source, role navigation, workspace tabs, and sample workflows. Its 31 Admin and 23 Mentor destinations use route-specific product screens—including admissions, people, curriculum, recognition, community, insights, settings, clan review, approvals, schedule, and mentor tools—rather than generic fallback cards. Mentee currently retains the earlier 14-page preview and is the next fidelity pass. The demo does not authenticate, use cookies, call the application API, or write to any workspace.
+
+## Android app showcase
+
+The homepage Android section uses five optimized WebP captures from the real native app running against the local seeded demo environment. Source captures were cropped to remove development-only emulator controls, resized to 540 px wide, and placed in `public/mobile/` to keep the section lightweight and prevent layout shift.
+
+The Google Play destination is the closed-test opt-in URL for `me.pathment.app`: `https://play.google.com/apps/testing/me.pathment.app`. The public site must continue to describe this as closed testing until the production listing is publicly available; visitors need an invited Google account to opt in.

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Brand } from "./Brand";
-import { APP_LOGIN_URL, APP_REGISTER_URL } from "../../lib/links";
+import { ANDROID_CLOSED_TEST_URL, APP_LOGIN_URL, APP_REGISTER_URL } from "../../lib/links";
 import { TrackedLink } from "./TrackedLink";
 export function Footer() {
   return (
@@ -32,6 +32,11 @@ export function Footer() {
                 <Link href="/#how-it-works" className="hover:text-accent">
                   How it works
                 </Link>
+              </li>
+              <li>
+                <a href={ANDROID_CLOSED_TEST_URL} target="_blank" rel="noreferrer" className="hover:text-accent">
+                  Android closed test
+                </a>
               </li>
               <li>
                 <Link href="/pricing" className="hover:text-accent">

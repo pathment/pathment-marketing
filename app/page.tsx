@@ -3,6 +3,7 @@ import { Footer } from "../components/landing/Footer";
 import { Hero } from "../components/landing/Hero";
 import { Navbar } from "../components/landing/Navbar";
 import { CustomerJourney } from "../components/landing/CustomerJourney";
+import { MobileExperience } from "../components/landing/MobileExperience";
 
 export default function HomePage() {
   const structuredData = {
@@ -10,7 +11,7 @@ export default function HomePage() {
     "@type": "SoftwareApplication",
     name: "Pathment",
     applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
+    operatingSystem: "Web, Android",
     url: "https://pathment.me",
     description: "Mentorship and learning program operations for organizations, admins, mentors, and mentees.",
   };
@@ -21,6 +22,7 @@ export default function HomePage() {
       <main id="main-content">
         <Hero />
         <CustomerJourney />
+        <MobileExperience />
         <FinalCta />
       </main>
       <Footer />

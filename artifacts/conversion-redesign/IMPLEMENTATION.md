@@ -34,6 +34,7 @@
 - Added conversion event hooks without form PII.
 - Added metadata updates, JSON-LD, `sitemap.xml`, and `robots.txt`.
 - Added focused critical-journey tests and npm scripts for lint/typecheck/test.
+- Added a responsive Android showcase built from five optimized captures of the real seeded native app. The section presents Admin, Mentor, and Mentee views, deeper admissions and review screens, and the truthful closed-test Google Play opt-in path without claiming public availability.
 
 ## Verification
 
@@ -41,6 +42,7 @@
 - `npm run typecheck` — passed.
 - `npm test` — passed.
 - `npm run build` — passed; all routes generated.
+- Browser verified the Android showcase at 1440×1000, 820×1180, and 390×844 with no horizontal overflow or console errors. The mobile menu now unlocks body scrolling and lands on the Android section instead of only changing the URL hash.
 - Browser verified all 31 Admin destinations and all 23 Mentor destinations, with zero missing route surfaces and zero console errors. Also verified desktop and 390×844 layouts, assessment creation, invitation generation, complete Admin settings, the clan-artwork selector, sequential Clan Review with attendance/notes/completion, the evidence-based mentor approval flow, role switching, global search, notification/changelog drawers, Mentee Roadmap, client validation, and truthful `503` form behavior when delivery is not configured.
 - The supplied staging demo credentials were rejected by the current hosted login. No alternative credentials were guessed. The current application components, navigation configuration, workspace-tab configuration, screenshots, and demo seeder in the sibling product repository were used as the authoritative implementation reference.
 
@@ -66,6 +68,7 @@ Before captures are preserved in `artifacts/ui-review-v3/`.
 - After Mentor approval result: `artifacts/conversion-redesign/after-mentor-approval-success.jpg`
 - After Mentor mobile review: `artifacts/conversion-redesign/after-mentor-mobile.jpg`
 - After product changelog drawer: `artifacts/conversion-redesign/after-whats-new.jpg`
+- Real Android Admin, Mentor, and Mentee captures: `artifacts/conversion-redesign/mobile/pathment-android-roles.png`
 
 ## Production configuration still required
 

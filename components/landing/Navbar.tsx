@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { APP_LOGIN_URL, APP_REGISTER_URL } from "../../lib/links";
 import { Brand } from "./Brand";
 import { ThemeToggle } from "./ThemeToggle";
@@ -11,6 +11,7 @@ import { TrackedLink } from "./TrackedLink";
 const navItems = [
   { href: "/#outcomes", label: "Outcomes" },
   { href: "/#roles", label: "Roles" },
+  { href: "/#mobile-app", label: "Mobile app" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
   { href: "/contact", label: "Talk to us" },
@@ -25,6 +26,25 @@ export function Navbar() {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  function closeMenu() {
+    setOpen(false);
+  }
+
+  function navigateFromMenu(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    closeMenu();
+
+    if (href.startsWith("/#") && window.location.pathname === "/") {
+      event.preventDefault();
+      const sectionId = href.slice(2);
+      window.history.pushState(null, "", `#${sectionId}`);
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          document.getElementById(sectionId)?.scrollIntoView();
+        });
+      });
+    }
+  }
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -59,10 +79,10 @@ export function Navbar() {
       {open ? (
         <div id={menuId} className="fixed inset-x-0 top-18 z-40 min-h-[calc(100dvh-4.5rem)] border-t border-line bg-surface p-5 lg:hidden">
           <div className="mx-auto max-w-xl space-y-1">
-            {navItems.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-soft">{item.label}</Link>)}
+            {navItems.map((item) => <Link key={item.href} href={item.href} onClick={(event) => navigateFromMenu(event, item.href)} className="block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-soft">{item.label}</Link>)}
             <div className="my-4 border-t border-line" />
-            <TrackedLink href={APP_LOGIN_URL} eventName="login_clicked" onClick={() => setOpen(false)} className="flex w-full justify-center rounded-xl border border-line px-4 py-3 text-sm font-semibold text-ink">Sign in</TrackedLink>
-            <TrackedLink href={APP_REGISTER_URL} eventName="organization_signup_clicked" onClick={() => setOpen(false)} className="mt-3 flex w-full justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white">Create your organization</TrackedLink>
+            <TrackedLink href={APP_LOGIN_URL} eventName="login_clicked" onClick={() => closeMenu()} className="flex w-full justify-center rounded-xl border border-line px-4 py-3 text-sm font-semibold text-ink">Sign in</TrackedLink>
+            <TrackedLink href={APP_REGISTER_URL} eventName="organization_signup_clicked" onClick={() => closeMenu()} className="mt-3 flex w-full justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white">Create your organization</TrackedLink>
           </div>
         </div>
       ) : null}
