@@ -252,7 +252,7 @@ function Notifications({ role }: { role: DemoRole }) {
   ] : [
     { title: "Task approved", message: "Aisha approved React components & state and awarded 15 points.", meta: "Today · View feedback", unread: true, tone: "teal" },
     { title: "Upcoming deadline", message: "Frontend Interview is due October 11.", meta: "2 hours ago · Open task", unread: true, tone: "amber" },
-    { title: "New announcement", message: "Week 10 — APIs & data modeling was published for MERN Fellows.", meta: "Yesterday", unread: false, tone: "slate" },
+    { title: "New announcement", message: "Week 10  -  APIs & data modeling was published for MERN Fellows.", meta: "Yesterday", unread: false, tone: "slate" },
   ];
   const [items, setItems] = useState(initial);
   const [filter, setFilter] = useState<"all" | "unread">("all");

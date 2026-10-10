@@ -224,14 +224,14 @@ section[id] {
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --surface: #102723;
-  --canvas: #0b1c19;
-  --soft: #19352f;
-  --ink: #e9f5ee;
-  --muted: #a3bab0;
-  --line: #2c453c;
-  --accent: #79d5bd;
-  --hero-glow: #17493b;
+  --surface: #0d1c19;
+  --canvas: #071310;
+  --soft: #142822;
+  --ink: #f1f7f3;
+  --muted: #a8bbb3;
+  --line: #294239;
+  --accent: #73dfc4;
+  --hero-glow: #143e34;
 }
 @theme inline {
   --color-surface: var(--surface);
@@ -245,6 +245,11 @@ section[id] {
 body {
   background: var(--canvas);
   color: var(--ink);
+}
+[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(24, 111, 91, 0.12), transparent 28rem),
+    linear-gradient(180deg, #091713 0%, #071310 70%);
 }
 ::selection {
   background: #008b7d55;
@@ -269,10 +274,19 @@ body {
     radial-gradient(ellipse at 50% 90%, var(--hero-glow), transparent 65%),
     var(--canvas);
 }
+[data-theme="dark"] .hero-section {
+  background:
+    radial-gradient(circle at 78% 30%, rgba(38, 143, 118, 0.2), transparent 28rem),
+    radial-gradient(circle at 22% 90%, rgba(20, 87, 71, 0.25), transparent 30rem),
+    linear-gradient(135deg, #081713 0%, #0b211c 55%, #071310 100%);
+}
 .product-hero-frame {
   border-color: var(--line);
   border-radius: 18px;
   box-shadow: 0 24px 80px -36px #003c3640;
+}
+[data-theme="dark"] .product-hero-frame {
+  box-shadow: 0 34px 100px -45px rgba(0, 0, 0, 0.85);
 }
 .theme-sun {
   display: none;

@@ -41,7 +41,7 @@ async function deliverLead(lead: BuyerLead, id: string) {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { authorization: `Bearer ${process.env.RESEND_API_KEY}`, "content-type": "application/json" },
-      body: JSON.stringify({ from: process.env.LEAD_NOTIFICATION_FROM, to: [process.env.LEAD_NOTIFICATION_TO], subject: `Pathment buyer interest — ${lead.organizationName}`, html: `<h1>New Pathment buyer interest</h1><table>${rows}</table>` }),
+      body: JSON.stringify({ from: process.env.LEAD_NOTIFICATION_FROM, to: [process.env.LEAD_NOTIFICATION_TO], subject: `Pathment buyer interest: ${lead.organizationName}`, html: `<h1>New Pathment buyer interest</h1><table>${rows}</table>` }),
       signal: AbortSignal.timeout(10000),
     });
     if (!response.ok) throw new Error(`Resend returned ${response.status}`);
@@ -69,6 +69,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true, id });
   } catch (error) {
     console.error("Buyer lead delivery failed", { id, error });
-    return NextResponse.json({ error: "We could not safely deliver your request. Nothing was claimed as sent—please try again shortly." }, { status: 503 });
+    return NextResponse.json({ error: "We could not safely deliver your request. Nothing was claimed as sent. Please try again shortly." }, { status: 503 });
   }
 }

@@ -94,11 +94,11 @@ export function PublicPlans({
     return (
       <div role="status" aria-busy="true">
         <span className="sr-only">Loading published plans…</span>
-        <div aria-hidden="true" className="grid gap-5 md:grid-cols-3">
+        <div aria-hidden="true" className="grid overflow-hidden rounded-[2rem] border border-line md:grid-cols-3">
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="min-h-[590px] rounded-2xl border border-line bg-surface p-8"
+              className="min-h-[590px] border-line bg-surface p-8 md:border-l md:first:border-l-0"
             >
               <div className="h-3 w-2/3 rounded bg-soft" />
               <div className="mt-8 h-7 w-1/2 rounded bg-soft" />
@@ -146,29 +146,28 @@ export function PublicPlans({
   return (
     <section
       aria-label="Published plans"
-      className="grid items-stretch gap-5 md:grid-cols-3"
+      className="grid items-stretch overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[0_32px_90px_-65px_rgba(7,61,59,.7)] md:grid-cols-3"
     >
-      {plans.map((plan) => {
+      {plans.map((plan, index) => {
         const featured = plan.name.toLowerCase() === "growth";
         const [base, hash] = setupHref.split("#");
         const href = plan.monthlyPriceCents === 0 ? APP_REGISTER_URL : `${base || "/contact"}?plan=${encodeURIComponent(plan.name)}${hash ? `#${hash}` : ""}`;
         return (
           <article
             key={plan.id}
-            className={`relative flex flex-col rounded-2xl border p-6 lg:p-8 ${featured ? "border-brand-700 bg-[#073d3b] text-white shadow-[0_16px_40px_-20px_#073d3b60]" : "border-line bg-surface text-ink"}`}
+            className={`relative flex flex-col overflow-hidden p-6 lg:p-8 ${index ? "border-t border-line md:border-l md:border-t-0" : ""} ${featured ? "bg-[linear-gradient(155deg,#0b514a_0%,#073d3b_60%,#062d29_100%)] text-white" : "bg-surface text-ink"}`}
           >
+            {featured ? <div className="absolute right-5 top-5 rounded-full bg-[#8fe0ca] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.14em] text-[#073d3b]">Best for growth</div> : null}
             <p
-              className={`mb-5 md:min-h-8 lg:min-h-4 text-[10px] font-semibold uppercase tracking-[.15em] ${featured ? "text-[#b9deca]" : "text-accent"}`}
+              className={`mb-5 text-[10px] font-semibold uppercase tracking-[.15em] ${featured ? "text-[#b9deca]" : "text-accent"}`}
             >
               {plan.monthlyPriceCents === 0
-                ? "Your first chapter"
+                ? "Start a pilot"
                 : featured
-                  ? "Your growing community"
-                  : "Your next level"}
+                  ? "For growing programs"
+                  : "For established operations"}
             </p>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              {plan.name}
-            </h2>
+            <div className="flex items-end justify-between gap-3"><h2 className="text-2xl font-semibold tracking-tight">{plan.name}</h2><span className={`font-mono text-[10px] ${featured ? "text-white/35" : "text-muted"}`}>0{index + 1}</span></div>
             <p
               className={`mt-3 min-h-16 md:min-h-24 lg:min-h-16 text-sm leading-6 ${featured ? "text-white/70" : "text-muted"}`}
             >
@@ -199,16 +198,14 @@ export function PublicPlans({
               onClick={() => {
                 if (plan.monthlyPriceCents === 0) track("organization_signup_clicked", { source: "pricing_plan" });
               }}
-              className={`mb-7 inline-flex items-center justify-center gap-2 rounded-lg px-3 py-3 text-sm font-semibold ${featured ? "bg-[#d9edbd] text-[#183a37] hover:bg-[#e4f3d0]" : "border border-line bg-surface text-accent hover:bg-soft"}`}
+              className={`mb-7 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3.5 text-sm font-semibold ${featured ? "bg-[#d9edbd] text-[#183a37] hover:bg-[#e4f3d0]" : "border border-line bg-soft text-accent hover:border-brand-300"}`}
             >
               {plan.monthlyPriceCents === 0
                 ? "Create an organization"
-                : `Request ${plan.name} guidance`}
+                : `Talk about ${plan.name}`}
               <ArrowRight size={15} />
             </Link>
-            <div
-              className={`mb-6 space-y-3 border-y py-5 ${featured ? "border-white/15" : "border-line"}`}
-            >
+            <div className={`mb-6 space-y-3 border-y py-5 ${featured ? "border-white/12" : "border-line"}`}>
               {Object.entries(plan.limits).map(([key, value]) => {
                 const Icon =
                   key === "members"

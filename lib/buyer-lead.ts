@@ -8,6 +8,7 @@ export type BuyerLead = {
   participants?: string;
   programType?: string;
   launchTimeframe?: string;
+  planInterest?: string;
   message?: string;
   website?: string;
   startedAt?: number;
@@ -30,6 +31,7 @@ export function validateBuyerLead(value: unknown): { data?: BuyerLead; errors: L
     participants: text(input.participants, 60),
     programType: text(input.programType, 80),
     launchTimeframe: text(input.launchTimeframe, 80),
+    planInterest: text(input.planInterest, 80),
     message: text(input.message, 1200),
     website: text(input.website, 200),
     startedAt: typeof input.startedAt === "number" ? input.startedAt : undefined,
@@ -41,4 +43,3 @@ export function validateBuyerLead(value: unknown): { data?: BuyerLead; errors: L
   if (data.message && data.message.length < 5) errors.message = "Add a little more detail or leave this blank.";
   return Object.keys(errors).length ? { errors } : { data, errors };
 }
-

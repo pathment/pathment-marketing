@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 
 const root = new URL("../", import.meta.url);
 const source = (path) => readFile(new URL(path, root), "utf8");
@@ -13,24 +13,27 @@ test("canonical application destinations are centralized and correct", async () 
   assert.doesNotMatch(links, /devweekends/i);
 });
 
-test("homepage presents the authentic Android app without claiming public availability", async () => {
+test("homepage presents the interactive Android experience without test-phase copy", async () => {
   const page = await source("app/page.tsx");
   const mobile = await source("components/landing/MobileExperience.tsx");
+  const product = await source("components/mobile/MobileProductDemo.tsx");
   assert.match(page, /MobileExperience/);
-  assert.match(mobile, /real screens captured from the seeded product/i);
-  assert.match(mobile, /Android closed testing/);
-  assert.match(mobile, /invited testers through Google Play/i);
-  for (const asset of ["admin-home.webp", "admin-intake.webp", "mentor-home.webp", "mentor-review.webp", "mentee-home.webp"]) {
-    assert.match(mobile, new RegExp(asset.replace(".", "\\.")));
+  assert.match(mobile, /\/demo\?device=mobile/);
+  assert.match(mobile, /\/demo\?device=web/);
+  assert.match(mobile, /Google Play/);
+  assert.doesNotMatch(mobile, /closed test|testing phase|invited tester/i);
+  for (const destination of ["Home", "Intake", "People", "Review", "Journey", "Inbox", "More"]) {
+    assert.match(product, new RegExp(`label: "${destination}"`));
   }
-  assert.doesNotMatch(mobile, /available now on (the )?play store/i);
+  for (const role of ["admin", "mentor", "mentee"]) assert.match(product, new RegExp(`${role}: \\[`));
+  assert.match(product, /safe simulation/i);
 });
 
 test("homepage exposes demo, registration, sign-in, and contact journeys", async () => {
   const hero = await source("components/landing/Hero.tsx");
   const form = await source("components/landing/FinalCta.tsx");
-  assert.match(hero, /Experience Pathment/);
-  assert.match(hero, /Create your organization/);
+  assert.match(hero, /Explore the product/);
+  assert.match(hero, /Create an organization/);
   assert.match(hero, /Already use Pathment\? Sign in/);
   assert.match(form, /Talk to the Pathment team/);
 });
@@ -52,6 +55,18 @@ test("demo contains all roles and completion controls", async () => {
   assert.match(screens, /Conversation with/);
   assert.match(screens, /Attendance and review order/);
   assert.match(screens, /My Fellowship Roadmap/);
+});
+
+test("experience chooser supports web and mobile with viewport-aware defaults", async () => {
+  const page = await source("app/demo/page.tsx");
+  const chooser = await source("components/demo/ExperienceDemo.tsx");
+  assert.match(page, /device/);
+  assert.match(chooser, /matchMedia/);
+  assert.match(chooser, /max-width: 1023px/);
+  assert.match(chooser, /Open Web workspace/);
+  assert.match(chooser, /Open mobile app/);
+  assert.match(chooser, /Choose a Pathment role/);
+  assert.match(chooser, /switch role or device at any time/i);
 });
 
 test("demo exposes the complete role navigation rather than dead-end previews", async () => {
@@ -147,6 +162,33 @@ test("buyer endpoint has validation, duplicate, rate-limit, and delivery failure
   for (const status of ["422", "409", "429", "503"]) assert.match(route, new RegExp(`status: ${status}`));
   assert.match(route, /LEADS_WEBHOOK_URL/);
   assert.match(route, /RESEND_API_KEY/);
+});
+
+test("pricing selection is carried into the recoverable buyer lead", async () => {
+  const plans = await source("components/landing/PublicPlans.tsx");
+  const contact = await source("app/contact/page.tsx");
+  const form = await source("components/landing/BuyerInterestForm.tsx");
+  const lead = await source("lib/buyer-lead.ts");
+  assert.match(plans, /\?plan=\$\{encodeURIComponent\(plan\.name\)\}/);
+  assert.match(contact, /selectedPlan/);
+  assert.match(form, /name="planInterest"/);
+  assert.match(lead, /planInterest/);
+});
+
+test("customer-facing application copy contains no em dashes", async () => {
+  async function collect(directory) {
+    const entries = await readdir(new URL(directory, root), { withFileTypes: true });
+    const files = [];
+    for (const entry of entries) {
+      const path = `${directory}${entry.name}`;
+      if (entry.isDirectory()) files.push(...await collect(`${path}/`));
+      else if (/\.(?:ts|tsx|js|jsx)$/.test(entry.name)) files.push(path);
+    }
+    return files;
+  }
+  for (const path of [...await collect("app/"), ...await collect("components/")]) {
+    assert.doesNotMatch(await source(path), /—/, path);
+  }
 });
 
 test("no visible marketing source retains request-access or customer-workspace CTAs", async () => {

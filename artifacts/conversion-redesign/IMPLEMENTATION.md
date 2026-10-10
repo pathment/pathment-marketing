@@ -21,7 +21,7 @@
 
 ## Implemented
 
-- Rebuilt the homepage around buyer outcomes, role previews, operating workflow, product evidence, trust details, and conversion.
+- Rebuilt the homepage as a concise five-section journey: clear value, a complete uncropped product preview, role clarity, a three-step operating model, device choice, and conversion. Repeated outcome and evidence blocks were removed.
 - Rebuilt `/demo` as a full-screen “Experience Pathment” workspace modeled on the current Pathment application source and Dev Weekends seed structure. It uses the real Pathment mark, a dedicated Dev Weekends workspace mark, fictional professional portraits, flat role navigation, the product’s horizontal workspace tabs, selectors, search, notifications, profile panels, four-step guidance, and clearly simulated decisions/reviews.
 - Replaced the generic Admin and Mentor placeholders with route-specific product workflows derived from the application source: assessments, invitation inventory, people tables, program and roadmap tooling, recognition decisions, community operations, review records, scoped access, complete settings, the action-first mentor cockpit, sequential clan review, approvals, clan team, curriculum kits, recognition, insights, community, schedule, and mentor settings.
 - Populated every visible Admin, Mentor, and Mentee destination with local fictional data. The complete route map covers 31 Admin pages, 23 Mentor pages, and 14 Mentee pages. Every exposed workspace tab resolves to a populated page; Admin and Mentor no longer share a generic fallback screen.
@@ -34,15 +34,15 @@
 - Added conversion event hooks without form PII.
 - Added metadata updates, JSON-LD, `sitemap.xml`, and `robots.txt`.
 - Added focused critical-journey tests and npm scripts for lint/typecheck/test.
-- Added a responsive Android showcase built from five optimized captures of the real seeded native app. The section presents Admin, Mentor, and Mentee views, deeper admissions and review screens, and the truthful closed-test Google Play opt-in path without claiming public availability.
+- Added a complete interactive Android experience that follows the native five-tab role structures. The homepage links to it through a compact Web-or-Android choice instead of embedding the full explorer and its JavaScript in the landing-page journey. Visitors can explore Admin, Mentor, and Mentee screen directories, work with filled fictional data, and try safe local-only inputs. The Google Play destination remains centralized so its URL can be replaced without copy changes.
 
 ## Verification
 
-- `npm run lint` — passed.
-- `npm run typecheck` — passed.
-- `npm test` — passed.
-- `npm run build` — passed; all routes generated.
-- Browser verified the Android showcase at 1440×1000, 820×1180, and 390×844 with no horizontal overflow or console errors. The mobile menu now unlocks body scrolling and lands on the Android section instead of only changing the URL hash.
+- `npm run lint`: passed.
+- `npm run typecheck`: passed.
+- `npm test`: passed.
+- `npm run build`: passed; all routes generated.
+- Browser verified the homepage at 1440×900, 820×1180, and 390×844 with no horizontal overflow. The Admin, Mentor, and Mentee hero previews preserve each complete product screenshot instead of cropping it into a fixed-height frame. The mobile menu remains usable and the compact conversion form keeps optional fields progressively disclosed.
 - Browser verified all 31 Admin destinations and all 23 Mentor destinations, with zero missing route surfaces and zero console errors. Also verified desktop and 390×844 layouts, assessment creation, invitation generation, complete Admin settings, the clan-artwork selector, sequential Clan Review with attendance/notes/completion, the evidence-based mentor approval flow, role switching, global search, notification/changelog drawers, Mentee Roadmap, client validation, and truthful `503` form behavior when delivery is not configured.
 - The supplied staging demo credentials were rejected by the current hosted login. No alternative credentials were guessed. The current application components, navigation configuration, workspace-tab configuration, screenshots, and demo seeder in the sibling product repository were used as the authoritative implementation reference.
 
