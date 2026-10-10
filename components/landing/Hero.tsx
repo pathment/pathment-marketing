@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="hero-section overflow-hidden border-b border-line">
       <div className="mx-auto max-w-7xl px-5 pb-12 pt-12 sm:px-8 sm:pb-16 sm:pt-16 lg:pb-20">
-        <div className="grid gap-10 xl:grid-cols-[.78fr_1.22fr] xl:items-center">
+        <div className="grid gap-10 xl:grid-cols-[.68fr_1.32fr] xl:items-center">
           <div>
             <p className="eyebrow"><span className="h-1.5 w-1.5 rounded-full bg-brand-500" />Mentorship and learning operations</p>
             <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.75rem,4.7vw,4.5rem)] font-semibold leading-[1.01] tracking-[-0.055em] text-ink">

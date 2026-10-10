@@ -50,15 +50,28 @@ export function HeroProductPreview() {
           </div>
           <p className="px-1 text-[10px] font-medium uppercase tracking-[.13em] text-[#7d918b]">Fictional demo workspace</p>
         </div>
-        <div className="grid md:grid-cols-[minmax(0,1fr)_210px]">
+        <div>
           <figure className="flex min-w-0 items-start justify-center overflow-hidden bg-white">
-            <Image key={preview.image} src={preview.image} alt={preview.alt} width={preview.width} height={preview.height} priority sizes="(max-width: 767px) 100vw, (max-width: 1279px) calc(100vw - 280px), 45vw" className="h-auto w-full object-contain object-top" />
+            <Image
+              key={preview.image}
+              src={preview.image}
+              alt={preview.alt}
+              width={preview.width}
+              height={preview.height}
+              priority
+              unoptimized
+              className="h-auto w-full object-contain object-top"
+            />
           </figure>
-          <div className="flex flex-col bg-[#073d3b] p-5 text-white sm:p-6">
-            <span className="w-fit rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[.13em] text-[#a7ddd0]">{preview.label} view</span>
-            <h2 className="mt-5 text-xl font-semibold leading-7">{preview.title}</h2>
-            <ul className="mt-5 space-y-3 text-xs leading-5 text-white/70">{preview.items.map((item) => <li key={item} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#75cbbb]" />{item}</li>)}</ul>
-            <Link href={`/demo?role=${role}`} className="mt-7 inline-flex items-center gap-2 text-xs font-semibold text-[#8fe0ca] md:mt-auto">Open this workspace <ArrowRight className="h-4 w-4" /></Link>
+          <div className="grid gap-5 bg-[#073d3b] p-5 text-white sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="w-fit rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[.13em] text-[#a7ddd0]">{preview.label} view</span>
+                <h2 className="text-base font-semibold sm:text-lg">{preview.title}</h2>
+              </div>
+              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs leading-5 text-white/70">{preview.items.map((item) => <li key={item} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#75cbbb]" />{item}</li>)}</ul>
+            </div>
+            <Link href={`/demo?role=${role}`} className="inline-flex items-center gap-2 text-xs font-semibold text-[#8fe0ca] sm:justify-self-end">Open this workspace <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </div>
       </div>

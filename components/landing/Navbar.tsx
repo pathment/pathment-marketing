@@ -57,7 +57,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-surface/95 px-5 backdrop-blur sm:px-8">
       <nav aria-label="Main navigation" className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-5">
-        <Brand />
+        <Brand scrollToTop />
         <div className="hidden items-center gap-6 text-sm font-medium text-muted lg:flex">
           {navItems.map((item) => <Link key={item.href} href={item.href} className="hover:text-accent">{item.label}</Link>)}
         </div>

@@ -38,6 +38,18 @@ test("homepage exposes demo, registration, sign-in, and contact journeys", async
   assert.match(form, /Talk to the Pathment team/);
 });
 
+test("hero preserves screenshot clarity and the header brand returns home to the top", async () => {
+  const preview = await source("components/landing/HeroProductPreview.tsx");
+  const brand = await source("components/landing/Brand.tsx");
+  const navbar = await source("components/landing/Navbar.tsx");
+  assert.match(preview, /unoptimized/);
+  assert.match(preview, /sm:grid-cols-\[1fr_auto\]/);
+  assert.doesNotMatch(preview, /md:grid-cols-\[minmax\(0,1fr\)_210px\]/);
+  assert.match(brand, /window\.scrollTo\(\{ top: 0, behavior: "smooth" \}\)/);
+  assert.match(brand, /window\.history\.replaceState\(null, "", "\/"\)/);
+  assert.match(navbar, /<Brand scrollToTop \/>/);
+});
+
 test("demo contains all roles and completion controls", async () => {
   const demo = await source("components/demo/InteractiveDemo.tsx");
   const screens = await source("components/demo/DemoScreens.tsx");
