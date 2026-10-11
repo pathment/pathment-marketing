@@ -47,7 +47,7 @@ export function Footer() {
           </div>
           <div>
             <h2 className="mb-4 text-[10px] font-semibold uppercase tracking-[.16em] text-white/40">Trust</h2>
-            <ul className="space-y-3 text-sm text-white/68"><li><Link href="/privacy" className="hover:text-brand-300">Privacy policy</Link></li><li>Role-based experiences</li><li>Workspace separation</li></ul>
+            <ul className="space-y-3 text-sm text-white/68"><li><Link href="/privacy" className="hover:text-brand-300">Privacy policy</Link></li><li><Link href="/account-deletion" className="hover:text-brand-300">Delete an account</Link></li><li>Role-based experiences</li><li>Workspace separation</li></ul>
           </div>
         </div>
 
