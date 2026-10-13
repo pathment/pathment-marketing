@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Sora } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,6 +16,14 @@ const sora = Sora({
   display: "swap",
 });
 
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -24,9 +32,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pathment | Mentorship program operations",
+  title: {
+    default: "Pathment | Run mentorship programs that actually finish",
+    template: "%s | Pathment",
+  },
   description:
-    "Run mentorship and learning programs without losing track of people, progress, evidence, or decisions.",
+    "One workspace from the application form to the certificate. Admissions, learning roadmaps, mentor reviews, roadblocks, recognition and reporting for fellowships, bootcamps, universities and internal L&D.",
   metadataBase: new URL("https://pathment.me"),
   icons: {
     icon: [
@@ -44,9 +55,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Pathment | Mentorship program operations",
+    title: "Pathment | Run mentorship programs that actually finish",
     description:
-      "Run structured mentorship and learning programs with clear workflows for admins, mentors, and mentees.",
+      "Admissions, learning roadmaps, mentor reviews, recognition and reporting on one record, with a workspace built for program leads, mentors and mentees.",
     url: "https://pathment.me",
     siteName: "Pathment",
     locale: "en_US",
@@ -54,9 +65,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pathment",
+    title: "Pathment | Run mentorship programs that actually finish",
     description:
-      "Run mentorship programs without losing track of people, progress, or decisions.",
+      "One workspace from the application form to the certificate, for program leads, mentors and mentees.",
   },
 };
 
@@ -76,7 +87,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${sora.variable} ${jetbrainsMono.variable}`}
+        className={`${inter.variable} ${sora.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
       >
         <a
           href="#main-content"

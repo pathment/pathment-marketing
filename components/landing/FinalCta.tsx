@@ -1,20 +1,70 @@
-import { ArrowRight, Building2, MessageSquareText } from "lucide-react";
+import { ArrowRight, Building2, MessageSquareText, Play } from "lucide-react";
 import { APP_REGISTER_URL } from "../../lib/links";
 import { BuyerInterestForm } from "./BuyerInterestForm";
 import { TrackedLink } from "./TrackedLink";
 
 export function FinalCta() {
   return (
-    <section id="contact" className="bg-brand-950 px-5 py-16 sm:px-8 sm:py-20">
-      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[.75fr_1.25fr] md:items-start">
-        <div className="text-white md:sticky md:top-28">
-          <p className="text-xs font-semibold uppercase tracking-[.16em] text-brand-200">Take the next step</p>
-          <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Start your Pathment organization, or talk through the fit.</h2>
-          <p className="mt-4 max-w-lg text-sm leading-7 text-brand-100/75">Create an organization now, or send three details for pricing and onboarding guidance.</p>
-          <TrackedLink href={APP_REGISTER_URL} eventName="organization_signup_clicked" eventProperties={{ source: "final_cta" }} className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-100 px-5 py-3 text-sm font-semibold text-brand-950 hover:bg-white"><Building2 size={17} />Create your organization <ArrowRight size={16} /></TrackedLink>
-          <div className="mt-6 flex gap-3 border-t border-white/15 pt-5 text-sm leading-6 text-brand-100/75"><MessageSquareText className="mt-1 shrink-0 text-brand-300" size={20} /><p>A team member replies to your work email.</p></div>
+    <section
+      id="contact"
+      aria-labelledby="final-cta-heading"
+      className="on-band scroll-mt-20 overflow-hidden"
+    >
+      <div className="shell rhythm">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="label">Next step</p>
+            <h2 id="final-cta-heading" className="display-lg mt-6">
+              What will your next cohort be able to{" "}
+              <span className="accent-serif">prove?</span>
+            </h2>
+            <p className="lede mt-5 max-w-lg">
+              Open the demo and walk the whole thing yourself, create a
+              workspace in a couple of minutes, or tell us about your program
+              and we will tell you honestly whether Pathment fits it.
+            </p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <TrackedLink
+                href="/demo"
+                eventName="demo_started"
+                eventProperties={{ source: "final_cta" }}
+                className="btn btn-lg btn-light"
+              >
+                <Play className="h-4 w-4" />
+                Explore the demo
+              </TrackedLink>
+              <TrackedLink
+                href={APP_REGISTER_URL}
+                eventName="organization_signup_clicked"
+                eventProperties={{ source: "final_cta" }}
+                className="btn btn-lg btn-ghost-light"
+              >
+                <Building2 className="h-4 w-4" />
+                Create an organization
+                <ArrowRight className="h-4 w-4" />
+              </TrackedLink>
+            </div>
+
+            <div className="mt-9 flex gap-3 border-t border-band-line pt-7 text-sm leading-6 text-band-muted">
+              <MessageSquareText className="mt-0.5 h-5 w-5 shrink-0 text-mint" />
+              <p>
+                No sales sequence. A member of the team replies to your work
+                email, once.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-surface p-6 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.6)] sm:p-8">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
+              Tell us about your program
+            </h3>
+            <p className="mb-6 mt-2 text-sm leading-6 text-muted">
+              Three required fields. No sales maze.
+            </p>
+            <BuyerInterestForm compact />
+          </div>
         </div>
-        <div className="rounded-3xl bg-surface p-6 shadow-xl sm:p-8"><h3 className="text-xl font-semibold text-ink">Talk to the Pathment team</h3><p className="mb-6 mt-2 text-sm leading-6 text-muted">Three required fields. No sales maze.</p><BuyerInterestForm compact /></div>
       </div>
     </section>
   );

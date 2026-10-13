@@ -4,6 +4,7 @@
   --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sora), "Sora", ui-sans-serif, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "JetBrains Mono", monospace;
+  --font-serif: var(--font-serif), "Instrument Serif", ui-serif, Georgia, serif;
 
   --color-brand-50: #effaf7;
   --color-brand-100: #d4f2e9;
@@ -143,18 +144,26 @@ section[id] {
   padding-block: 96px;
 }
 .eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.6em;
+  font-family: var(--font-mono);
   color: #00766c;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
 }
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.5rem);
   font-weight: 600;
   line-height: 1.16;
   letter-spacing: -0.045em;
@@ -224,14 +233,18 @@ section[id] {
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --surface: #0d1c19;
-  --canvas: #071310;
-  --soft: #142822;
-  --ink: #f1f7f3;
-  --muted: #a8bbb3;
-  --line: #294239;
-  --accent: #73dfc4;
-  --hero-glow: #143e34;
+  /* Five surfaces on an even lightness ramp, so sections still read as
+     separate bands instead of collapsing into one flat green. Order, darkest
+     first: band-deep < canvas < sand < surface < soft. The green cast is kept
+     slight on purpose; saturating it is what made the old scale muddy. */
+  --canvas: #0a100e;
+  --surface: #1a2320;
+  --soft: #232e2a;
+  --ink: #e9f1ee;
+  --muted: #93a5a0;
+  --line: #2c3834;
+  --accent: #5fd9bd;
+  --hero-glow: rgba(95, 217, 189, 0.07);
 }
 @theme inline {
   --color-surface: var(--surface);
@@ -241,15 +254,21 @@ section[id] {
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  /* Band palette, exposed as utilities for the full-bleed dark sections. */
+  --color-band: var(--band);
+  --color-band-deep: var(--band-deep);
+  --color-band-ink: var(--band-ink);
+  --color-band-muted: var(--band-muted);
+  --color-mint: var(--mint);
+  --color-mint-bright: var(--mint-bright);
+  --color-sand: var(--sand);
 }
 body {
   background: var(--canvas);
   color: var(--ink);
 }
 [data-theme="dark"] body {
-  background:
-    radial-gradient(circle at 12% 12%, rgba(24, 111, 91, 0.12), transparent 28rem),
-    linear-gradient(180deg, #091713 0%, #071310 70%);
+  background: var(--canvas);
 }
 ::selection {
   background: #008b7d55;
@@ -275,10 +294,14 @@ body {
     var(--canvas);
 }
 [data-theme="dark"] .hero-section {
+  /* One faint wash low on the fold, nothing else. */
   background:
-    radial-gradient(circle at 78% 30%, rgba(38, 143, 118, 0.2), transparent 28rem),
-    radial-gradient(circle at 22% 90%, rgba(20, 87, 71, 0.25), transparent 30rem),
-    linear-gradient(135deg, #081713 0%, #0b211c 55%, #071310 100%);
+    radial-gradient(
+      ellipse 90% 60% at 50% 100%,
+      var(--hero-glow),
+      transparent 70%
+    ),
+    var(--canvas);
 }
 .product-hero-frame {
   border-color: var(--line);
@@ -339,5 +362,460 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Pathment design system — editorial scale, full-bleed bands, product frames.
+   Added for the 2026 site rebuild. Everything above this line is preserved so
+   /demo, /pricing, /contact and /privacy keep rendering unchanged.
+   ========================================================================== */
+
+:root {
+  /* Full-bleed band surfaces. Deep is the darkest, used for the closing act. */
+  --band: #073d3b;
+  --band-deep: #04110f;
+  --band-ink: #f2fbf8;
+  --band-muted: #a9c9c1;
+  --band-line: rgba(255, 255, 255, 0.14);
+  --mint: #75cbbb;
+  --mint-bright: #8fe0ca;
+  --sand: #f6f3ec;
+
+  /* Section rhythm. Generous by default, tightened on small screens. */
+  --rhythm: 7.5rem;
+  --gutter: 1.5rem;
+}
+
+:root[data-theme="dark"] {
+  /* The one genuinely green surface, so the brand bands still feel branded. */
+  --band: #0a2d28;
+  --band-deep: #040807;
+  --sand: #121917;
+  --band-muted: #b2cfc7;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --rhythm: 9rem;
+    --gutter: 2.5rem;
+  }
+}
+
+/* --- Layout ------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.shell-wide {
+  width: 100%;
+  max-width: 1480px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.rhythm {
+  padding-block: var(--rhythm);
+}
+
+.rhythm-tight {
+  padding-block: calc(var(--rhythm) * 0.62);
+}
+
+/* --- Type --------------------------------------------------------------- */
+
+.display-xl,
+.display-lg,
+.display-md {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.display-xl {
+  font-size: clamp(2.9rem, 6.6vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.display-lg {
+  font-size: clamp(2.2rem, 4.4vw, 3.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.display-md {
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+/* The one editorial flourish: a serif italic for the word that carries the
+   claim. Used sparingly — hero, section turns, and pull quotes only. */
+.accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--accent);
+}
+
+.on-band .accent-serif {
+  color: var(--mint-bright);
+}
+
+.lede {
+  font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+  line-height: 1.68;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.label::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.label-plain::before {
+  display: none;
+}
+
+/* Tabular figures so stat rows and counters never jitter. */
+.numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* --- Bands -------------------------------------------------------------- */
+
+.on-band {
+  background: var(--band);
+  color: var(--band-ink);
+}
+
+.on-band-deep {
+  background: var(--band-deep);
+  color: var(--band-ink);
+}
+
+.on-band .lede,
+.on-band-deep .lede {
+  color: var(--band-muted);
+}
+
+.on-band .label,
+.on-band-deep .label {
+  color: var(--mint);
+}
+
+.on-band .display-xl,
+.on-band .display-lg,
+.on-band .display-md,
+.on-band-deep .display-xl,
+.on-band-deep .display-lg,
+.on-band-deep .display-md {
+  color: var(--band-ink);
+}
+
+/* --- Buttons ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color 180ms,
+    border-color 180ms,
+    color 180ms,
+    transform 180ms;
+}
+
+.btn-lg {
+  padding: 1.1rem 1.75rem;
+  font-size: 0.95rem;
+}
+
+.btn-solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .btn-solid {
+  color: #04110f;
+}
+
+.btn-solid:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.btn-outline:hover {
+  background: var(--soft);
+  border-color: var(--accent);
+}
+
+/* Band variants: light pill on dark, and a hairline ghost. */
+.btn-light {
+  background: var(--mint-bright);
+  border-color: var(--mint-bright);
+  color: #04110f;
+}
+
+.btn-light:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.btn-ghost-light {
+  background: transparent;
+  border-color: var(--band-line);
+  color: var(--band-ink);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* --- Product frames ----------------------------------------------------- */
+
+/* A restrained browser chrome so screenshots read as software, not as art. */
+.screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow:
+    0 2px 4px -2px rgba(4, 17, 15, 0.08),
+    0 24px 64px -32px rgba(4, 17, 15, 0.45);
+}
+
+.on-band .screen,
+.on-band-deep .screen {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 40px 100px -40px rgba(0, 0, 0, 0.75);
+}
+
+.screen-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--soft);
+}
+
+.on-band .screen-bar,
+.on-band-deep .screen-bar {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.screen-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.screen-dots span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--line);
+}
+
+.on-band .screen-dots span,
+.on-band-deep .screen-dots span {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* --- Hairlines and surfaces -------------------------------------------- */
+
+.hair {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.on-band .hair,
+.on-band-deep .hair {
+  background: var(--band-line);
+}
+
+.card-flat {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+/* --- Motion ------------------------------------------------------------- */
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em) rotate(1.5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+.word-in {
+  animation: word-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes band-sheen {
+  from {
+    transform: translateX(-30%);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word-in {
+    animation: none;
+  }
+}
+
+/* --- Snake button ------------------------------------------------------- */
+
+/*
+ * A light that runs a lap around the button's border.
+ *
+ * Built from a rotating conic gradient rather than @property, so it animates
+ * a plain transform and works without the browser needing to interpolate a
+ * custom property. ::before is the spinning light, ::after is the button face
+ * laid over it, leaving only a hairline ring exposed. The label needs its own
+ * stacking context, hence `.snake-label`.
+ */
+:root {
+  /* Both themes use the same recipe: a dark groove with a bright head, which
+     is what reads as a travelling light. A pale track failed twice here, once
+     by washing out against the page and once because a dark head on it merged
+     into the dark button face. */
+  --snake-track: #0a4f48;
+  --snake-head: #7fe9ce;
+  --snake-head-core: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  /* Mirrored: a near black groove under the bright mint face, white head. */
+  --snake-track: #04140f;
+  --snake-head: #bff3e4;
+  --snake-head-core: #ffffff;
+}
+
+.snake {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* .btn-solid's own border and fill would paint over the ring, so clear
+     both. The border stays for sizing; this background is what shows through
+     the gap ::after leaves, giving the track the light runs along. */
+  border-color: transparent;
+  background: var(--snake-track);
+}
+
+.snake::before,
+.snake::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.snake::before {
+  /* Square and oversized so the sweep still covers the corners as it turns. */
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  aspect-ratio: 1;
+  /* A short tail into a tight core, so it reads as one travelling head
+     rather than a long smear around half the button. */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0turn,
+    transparent 0.70turn,
+    color-mix(in srgb, var(--snake-head) 30%, transparent) 0.84turn,
+    var(--snake-head) 0.93turn,
+    var(--snake-head-core) 0.965turn,
+    var(--snake-head-core) 0.985turn,
+    transparent 1turn
+  );
+  animation: snake-run 2.8s linear infinite;
+  z-index: 0;
+}
+
+.snake::after {
+  /* The face. Inset by the ring thickness. */
+  inset: 3px;
+  border-radius: inherit;
+  background: var(--snake-face, var(--accent));
+  z-index: 1;
+}
+
+.snake-label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@keyframes snake-run {
+  from {
+    transform: translate(-50%, -50%) rotate(0turn);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+/* Without motion the ring would sit frozen as a bright wedge, so hide it and
+   leave an ordinary solid button. */
+@media (prefers-reduced-motion: reduce) {
+  .snake::before {
+    display: none;
+  }
+  .snake::after {
+    inset: 0;
   }
 }

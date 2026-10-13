@@ -3,7 +3,7 @@ import { ExperienceDemo, type DemoDevice } from "../../components/demo/Experienc
 import type { DemoRole } from "../../components/demo/InteractiveDemo";
 import type { DemoPageId } from "../../components/demo/demo-data";
 
-export const metadata: Metadata = { title: "Experience Pathment | Web and mobile product tour", description: "Explore Pathment on web or mobile as an Admin, Mentor, or Mentee using representative, read-only Dev Weekends data." };
+export const metadata: Metadata = { title: "Interactive demo", description: "Explore Pathment on web or mobile as an Admin, Mentor, or Mentee using representative, read-only Dev Weekends data." };
 
 export default async function DemoPage({ searchParams }: { searchParams: Promise<{ role?: string; page?: string; device?: string }> }) {
   const { role, page, device } = await searchParams;

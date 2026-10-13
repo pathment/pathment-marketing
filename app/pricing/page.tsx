@@ -8,7 +8,7 @@ import { APP_LOGIN_URL, APP_REGISTER_URL } from "../../lib/links";
 import { TrackedLink } from "../../components/landing/TrackedLink";
 
 export const metadata: Metadata = {
-  title: "Pricing | Pathment",
+  title: "Pricing",
   description:
     "Compare published Pathment workspace prices, member limits, and features. Start with a plan that fits your mentorship community.",
 };
@@ -27,8 +27,8 @@ export default async function PricingPage({
         <header className="mb-14 grid gap-9 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
           <div>
             <p className="eyebrow">Straightforward workspace pricing</p>
-            <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.08] tracking-[-.045em] text-ink sm:text-6xl">Start with the program you run today.</h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-muted">Pilot with one community or support a larger operation. The Admin, Mentor, and Mentee experience stays connected on every plan.</p>
+            <h1 className="display-xl mt-6 max-w-3xl">Start with the program you run today.</h1>
+            <p className="lede mt-6 max-w-2xl">Pilot with one community or support a larger operation. The Admin, Mentor, and Mentee experience stays connected on every plan.</p>
           </div>
           <div className="rounded-[1.5rem] border border-line bg-surface p-6 shadow-sm-soft">
             <p className="text-xs font-semibold uppercase tracking-[.14em] text-accent">Before anything changes</p>

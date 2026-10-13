@@ -1,32 +1,114 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Monitor, Smartphone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Monitor, Smartphone } from "lucide-react";
 import { ANDROID_APP_URL } from "../../lib/links";
+import { mobileScreens } from "./site-content";
+import { Reveal } from "./Reveal";
 
 export function MobileExperience() {
   return (
-    <section id="mobile-app" className="scroll-mt-[4.5rem] bg-brand-950 px-5 py-16 text-white sm:px-8 sm:py-20">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[.16em] text-brand-300">Choose how to explore</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Web workspace or Android app.</h2>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-brand-100/75">Start with the format your team will use. Switch roles inside the demo without creating an account.</p>
-          </div>
+    <section
+      id="mobile"
+      aria-labelledby="mobile-heading"
+      className="on-band-deep scroll-mt-20 overflow-hidden"
+    >
+      <div className="shell rhythm">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-14">
+          <Reveal>
+            <p className="label">On the phone, too</p>
+            <h2 id="mobile-heading" className="display-lg mt-6">
+              Mentors review from the train.{" "}
+              <span className="accent-serif">Not from their inbox.</span>
+            </h2>
+            <p className="lede mt-5">
+              A native Android app with the full five-tab experience for all
+              three roles: approvals, submissions, messages, schedule and
+              recognition. The same record as the web workspace, not a
+              read-only companion.
+            </p>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <article className="rounded-2xl border border-white/15 bg-white/7 p-5">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-brand-200"><Monitor size={20} /></span>
-              <h3 className="mt-5 text-lg font-semibold">Web workspace</h3>
-              <p className="mt-2 text-sm leading-6 text-brand-100/70">Explore the complete Admin, Mentor, or Mentee workspace.</p>
-              <Link href="/demo?device=web" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-200">Open Web demo <ArrowRight size={15} /></Link>
-            </article>
-            <article className="rounded-2xl bg-brand-100 p-5 text-brand-950">
-              <div className="flex items-center justify-between gap-3"><span className="grid h-10 w-10 place-items-center rounded-xl bg-white text-brand-700"><Smartphone size={20} /></span><span className="text-[10px] font-semibold uppercase tracking-[.14em] text-brand-700">Admin · Mentor · Mentee</span></div>
-              <h3 className="mt-5 text-lg font-semibold">Android app</h3>
-              <p className="mt-2 text-sm leading-6 text-brand-900/75">Use the native five-tab experience and open every role screen.</p>
-              <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2"><Link href="/demo?device=mobile" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-800">Open mobile demo <ArrowRight size={15} /></Link><a href={ANDROID_APP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800"><CheckCircle2 size={14} />Google Play</a></div>
-            </article>
-          </div>
+            <div className="mt-9 grid gap-4 sm:grid-cols-2">
+              <article className="rounded-2xl border border-band-line bg-white/[0.04] p-5">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-mint">
+                  <Monitor className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold text-band-ink">
+                  Web workspace
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-band-muted">
+                  The complete Admin, Mentor or Mentee workspace in the browser.
+                </p>
+                <Link
+                  href="/demo?device=web"
+                  className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-mint-bright"
+                >
+                  Open the web demo
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </article>
+
+              <article className="rounded-2xl bg-mint p-5 text-[#04110f]">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/70">
+                  <Smartphone className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold">
+                  Android app
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[#04110f]/70">
+                  Native navigation for every role, with the full screen
+                  directory.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <Link
+                    href="/demo?device=mobile"
+                    className="inline-flex items-center gap-2 text-sm font-semibold"
+                  >
+                    Mobile demo
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <a
+                    href={ANDROID_APP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold"
+                  >
+                    Google Play
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </article>
+            </div>
+          </Reveal>
+
+          {/* Three real captures, fanned so the middle one leads. */}
+          <Reveal delay={0.1}>
+            <ul className="flex items-center justify-center gap-3 sm:gap-4">
+              {mobileScreens.map((screen, index) => (
+                <li
+                  key={screen.src}
+                  className={`min-w-0 flex-1 ${
+                    index === 1 ? "lg:-translate-y-5" : ""
+                  }`}
+                >
+                  <figure>
+                    <div className="overflow-hidden rounded-[1.25rem] border border-white/12 bg-black/20 shadow-[0_40px_90px_-45px_rgba(0,0,0,0.9)]">
+                      <Image
+                        src={screen.src}
+                        alt={screen.alt}
+                        width={540}
+                        height={1050}
+                        className="h-auto w-full"
+                        unoptimized
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-band-muted">
+                      {screen.caption}
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </div>
     </section>

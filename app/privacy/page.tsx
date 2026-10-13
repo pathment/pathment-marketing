@@ -17,12 +17,12 @@ import { Footer } from "../../components/landing/Footer";
 import { Navbar } from "../../components/landing/Navbar";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Pathment",
+  title: "Privacy Policy",
   description:
     "Learn what information Pathment collects, how it is used, who can see it, and the choices available to workspace members.",
   alternates: { canonical: "/privacy" },
   openGraph: {
-    title: "Privacy Policy | Pathment",
+    title: "Privacy Policy",
     description:
       "A clear account of how Pathment handles information across mentorship workspaces, the website, and mobile apps.",
     url: "https://pathment.me/privacy",
