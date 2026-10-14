@@ -31,23 +31,98 @@ test("homepage presents the interactive Android experience without test-phase co
 
 test("homepage exposes demo, registration, sign-in, and contact journeys", async () => {
   const hero = await source("components/landing/Hero.tsx");
+  const navbar = await source("components/landing/Navbar.tsx");
   const form = await source("components/landing/FinalCta.tsx");
-  assert.match(hero, /Explore the product/);
+  assert.match(hero, /Explore the live demo/);
   assert.match(hero, /Create an organization/);
-  assert.match(hero, /Already use Pathment\? Sign in/);
-  assert.match(form, /Talk to the Pathment team/);
+  assert.match(hero, /APP_REGISTER_URL/);
+  assert.match(navbar, /APP_LOGIN_URL/);
+  assert.match(navbar, /Sign in/);
+  assert.match(form, /Tell us about your program/);
+  assert.match(form, /<BuyerInterestForm compact \/>/);
 });
 
-test("hero preserves screenshot clarity and the header brand returns home to the top", async () => {
-  const preview = await source("components/landing/HeroProductPreview.tsx");
+test("homepage keeps the full narrative order from claim to ask", async () => {
+  const page = await source("app/page.tsx");
+  const order = [
+    "<Hero />",
+    "<ProofBand />",
+    "<ProblemSection />",
+    "<RoleWorkspaces />",
+    "<CapabilityGrid />",
+    "<Lifecycle />",
+    "<AudienceGrid />",
+    "<Testimonials />",
+    "<MobileExperience />",
+    "<PricingPreview />",
+    "<HomeFaq />",
+    "<FinalCta />",
+  ];
+  let cursor = -1;
+  for (const section of order) {
+    const at = page.indexOf(section);
+    assert.ok(at > cursor, `${section} is missing or out of order on the homepage`);
+    cursor = at;
+  }
+});
+
+test("every in-page nav target exists as a section id", async () => {
+  const sources = await Promise.all(
+    ["Navbar", "Footer", "ProblemSection"].map((name) => source(`components/landing/${name}.tsx`)),
+  );
+  const home = (
+    await Promise.all(
+      ["Hero", "RoleWorkspaces", "CapabilityGrid", "Lifecycle", "AudienceGrid", "MobileExperience", "PricingPreview", "HomeFaq", "FinalCta", "ProblemSection"].map(
+        (name) => source(`components/landing/${name}.tsx`),
+      )
+    )
+  ).join("\n");
+  const targets = new Set();
+  for (const value of sources) {
+    for (const match of value.matchAll(/href="(?:\/)?#([a-z-]+)"/g)) targets.add(match[1]);
+  }
+  assert.ok(targets.size > 0, "expected the nav or footer to link to in-page sections");
+  for (const id of targets) {
+    assert.match(home, new RegExp(`id="${id}"`), `no section renders id="${id}"`);
+  }
+});
+
+test("product screenshots stay unoptimized and the header brand returns home to the top", async () => {
+  const hero = await source("components/landing/Hero.tsx");
+  const workspaces = await source("components/landing/RoleWorkspaces.tsx");
   const brand = await source("components/landing/Brand.tsx");
   const navbar = await source("components/landing/Navbar.tsx");
-  assert.match(preview, /unoptimized/);
-  assert.match(preview, /sm:grid-cols-\[1fr_auto\]/);
-  assert.doesNotMatch(preview, /md:grid-cols-\[minmax\(0,1fr\)_210px\]/);
+  assert.match(hero, /unoptimized/);
+  assert.match(workspaces, /unoptimized/);
   assert.match(brand, /window\.scrollTo\(\{ top: 0, behavior: "smooth" \}\)/);
   assert.match(brand, /window\.history\.replaceState\(null, "", "\/"\)/);
   assert.match(navbar, /<Brand scrollToTop \/>/);
+});
+
+test("placeholder testimonials are never attributed to a person", async () => {
+  const content = await source("components/landing/site-content.ts");
+  const view = await source("components/landing/Testimonials.tsx");
+  if (/placeholder: true/.test(content)) {
+    // A flagged entry must not also carry a name, or the card would publish
+    // an invented sentence under an invented person.
+    for (const entry of content.split(/\n  \{\n/).slice(1)) {
+      const body = entry.split(/\n  \},/)[0];
+      if (/placeholder: true/.test(body)) {
+        assert.doesNotMatch(body, /\n\s*name:/, `flagged testimonial must have no name: ${body.slice(0, 80)}`);
+      }
+    }
+    // And the component must fall back to the role rather than render blank.
+    assert.match(view, /item\.name \?\? item\.role/);
+    assert.match(view, /allPlaceholder/);
+  }
+});
+
+test("published metrics stay traceable to a verification date", async () => {
+  const content = await source("components/landing/site-content.ts");
+  const band = await source("components/landing/ProofBand.tsx");
+  assert.match(content, /VERIFIED against the production database/);
+  assert.match(content, /asOf: "/);
+  assert.match(band, /proof\.asOf/, "the proof band must print the period its figures cover");
 });
 
 test("demo contains all roles and completion controls", async () => {
