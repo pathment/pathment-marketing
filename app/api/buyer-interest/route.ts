@@ -7,6 +7,8 @@ export const runtime = "nodejs";
 const attempts = new Map<string, number[]>();
 const duplicates = new Map<string, number>();
 const WINDOW_MS = 15 * 60 * 1000;
+/** Where a visitor is sent when we cannot take their request ourselves. */
+const CONTACT_EMAIL = "hello@pathment.me";
 
 function clientKey(request: NextRequest) {
   return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
@@ -47,7 +49,22 @@ async function deliverLead(lead: BuyerLead, id: string) {
     if (!response.ok) throw new Error(`Resend returned ${response.status}`);
     return;
   }
-  throw new Error("Lead delivery is not configured");
+  throw new NotConfiguredError();
+}
+
+/**
+ * Nothing is wired up to receive leads.
+ *
+ * Its own type because it is a deploy problem, not a delivery problem: no
+ * amount of retrying fixes it, and it means every submission since the site
+ * went live has been refused. Worth telling apart in the logs from a webhook
+ * that happened to be down for a minute.
+ */
+class NotConfiguredError extends Error {
+  constructor() {
+    super("Lead delivery is not configured: set LEADS_WEBHOOK_URL, or all three of RESEND_API_KEY, LEAD_NOTIFICATION_TO and LEAD_NOTIFICATION_FROM");
+    this.name = "NotConfiguredError";
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -68,7 +85,28 @@ export async function POST(request: NextRequest) {
     duplicates.set(key, Date.now());
     return NextResponse.json({ ok: true, id });
   } catch (error) {
-    console.error("Buyer lead delivery failed", { id, error });
-    return NextResponse.json({ error: "We could not safely deliver your request. Nothing was claimed as sent. Please try again shortly." }, { status: 503 });
+    /**
+     * Write the whole lead to the log, not just that one failed.
+     *
+     * Someone filled this in and was told it did not arrive. If it is not
+     * recorded here it is gone, and `{ error }` alone serialises an Error to
+     * `{}` in most log pipelines, so even the reason was being lost. These
+     * lines are the recovery path until a durable destination is configured.
+     */
+    const unconfigured = error instanceof NotConfiguredError;
+    console.error("Buyer lead delivery failed", {
+      id,
+      reason: error instanceof Error ? error.message : String(error),
+      unconfigured,
+      lead: { ...lead, website: undefined, startedAt: undefined },
+    });
+    return NextResponse.json({
+      error: unconfigured
+        // Honest: "try again shortly" is false when nothing is listening, and
+        // it sends people round a loop that cannot succeed.
+        ? "We could not deliver your request. Nothing was claimed as sent. Please email us instead and we will pick it up straight away."
+        : "We could not safely deliver your request. Nothing was claimed as sent. Please try again shortly.",
+      contactEmail: CONTACT_EMAIL,
+    }, { status: 503 });
   }
 }
