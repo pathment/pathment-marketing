@@ -33,6 +33,40 @@ export const heroStats = [
 ] as const;
 
 /* -------------------------------------------------------------------------- */
+/* Hero activity card                                                          */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * The three people in the hero composition. These are the demo workspace's
+ * own seed personas, the same ones the product screenshots show, so the card
+ * depicts the real interface rather than inventing customers. Do not reuse
+ * these portraits anywhere that implies they are Dev Weekends members.
+ */
+export const heroActivity = [
+  {
+    name: "Maya Patel",
+    role: "Mentee",
+    action: "Submitted API validation and rate limiting",
+    time: "10:14",
+    avatar: "/demo/people/maya-patel.png",
+  },
+  {
+    name: "Aisha Khan",
+    role: "Mentor",
+    action: "Reviewed the evidence, approved with feedback",
+    time: "11:06",
+    avatar: "/demo/people/aisha-khan.png",
+  },
+  {
+    name: "Dana Reyes",
+    role: "Admin",
+    action: "Saw the clan clear without chasing anyone",
+    time: "14:32",
+    avatar: "/demo/people/dana-reyes.png",
+  },
+] as const;
+
+/* -------------------------------------------------------------------------- */
 /* Proof                                                                       */
 /* -------------------------------------------------------------------------- */
 

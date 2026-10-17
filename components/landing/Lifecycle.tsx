@@ -24,9 +24,14 @@ export function Lifecycle() {
               <span className="accent-serif">visible.</span>
             </h2>
           </div>
-          <p className="lede">
-            Four moves from an empty workspace to a defensible outcome. Nothing
-            in between relies on someone remembering to send an update.
+          <p className="text-lg leading-[1.6] tracking-[-0.01em]">
+            <span className="text-band-ink">
+              Four moves from an empty workspace to a defensible outcome.
+            </span>{" "}
+            <span className="text-band-muted">
+              Nothing in between relies on someone remembering to send an
+              update.
+            </span>
           </p>
         </div>
 

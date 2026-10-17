@@ -234,15 +234,20 @@ section[id] {
 :root[data-theme="dark"] {
   color-scheme: dark;
   /* Five surfaces on an even lightness ramp, so sections still read as
-     separate bands instead of collapsing into one flat green. Order, darkest
-     first: band-deep < canvas < sand < surface < soft. The green cast is kept
-     slight on purpose; saturating it is what made the old scale muddy. */
-  --canvas: #0a100e;
-  --surface: #1a2320;
-  --soft: #232e2a;
-  --ink: #e9f1ee;
-  --muted: #93a5a0;
-  --line: #2c3834;
+     separate bands instead of collapsing into one. Order, darkest first:
+     band-deep < canvas < sand < surface < soft.
+
+     The neutrals are deliberately NOT green. Two earlier passes tinted them
+     toward the brand and both read as olive and muddy: at near-black, a green
+     hue looks like dirt rather than like brand. The cast here is faintly cool,
+     which is what makes a dark UI read as premium. Green belongs to --band,
+     --accent and --mint only. Do not tint these back. */
+  --canvas: #0b0d0f;
+  --surface: #16191d;
+  --soft: #1e2227;
+  --ink: #eef2f4;
+  --muted: #98a2aa;
+  --line: #2a2f35;
   --accent: #5fd9bd;
   --hero-glow: rgba(95, 217, 189, 0.07);
 }
@@ -389,9 +394,9 @@ body {
 
 :root[data-theme="dark"] {
   /* The one genuinely green surface, so the brand bands still feel branded. */
-  --band: #0a2d28;
-  --band-deep: #040807;
-  --sand: #121917;
+  --band: #06312c;
+  --band-deep: #060708;
+  --sand: #101316;
   --band-muted: #b2cfc7;
 }
 
@@ -818,4 +823,259 @@ body {
   .snake::after {
     inset: 0;
   }
+}
+
+/* --- Cinematic hero ----------------------------------------------------- */
+
+/*
+ * The hero is always dark, in both themes, the way a photographic hero would
+ * be. Pathment has no photography, so the depth has to be built: a directional
+ * light sweep, film grain, and a product composition on three planes that
+ * bleeds past the section edge instead of sitting inside a tidy box.
+ */
+.hero-cinema {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #07090a;
+  color: #f4f8f7;
+}
+
+/* Directional light. Two cool-mint sources high and right, one deep pool at
+   the base so the composition appears to rise out of shadow. */
+.hero-cinema-light {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(
+      62rem 42rem at 72% 8%,
+      rgba(95, 217, 189, 0.17),
+      transparent 62%
+    ),
+    radial-gradient(
+      44rem 30rem at 18% 0%,
+      rgba(64, 150, 196, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      70rem 34rem at 50% 104%,
+      rgba(8, 72, 64, 0.55),
+      transparent 68%
+    );
+}
+
+/* A hairline grid, barely there, masked to fade out toward the centre and
+   base. It gives the empty upper area some structure so the headline sits on
+   something rather than floating in a void. */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(
+    70% 55% at 50% 12%,
+    #000 0%,
+    rgba(0, 0, 0, 0.35) 55%,
+    transparent 85%
+  );
+}
+
+/* Film grain. Without it the gradients band visibly on wide dark screens. */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(167, 221, 208, 0.75);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  color: #ffffff;
+}
+
+.hero-title .accent-serif {
+  color: #8fe0ca;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  line-height: 1.6;
+  color: rgba(226, 240, 236, 0.66);
+  text-wrap: pretty;
+}
+
+.hero-note {
+  font-size: 0.8rem;
+  color: rgba(226, 240, 236, 0.42);
+}
+
+/* The stage. Three planes: a centre screen that runs off the bottom edge, and
+   two smaller cards overlapping it, each rotated a little so the group reads
+   as objects in space rather than as a row of thumbnails. */
+.hero-stage {
+  position: relative;
+  margin-inline: auto;
+  max-width: 1180px;
+  padding-inline: var(--gutter);
+}
+
+/* Dissolve the whole composition into the hero black at the base. Without
+   this the screenshot is guillotined mid-table against the next section,
+   which reads as a crop accident rather than as depth. Covers every plane,
+   so the phone does not stay sharp while the dashboard fades. */
+.hero-stage::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 15rem;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, #07090a 88%);
+}
+
+.hero-plane-main {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 1rem 1rem 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 0;
+  background: #0d1214;
+  box-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 60px 120px -40px rgba(0, 0, 0, 0.9);
+}
+
+.hero-plane-side {
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  /* Opaque enough to read as a card sitting in front of the dashboard. At the
+     old 0.72 alpha the pane vanished and whatever sat inside looked like a
+     rendering fault rather than a layer. */
+  background: rgba(11, 16, 18, 0.93);
+  backdrop-filter: blur(18px) saturate(1.1);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 40px 90px -26px rgba(0, 0, 0, 0.95);
+}
+
+.hero-plane-left {
+  left: -1.75rem;
+  bottom: 8rem;
+  width: 19.5rem;
+  transform: rotate(-3.5deg);
+}
+
+/* Live dot on the activity card. */
+.hero-pulse {
+  position: relative;
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: #8fe0ca;
+}
+
+.hero-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -0.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(143, 224, 202, 0.5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-pulse::after {
+    animation: hero-pulse 2.4s ease-out infinite;
+  }
+}
+
+@keyframes hero-pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.6);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.hero-plane-right {
+  right: -1rem;
+  bottom: 9.5rem;
+  width: 17rem;
+  transform: rotate(3.5deg);
+  padding: 1.1rem 1.25rem;
+}
+
+/* Below the large breakpoint the side planes would cover the screenshot, so
+   they drop out rather than shrink into illegibility. */
+/* The planes hang past the stage edges on purpose, but below this width the
+   viewport clips them mid-avatar, which reads as breakage rather than bleed.
+   Drop them and show the dashboard alone instead. */
+@media (max-width: 1365px) {
+  .hero-plane-side {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    animation: hero-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(2.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The hero is dark in both themes, so its call to action cannot inherit
+   --accent: in the light theme that is a deep teal and would disappear into
+   the near-black stage. Pin a bright face and a dark groove instead. */
+.hero-cinema .snake {
+  --snake-face: #8fe0ca;
+  --snake-track: #04140f;
+  color: #04110f;
+}
+
+.hero-cinema .snake:hover {
+  --snake-face: #ffffff;
 }
