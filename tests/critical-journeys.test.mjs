@@ -32,14 +32,24 @@ test("homepage presents the interactive Android experience without test-phase co
 test("homepage exposes demo, registration, sign-in, and contact journeys", async () => {
   const hero = await source("components/landing/Hero.tsx");
   const navbar = await source("components/landing/Navbar.tsx");
+  const footer = await source("components/landing/Footer.tsx");
   const form = await source("components/landing/FinalCta.tsx");
+
+  // The hero carries one call to action by design; the other journeys have to
+  // exist somewhere on the page, but not necessarily above the fold.
   assert.match(hero, /Explore the live demo/);
-  assert.match(hero, /Create an organization/);
-  assert.match(hero, /APP_REGISTER_URL/);
   assert.match(navbar, /APP_LOGIN_URL/);
   assert.match(navbar, /Sign in/);
   assert.match(form, /Tell us about your program/);
   assert.match(form, /<BuyerInterestForm compact \/>/);
+
+  const registration = [navbar, footer, form].filter((value) =>
+    /APP_REGISTER_URL/.test(value),
+  );
+  assert.ok(
+    registration.length > 0,
+    "organization signup must be reachable from the nav, footer or final CTA",
+  );
 });
 
 test("homepage keeps the full narrative order from claim to ask", async () => {

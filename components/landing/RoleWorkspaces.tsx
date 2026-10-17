@@ -44,10 +44,15 @@ export function RoleWorkspaces() {
               <span className="accent-serif">needs to see it.</span>
             </h2>
           </div>
-          <p className="lede">
-            A program lead, a mentor and a mentee want completely different
-            things from Monday morning. Pathment gives each of them their own
-            front door into one shared record.
+          <p className="text-lg leading-[1.6] tracking-[-0.01em]">
+            <span className="text-ink">
+              A program lead, a mentor and a mentee want completely different
+              things from Monday morning.
+            </span>{" "}
+            <span className="text-muted">
+              Pathment gives each of them their own front door into one shared
+              record.
+            </span>
           </p>
         </div>
 
