@@ -1,40 +1,46 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Instrument_Serif, JetBrains_Mono, Sora } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+/*
+ * Fonts are self-hosted (latin subset, variable where available) so builds
+ * never depend on reaching Google Fonts. Source: fonts.google.com, all SIL
+ * Open Font License.
+ */
+const inter = localFont({
+  src: "./fonts/inter-latin.woff2",
+  weight: "300 700",
   variable: "--font-inter",
   display: "swap",
 });
 
-const sora = Sora({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const sora = localFont({
+  src: "./fonts/sora-latin.woff2",
+  weight: "400 700",
   variable: "--font-sora",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
+const instrumentSerif = localFont({
+  src: [
+    { path: "./fonts/instrument-serif-latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/instrument-serif-italic-latin.woff2", weight: "400", style: "italic" },
+  ],
   variable: "--font-serif",
   display: "swap",
 });
 
 /** Bold editorial serif for section headings and proof figures. */
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["600", "700"],
+const fraunces = localFont({
+  src: "./fonts/fraunces-latin.woff2",
+  weight: "600 700",
   variable: "--font-fraunces",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin.woff2",
+  weight: "400 500",
   variable: "--font-jetbrains",
   display: "swap",
 });
@@ -85,7 +91,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+      // Font variables live on <html> so the theme tokens defined on :root
+      // (--font-sans, --font-display, ...) can resolve them.
+      className={`${inter.variable} ${sora.variable} ${instrumentSerif.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -93,10 +106,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        suppressHydrationWarning
-        className={`${inter.variable} ${sora.variable} ${instrumentSerif.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
-      >
+      <body suppressHydrationWarning>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-white focus:p-3"

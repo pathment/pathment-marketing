@@ -1,135 +1,135 @@
 import Image from "next/image";
-import { ArrowRight, Check, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle } from "lucide-react";
 import { APP_REGISTER_URL } from "../../lib/links";
+import { HeroActivity } from "./HeroActivity";
+import { proof } from "./site-content";
 import { TrackedLink } from "./TrackedLink";
 
-const pillars = ["Applications", "Mentorship", "Learning", "Reviews", "Outcomes"] as const;
-
-const books = [
-  { label: "Mentorship", tone: "from-[#1d5a45] to-[#123d2f]", offset: "translate-x-3" },
-  { label: "Cohorts", tone: "from-[#24694f] to-[#164835]", offset: "-translate-x-1" },
-  { label: "Programs", tone: "from-[#1a5241] to-[#0f372a]", offset: "translate-x-1" },
-] as const;
-
-/** A few stylised leaves behind the laptop, drawn rather than photographed. */
-function Plant() {
-  const leaves = [
-    { d: "M60 190 C 20 150, 10 90, 40 40 C 60 90, 70 140, 60 190Z", fill: "#2f7a52" },
-    { d: "M64 190 C 80 130, 120 90, 170 80 C 140 120, 110 160, 64 190Z", fill: "#3f9163" },
-    { d: "M62 190 C 40 140, 0 120, -20 120 C 0 160, 30 180, 62 190Z", fill: "#256643" },
-    { d: "M62 190 C 70 120, 100 50, 130 20 C 120 80, 100 140, 62 190Z", fill: "#4ea371" },
-    { d: "M60 190 C 50 150, 60 80, 90 60 C 90 110, 80 160, 60 190Z", fill: "#1f5a3b" },
-  ];
-  return (
-    <svg
-      viewBox="-30 0 210 205"
-      aria-hidden
-      className="pointer-events-none absolute -left-4 bottom-14 z-0 hidden w-40 lg:block xl:-left-12 xl:w-48"
-    >
-      {leaves.map((leaf) => (
-        <path key={leaf.d} d={leaf.d} fill={leaf.fill} />
-      ))}
-      <path d="M44 186 h36 l-5 18 h-26z" fill="#e9e4d8" />
-    </svg>
-  );
-}
-
+/**
+ * The hero, built as a single argument:
+ *  1. who already trusts it (a real customer, before any claim),
+ *  2. the claim,
+ *  3. the product, large and flat enough to read, with the Android app and
+ *     the review loop in the same frame.
+ * The product shot straddles the green band and the page below it, so the
+ * hero flows into the proof band instead of ending in a box.
+ */
 export function Hero() {
-  return (
-    <section className="lp-forest relative overflow-hidden">
-      <div className="shell grid items-center gap-12 pb-16 pt-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6 lg:pb-20 lg:pt-16">
-        <div className="hero-rise">
-          <p className="lp-label !text-[#b9ecc9]">
-            Built for mentorship programs
-            <span aria-hidden className="h-px w-14 bg-current opacity-50" />
-          </p>
+  const members = proof.metrics[0];
 
-          <h1 className="mt-6 font-display text-[clamp(2.6rem,5.2vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.035em] text-white">
-            Run mentorship programs that{" "}
-            <span className="font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-[var(--leaf)]">
+  return (
+    <section className="lp-bg relative isolate overflow-hidden">
+      {/* Green field, stopping partway down the product shot. */}
+      <div aria-hidden className="lp-forest absolute inset-x-0 top-0 -z-10 h-[calc(100%-9rem)] sm:h-[calc(100%-13rem)] lg:h-[calc(100%-17rem)]">
+        <div className="lp-dots absolute inset-0" />
+        <div className="lp-hero-beam absolute inset-0" />
+      </div>
+
+      <div className="shell pt-14 text-center sm:pt-16 lg:pt-20">
+        <div className="hero-rise mx-auto max-w-5xl">
+          <a
+            href="#proof"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-1 pl-1 pr-3.5 text-[13px] text-white/85 backdrop-blur transition-colors hover:border-white/30 hover:bg-white/10"
+          >
+            <Image
+              src="/brand/dev-weekends.png"
+              alt=""
+              width={56}
+              height={56}
+              className="h-7 w-7 rounded-full ring-1 ring-white/40"
+            />
+            <span>
+              <strong className="font-semibold text-white">Dev Weekends</strong>{" "}
+              runs its fellowship on Pathment
+              <span className="mx-2 text-white/30">·</span>
+              <span className="numeric text-white">{members.value}</span> members
+            </span>
+            <ArrowRight className="h-3.5 w-3.5 text-[var(--leaf)] transition-transform group-hover:translate-x-0.5" />
+          </a>
+
+          <h1 className="mx-auto mt-7 max-w-[15ch] font-display text-[clamp(2.4rem,5.6vw,4.6rem)] font-bold leading-[1.02] tracking-[-0.045em] text-white sm:max-w-none">
+            Run mentorship programs
+            <br className="hidden sm:block" /> that{" "}
+            <span className="font-serif text-[1.1em] font-normal italic tracking-[-0.02em] text-[var(--leaf)]">
               actually deliver.
             </span>
           </h1>
 
-          <p className="mt-6 max-w-md text-[1.05rem] leading-7 text-white/80">
-            One workspace to run applications, match people, manage learning,
-            review work, and prove outcomes.
+          <p className="mx-auto mt-6 max-w-xl text-[1.05rem] leading-7 text-white/75 sm:text-lg">
+            Applications, mentor matching, learning roadmaps, reviews and
+            certificates, on one record for admins, mentors and mentees.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <TrackedLink
               href="/demo"
               eventName="demo_started"
               eventProperties={{ source: "hero" }}
-              className="lp-btn-leaf"
+              className="lp-btn-leaf w-full !px-6 !py-3.5 sm:w-auto"
             >
-              <PlayCircle className="h-[1.1rem] w-[1.1rem]" />
+              <PlayCircle className="h-[1.15rem] w-[1.15rem]" />
               Explore live demo
             </TrackedLink>
             <TrackedLink
               href={APP_REGISTER_URL}
               eventName="organization_signup_clicked"
               eventProperties={{ source: "hero" }}
-              className="lp-btn-ghost group sm:min-w-[9.5rem]"
+              className="lp-btn-ghost group w-full !px-6 !py-3.5 sm:w-auto"
             >
               Start free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </TrackedLink>
           </div>
-
-          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-white/80">
-            {pillars.map((pillar) => (
-              <li key={pillar} className="inline-flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-[var(--leaf)]" strokeWidth={2.5} />
-                {pillar}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-4 text-[13px] text-white/55">
+            The demo needs no account. The Starter plan is free.
+          </p>
         </div>
 
-        {/* Laptop on a plinth, with the program books stacked beside it. */}
-        <div className="relative lg:pl-6">
-          <Plant />
-          <div className="lp-laptop relative z-10 mx-auto max-w-[640px] lg:ml-10">
-            <div className="lp-laptop-bezel">
-              <div className="mx-auto mb-2 h-1.5 w-1.5 rounded-full bg-white/20" aria-hidden />
-              <div className="overflow-hidden rounded-md bg-white">
-                <Image
-                  src="/product/admin-dashboard.webp"
-                  alt="Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks and completion distribution."
-                  width={1425}
-                  height={989}
-                  priority
-                  unoptimized
-                  className="h-auto w-full"
-                />
+        {/* The stage */}
+        <div className="lp-stage-rise relative mx-auto mt-14 max-w-[68rem] pb-10 sm:mt-16 lg:pb-16">
+          <figure className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#0d1512] p-1.5 shadow-[0_60px_120px_-50px_rgba(0,0,0,0.85)] ring-1 ring-black/5 sm:rounded-[1.4rem]">
+            <div className="flex items-center gap-3 px-3 py-2 sm:py-2.5">
+              <div className="flex gap-1.5" aria-hidden>
+                <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
               </div>
+              <span className="mx-auto hidden truncate rounded-md bg-white/[0.07] px-3 py-1 font-mono text-[10.5px] text-white/50 sm:block">
+                app.pathment.me/w/pathment-demo/overview
+              </span>
+              <span className="w-10" aria-hidden />
             </div>
-            <div
-              aria-hidden
-              className="h-3 w-[106%] -translate-x-[2.8%] rounded-b-2xl bg-gradient-to-b from-[#3a3f42] to-[#151819]"
-            />
+            <div className="overflow-hidden rounded-xl bg-white">
+              <Image
+                src="/product/admin-dashboard-framed.webp"
+                alt="Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks and completion distribution."
+                width={1408}
+                height={989}
+                priority
+                unoptimized
+                className="h-auto w-full"
+              />
+            </div>
+          </figure>
+
+          {/* The review loop, across all three roles. */}
+          <div className="lp-float-slow absolute -left-10 top-[22%] z-20 hidden lg:block xl:-left-20">
+            <HeroActivity />
           </div>
 
-          {/* Plinth */}
-          <div
-            aria-hidden
-            className="relative z-0 mx-auto -mt-8 h-16 w-[100%] rounded-[50%] border-t border-[#8ee8ad]/25 bg-gradient-to-b from-[#26755a] via-[#164a39] to-[#0a2e23] shadow-[0_40px_60px_-30px_rgba(0,0,0,0.9)]"
-          />
-
-          <ul
-            aria-hidden
-            className="absolute -bottom-3 right-0 z-20 hidden w-44 flex-col gap-1 sm:flex lg:-right-6 xl:-right-14"
-          >
-            {books.map((book) => (
-              <li
-                key={book.label}
-                className={`rounded-l-md rounded-r-sm border-y border-l border-[#d9b96a]/35 bg-gradient-to-b ${book.tone} ${book.offset} px-4 py-2 [font-family:var(--font-fraunces)] text-[15px] font-semibold text-[#e7d7a6] shadow-[0_10px_20px_-10px_rgba(0,0,0,0.8)]`}
-              >
-                {book.label}
-              </li>
-            ))}
-          </ul>
+          {/* The same record on Android. */}
+          <div className="lp-float absolute -bottom-2 -right-2 z-20 w-[24%] max-w-[13.5rem] sm:-right-6 lg:-right-12 lg:bottom-4">
+            <div className="lp-phone">
+              <Image
+                src="/mobile/hero-mentor-home.webp"
+                alt="The same program on the Pathment Android app: the mentor home showing who has waited longest for a review."
+                width={600}
+                height={1285}
+                unoptimized
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

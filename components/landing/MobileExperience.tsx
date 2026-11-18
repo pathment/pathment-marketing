@@ -1,55 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GraduationCap, UserCog, Users } from "lucide-react";
 import { GooglePlayButton } from "./GooglePlayButton";
 import { Reveal } from "./Reveal";
 
-/** Real screens from the Google Play listing, one per role. */
-const phones = [
-  {
-    src: "/mobile/play-mentee-home.webp",
-    alt: "Pathment Android mentee home: the next move on the roadmap and points against pace.",
-    className: "-rotate-[8deg] translate-y-4",
-  },
-  {
-    src: "/mobile/play-mentor-review.webp",
-    alt: "Pathment Android mentor review queue, ordered by who has waited longest.",
-    className: "z-10 -translate-y-3 scale-[1.06]",
-  },
-  {
-    src: "/mobile/play-admin-today.webp",
-    alt: "Pathment Android admin today view with applications waiting on a decision.",
-    className: "rotate-[8deg] translate-y-6",
-  },
+/** The Google Play listing artwork, in store order. */
+const storeShots = [
+  { src: "/mobile/store/mentor-support.webp", alt: "See who needs support first: the mentor home with the oldest waiting review." },
+  { src: "/mobile/store/admin-programme.webp", alt: "Run each programme from one place: the admin Today view with applications waiting." },
+  { src: "/mobile/store/sign-in.webp", alt: "Your next step starts here: the Pathment sign-in screen." },
+  { src: "/mobile/store/mentee-today.webp", alt: "Know what needs you today: the mentee home with the next move." },
+  { src: "/mobile/store/mentee-journey.webp", alt: "See the whole journey clearly: the mentee roadmap progress." },
+  { src: "/mobile/store/clan-community.webp", alt: "Keep the clan conversation close: the clan community feed." },
+] as const;
+
+/** The three shots fanned in the band, one per role. */
+const fan = [
+  { shot: storeShots[3], className: "-rotate-[9deg] translate-x-6 translate-y-8", float: "lp-float-slow" },
+  { shot: storeShots[0], className: "z-10 scale-[1.08]", float: "lp-float" },
+  { shot: storeShots[1], className: "rotate-[9deg] -translate-x-6 translate-y-8", float: "lp-float-slow" },
+] as const;
+
+const roles = [
+  { icon: UserCog, label: "Admins" },
+  { icon: GraduationCap, label: "Mentors" },
+  { icon: Users, label: "Mentees" },
 ] as const;
 
 export function MobileExperience() {
   return (
-    <section id="mobile" aria-labelledby="mobile-heading" className="scroll-mt-20 bg-surface">
+    <section id="mobile" aria-labelledby="mobile-heading" className="lp-bg scroll-mt-20">
       <div className="shell py-6 lg:py-8">
-        <div className="lp-panel relative overflow-hidden rounded-[1.75rem] px-6 py-10 sm:px-10 lg:px-14 lg:py-0">
-          {/* Accent strokes, as in the store artwork. */}
-          <svg
-            viewBox="0 0 40 30"
+        <div className="lp-panel relative overflow-hidden rounded-[1.75rem] px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+          <div aria-hidden className="lp-dots pointer-events-none absolute inset-0" />
+          <div
             aria-hidden
-            className="absolute left-8 top-6 hidden h-8 w-10 text-[var(--leaf)] lg:block"
-          >
-            <path d="M6 22 L2 8 M16 18 L16 2 M26 22 L34 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          </svg>
+            className="pointer-events-none absolute -left-24 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[var(--leaf)]/15 blur-3xl"
+          />
 
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
+          <div className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
             <Reveal className="order-2 lg:order-1">
-              <ul className="flex items-end justify-center gap-2 pt-4 sm:gap-4 lg:pb-0 lg:pt-10">
-                {phones.map((phone) => (
-                  <li key={phone.src} className={`w-[31%] max-w-[11rem] ${phone.className}`}>
-                    <div className="lp-phone">
+              <ul className="flex items-center justify-center">
+                {fan.map(({ shot, className, float }) => (
+                  <li key={shot.src} className={`w-[36%] max-w-[13rem] ${className}`}>
+                    <div className={float}>
                       <Image
-                        src={phone.src}
-                        alt={phone.alt}
-                        width={600}
-                        height={1285}
+                        src={shot.src}
+                        alt={shot.alt}
+                        width={720}
+                        height={1280}
                         unoptimized
-                        className="h-auto w-full"
+                        className="h-auto w-full rounded-[1.25rem] shadow-[0_40px_70px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/15"
                       />
                     </div>
                   </li>
@@ -57,7 +58,7 @@ export function MobileExperience() {
               </ul>
             </Reveal>
 
-            <div className="order-1 lg:order-2 lg:py-14">
+            <div className="order-1 lg:order-2">
               <p className="lp-label !text-[#b9ecc9]">On the go</p>
               <h2
                 id="mobile-heading"
@@ -69,6 +70,17 @@ export function MobileExperience() {
                 Stay in the loop, review work, and track progress, anytime,
                 anywhere. The same record as the web workspace, for every role.
               </p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {roles.map((role) => (
+                  <li
+                    key={role.label}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-xs font-medium text-white/85"
+                  >
+                    <role.icon className="h-3.5 w-3.5 text-[var(--leaf)]" />
+                    {role.label}
+                  </li>
+                ))}
+              </ul>
               <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <GooglePlayButton source="mobile_section" />
                 <Link
@@ -81,6 +93,29 @@ export function MobileExperience() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* The full store gallery, drifting slowly; it pauses on hover and
+            becomes a plain scroller for reduced motion. */}
+        <div className="lp-marquee mt-6 overflow-hidden" aria-label="Pathment Android app screens">
+          <ul className="lp-marquee-track flex w-max gap-4 py-2">
+            {[...storeShots, ...storeShots].map((shot, index) => (
+              <li
+                key={`${shot.src}-${index}`}
+                aria-hidden={index >= storeShots.length}
+                className="w-[9.5rem] shrink-0 sm:w-[11rem]"
+              >
+                <Image
+                  src={shot.src}
+                  alt={index >= storeShots.length ? "" : shot.alt}
+                  width={720}
+                  height={1280}
+                  unoptimized
+                  className="h-auto w-full rounded-2xl border border-line shadow-[0_18px_40px_-28px_rgba(7,42,32,0.7)] transition-transform duration-300 hover:-translate-y-1.5"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

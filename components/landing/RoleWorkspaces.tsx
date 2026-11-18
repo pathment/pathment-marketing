@@ -34,7 +34,7 @@ export function RoleWorkspaces() {
     <section
       id="workspaces"
       aria-labelledby="workspaces-heading"
-      className="relative scroll-mt-20 overflow-hidden border-y border-line bg-gradient-to-b from-[var(--lp-tint)] to-surface"
+      className="relative scroll-mt-20 overflow-hidden border-y border-line bg-gradient-to-b from-[var(--lp-tint)] to-white dark:to-black"
     >
       <div
         aria-hidden

@@ -108,8 +108,8 @@ export const roleWorkspaces = [
     ],
     headline: "See the program before a problem grows.",
     body: "Admissions, placement, program health and recognition in one overview. You stop chasing status and start spending attention where the numbers say it is needed.",
-    image: "/product/admin-dashboard.webp",
-    width: 1425,
+    image: "/product/admin-dashboard-framed.webp",
+    width: 1408,
     height: 989,
     alt: "Pathment admin overview showing active mentees, clans needing support, pending approvals and open roadblocks.",
     signals: [
@@ -137,8 +137,8 @@ export const roleWorkspaces = [
     ],
     headline: "Open to the person who needs you first.",
     body: "The review queue is ordered by who is slipping, not by who shouted loudest. Feedback, approvals and next steps stay attached to the work they refer to.",
-    image: "/product/mentor-dashboard.webp",
-    width: 1424,
+    image: "/product/mentor-dashboard-framed.webp",
+    width: 1272,
     height: 900,
     alt: "Pathment mentor cockpit showing awaiting review, mentees needing attention, open roadblocks and next check-ins.",
     signals: [
@@ -166,8 +166,8 @@ export const roleWorkspaces = [
     ],
     headline: "One roadmap. One obvious next step.",
     body: "No wondering what to work on. The roadmap breaks the goal into tasks, submissions carry files and links, and every piece of feedback stays with the thing it is about.",
-    image: "/product/mentee-dashboard.webp",
-    width: 1424,
+    image: "/product/mentee-dashboard-framed.webp",
+    width: 1272,
     height: 900,
     alt: "Pathment mentee workspace showing the next task, learning progress and feedback in context.",
     signals: [
