@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  ArrowRight,
   BarChart3,
   CalendarClock,
   ChevronDown,
@@ -273,14 +274,14 @@ export function Navbar() {
   }
 
   const triggers: { id: Exclude<OpenMenu, null>; label: string; groups: MenuGroup[] }[] = [
-    { id: "product", label: "Product", groups: productMenu },
+    { id: "product", label: "Products", groups: productMenu },
     { id: "solutions", label: "Solutions", groups: solutionsMenu },
   ];
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-surface/85 backdrop-blur-xl transition-colors ${
-        scrolled ? "border-line" : "border-transparent"
+      className={`sticky top-0 z-50 border-b bg-[var(--forest)]/95 backdrop-blur-xl transition-colors ${
+        scrolled ? "border-white/10" : "border-transparent"
       }`}
     >
       <nav
@@ -288,7 +289,7 @@ export function Navbar() {
         aria-label="Main navigation"
         className="shell flex h-16 items-center justify-between gap-6 lg:h-18"
       >
-        <Brand scrollToTop />
+        <Brand scrollToTop inverse />
 
         <div className="hidden items-center gap-1 lg:flex">
           {triggers.map((trigger) => {
@@ -308,7 +309,7 @@ export function Navbar() {
                   aria-expanded={open}
                   onClick={() => setOpenMenu(open ? null : trigger.id)}
                   className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                    open ? "text-accent" : "text-muted hover:text-ink"
+                    open ? "text-white" : "text-white/80 hover:text-white"
                   }`}
                 >
                   {trigger.label}
@@ -333,7 +334,7 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-ink"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white"
             >
               {item.label}
             </Link>
@@ -341,11 +342,11 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <ThemeToggle />
+          <ThemeToggle tone="dark" />
           <TrackedLink
             href={APP_LOGIN_URL}
             eventName="login_clicked"
-            className="px-2 text-sm font-semibold text-muted hover:text-ink"
+            className="rounded-lg border border-white/45 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white/5"
           >
             Sign in
           </TrackedLink>
@@ -353,14 +354,15 @@ export function Navbar() {
             href="/demo"
             eventName="demo_started"
             eventProperties={{ source: "header" }}
-            className="btn btn-solid snake"
+            className="lp-btn-leaf !py-2.5 group"
           >
-            <span className="snake-label">Explore the demo</span>
+            Explore live demo
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </TrackedLink>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
+          <ThemeToggle tone="dark" />
           <button
             ref={toggleRef}
             type="button"
@@ -368,7 +370,7 @@ export function Navbar() {
             aria-controls={menuId}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((value) => !value)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface text-ink"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 text-white"
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>

@@ -1,7 +1,7 @@
 "use client";
 import { Moon, Sun } from "lucide-react";
 import { useEffect } from "react";
-export function ThemeToggle() {
+export function ThemeToggle({ tone = "default" }: { tone?: "default" | "dark" }) {
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const followSystem = () => {
@@ -22,7 +22,11 @@ export function ThemeToggle() {
       type="button"
       aria-label="Toggle color theme"
       title="Switch light or dark theme"
-      className="theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink transition-colors hover:bg-soft"
+      className={`theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors ${
+        tone === "dark"
+          ? "border-white/20 text-white/85 hover:bg-white/10"
+          : "border-line bg-surface text-ink hover:bg-soft"
+      }`}
       onClick={() => {
         const next =
           document.documentElement.dataset.theme === "dark" ? "light" : "dark";

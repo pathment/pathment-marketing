@@ -1,108 +1,78 @@
 import Image from "next/image";
+import { Award, FileText, Users } from "lucide-react";
 import { proof } from "./site-content";
+
+/** Icons for the three detail figures under the headline metrics. */
+const detailIcons = [Users, FileText, Award] as const;
 
 /**
  * The band directly under the fold. Its job is to answer "is this real?"
- * before the visitor decides whether to keep scrolling.
- *
- * Two modes. With one nameable customer, a thin row of five placeholder
- * wordmarks reads as weaker than no logos at all, so "featured" tells that
- * one customer's story and lets the numbers carry the weight. Switch
- * `proof.mode` to "wall" once there are at least three real names.
+ * before the visitor decides whether to keep scrolling. Every figure comes
+ * from the verified `proof` block, never from the design file.
  */
 export function ProofBand() {
-  const hasMetrics = proof.showMetrics && proof.metrics.length > 0;
-  const isWall = proof.mode === "wall" && proof.organizations.length > 0;
-
-  if (!hasMetrics && !isWall) return null;
+  if (!proof.showMetrics || proof.metrics.length === 0) return null;
 
   return (
-    <section
-      aria-labelledby="proof-heading"
-      className="border-y border-line bg-sand"
-    >
-      <div className="shell py-14 lg:py-16">
-        {isWall ? (
-          <>
-            <h2
-              id="proof-heading"
-              className="text-center font-display text-base font-medium tracking-tight text-muted"
-            >
-              {proof.heading}
-            </h2>
-            <ul className="mt-9 grid grid-cols-2 items-center justify-items-center gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
-              {proof.organizations.map((org) => (
-                <li key={org.name} className="flex items-center justify-center">
-                  {org.logo ? (
-                    <Image
-                      src={org.logo}
-                      alt={org.name}
-                      width={132}
-                      height={36}
-                      className="h-8 w-auto max-w-[9rem] object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-                    />
-                  ) : (
-                    // Until a mark is cleared for use, the name set in the
-                    // display face reads as a wordmark, never as a fake logo.
-                    <span className="text-center font-display text-[15px] font-semibold tracking-tight text-ink/55">
-                      {org.name}
-                    </span>
-                  )}
+    <section aria-labelledby="proof-heading" className="border-b border-line bg-surface">
+      <div className="shell grid gap-10 py-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.6fr)] lg:items-center lg:gap-0 lg:py-14">
+        <div className="lg:border-r lg:border-line lg:pr-12">
+          <p className="lp-label">
+            <span aria-hidden className="h-px w-6 bg-current" />
+            Trusted by real programs
+          </p>
+          <h2 id="proof-heading" className="mt-5 flex items-center gap-4">
+            <Image
+              src="/demo/brand/dev-weekends-logo.svg"
+              alt=""
+              width={52}
+              height={52}
+              className="h-12 w-12 rounded-xl"
+            />
+            <span className="lp-heading text-[2.1rem] leading-none">
+              {proof.featured.name}
+            </span>
+          </h2>
+          <p className="mt-4 max-w-sm text-[15px] leading-6 text-muted">
+            Runs its engineering fellowship on Pathment, from applications to
+            certification.
+          </p>
+        </div>
+
+        <div className="lg:pl-12">
+          <dl className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-0">
+            {proof.metrics.map((metric, index) => (
+              <div
+                key={metric.label}
+                className={`sm:px-6 ${index === 0 ? "sm:pl-0" : "sm:border-l sm:border-line"}`}
+                title={metric.note}
+              >
+                <dt className="sr-only">{metric.label}</dt>
+                <dd>
+                  <span className="lp-heading numeric block text-[2.6rem] leading-none">
+                    {metric.value}
+                  </span>
+                  <span className="mt-2 block text-[15px] text-ink/80">
+                    {metric.label}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <ul className="mt-7 grid gap-3 border-t border-line pt-5 text-sm text-ink/80 sm:grid-cols-3">
+            {proof.detail.slice(0, 3).map((item, index) => {
+              const Icon = detailIcons[index];
+              return (
+                <li key={item} className="numeric flex items-center gap-2.5">
+                  <Icon className="h-4 w-4 shrink-0 text-[var(--lp-green)]" />
+                  {item}
                 </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <div className="max-w-4xl">
-            <p className="label label-plain text-[10px]">{proof.heading}</p>
-            <h2 id="proof-heading" className="mt-5 display-md">
-              <span className="text-accent">{proof.featured.name}</span>{" "}
-              {proof.featured.descriptor}
-            </h2>
-          </div>
-        )}
-
-        {hasMetrics ? (
-          <>
-            <dl
-              className={`grid gap-10 sm:grid-cols-3 ${
-                isWall ? "mt-14 border-t border-line pt-12" : "mt-12"
-              }`}
-            >
-              {proof.metrics.map((metric) => (
-                <div key={metric.label}>
-                  <dt className="sr-only">{metric.label}</dt>
-                  <dd>
-                    <span className="numeric block font-display text-5xl font-semibold tracking-[-0.045em] text-accent lg:text-[4rem] lg:leading-none">
-                      {metric.value}
-                    </span>
-                    <span className="mt-3 block text-sm font-semibold text-ink">
-                      {metric.label}
-                    </span>
-                    <span className="mt-1 block text-sm leading-6 text-muted">
-                      {metric.note}
-                    </span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-
-            {proof.detail.length > 0 ? (
-              <ul className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 text-sm text-muted">
-                {proof.detail.map((item) => (
-                  <li
-                    key={item}
-                    className="numeric flex items-center gap-2 before:h-1 before:w-1 before:rounded-full before:bg-accent/50"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-
-            <p className="mt-4 text-xs text-muted">{proof.asOf}</p>
-          </>
-        ) : null}
+              );
+            })}
+          </ul>
+          <p className="mt-3 text-[11px] text-muted">{proof.asOf}</p>
+        </div>
       </div>
     </section>
   );

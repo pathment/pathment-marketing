@@ -19,7 +19,7 @@ test("homepage presents the interactive Android experience without test-phase co
   const product = await source("components/mobile/MobileProductDemo.tsx");
   assert.match(page, /MobileExperience/);
   assert.match(mobile, /\/demo\?device=mobile/);
-  assert.match(mobile, /\/demo\?device=web/);
+  assert.match(mobile, /GooglePlayButton/);
   assert.match(mobile, /Google Play/);
   assert.doesNotMatch(mobile, /closed test|testing phase|invited tester/i);
   for (const destination of ["Home", "Intake", "People", "Review", "Journey", "Inbox", "More"]) {
@@ -37,11 +37,12 @@ test("homepage exposes demo, registration, sign-in, and contact journeys", async
 
   // The hero carries one call to action by design; the other journeys have to
   // exist somewhere on the page, but not necessarily above the fold.
-  assert.match(hero, /Explore the live demo/);
+  assert.match(hero, /Explore live demo/);
+  assert.match(hero, /APP_REGISTER_URL/);
   assert.match(navbar, /APP_LOGIN_URL/);
   assert.match(navbar, /Sign in/);
-  assert.match(form, /Tell us about your program/);
-  assert.match(form, /<BuyerInterestForm compact \/>/);
+  assert.match(form, /href="\/contact"/);
+  assert.match(await source("app/contact/page.tsx"), /BuyerInterestForm/);
 
   const registration = [navbar, footer, form].filter((value) =>
     /APP_REGISTER_URL/.test(value),
@@ -52,20 +53,16 @@ test("homepage exposes demo, registration, sign-in, and contact journeys", async
   );
 });
 
-test("homepage keeps the full narrative order from claim to ask", async () => {
+test("homepage keeps the narrative order from claim to ask", async () => {
   const page = await source("app/page.tsx");
   const order = [
     "<Hero />",
     "<ProofBand />",
-    "<ProblemSection />",
+    "<HowItWorks />",
     "<RoleWorkspaces />",
-    "<CapabilityGrid />",
-    "<Lifecycle />",
-    "<AudienceGrid />",
-    "<Testimonials />",
+    "<Toolkit />",
     "<MobileExperience />",
     "<PricingPreview />",
-    "<HomeFaq />",
     "<FinalCta />",
   ];
   let cursor = -1;
@@ -78,18 +75,18 @@ test("homepage keeps the full narrative order from claim to ask", async () => {
 
 test("every in-page nav target exists as a section id", async () => {
   const sources = await Promise.all(
-    ["Navbar", "Footer", "ProblemSection"].map((name) => source(`components/landing/${name}.tsx`)),
+    ["Navbar", "Footer"].map((name) => source(`components/landing/${name}.tsx`)),
   );
   const home = (
     await Promise.all(
-      ["Hero", "RoleWorkspaces", "CapabilityGrid", "Lifecycle", "AudienceGrid", "MobileExperience", "PricingPreview", "HomeFaq", "FinalCta", "ProblemSection"].map(
+      ["Hero", "ProofBand", "HowItWorks", "RoleWorkspaces", "Toolkit", "MobileExperience", "PricingPreview", "FinalCta"].map(
         (name) => source(`components/landing/${name}.tsx`),
       )
     )
   ).join("\n");
   const targets = new Set();
   for (const value of sources) {
-    for (const match of value.matchAll(/href="(?:\/)?#([a-z-]+)"/g)) targets.add(match[1]);
+    for (const match of value.matchAll(/href(?:=|: )"(?:\/)?#([a-z-]+)"/g)) targets.add(match[1]);
   }
   assert.ok(targets.size > 0, "expected the nav or footer to link to in-page sections");
   for (const id of targets) {
@@ -106,25 +103,7 @@ test("product screenshots stay unoptimized and the header brand returns home to 
   assert.match(workspaces, /unoptimized/);
   assert.match(brand, /window\.scrollTo\(\{ top: 0, behavior: "smooth" \}\)/);
   assert.match(brand, /window\.history\.replaceState\(null, "", "\/"\)/);
-  assert.match(navbar, /<Brand scrollToTop \/>/);
-});
-
-test("placeholder testimonials are never attributed to a person", async () => {
-  const content = await source("components/landing/site-content.ts");
-  const view = await source("components/landing/Testimonials.tsx");
-  if (/placeholder: true/.test(content)) {
-    // A flagged entry must not also carry a name, or the card would publish
-    // an invented sentence under an invented person.
-    for (const entry of content.split(/\n  \{\n/).slice(1)) {
-      const body = entry.split(/\n  \},/)[0];
-      if (/placeholder: true/.test(body)) {
-        assert.doesNotMatch(body, /\n\s*name:/, `flagged testimonial must have no name: ${body.slice(0, 80)}`);
-      }
-    }
-    // And the component must fall back to the role rather than render blank.
-    assert.match(view, /item\.name \?\? item\.role/);
-    assert.match(view, /allPlaceholder/);
-  }
+  assert.match(navbar, /<Brand scrollToTop inverse \/>/);
 });
 
 test("published metrics stay traceable to a verification date", async () => {

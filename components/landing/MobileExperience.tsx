@@ -1,111 +1,86 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Monitor, Smartphone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GooglePlayButton } from "./GooglePlayButton";
-import { mobileScreens } from "./site-content";
 import { Reveal } from "./Reveal";
+
+/** Real screens from the Google Play listing, one per role. */
+const phones = [
+  {
+    src: "/mobile/play-mentee-home.webp",
+    alt: "Pathment Android mentee home: the next move on the roadmap and points against pace.",
+    className: "-rotate-[8deg] translate-y-4",
+  },
+  {
+    src: "/mobile/play-mentor-review.webp",
+    alt: "Pathment Android mentor review queue, ordered by who has waited longest.",
+    className: "z-10 -translate-y-3 scale-[1.06]",
+  },
+  {
+    src: "/mobile/play-admin-today.webp",
+    alt: "Pathment Android admin today view with applications waiting on a decision.",
+    className: "rotate-[8deg] translate-y-6",
+  },
+] as const;
 
 export function MobileExperience() {
   return (
-    <section
-      id="mobile"
-      aria-labelledby="mobile-heading"
-      className="on-band-deep scroll-mt-20 overflow-hidden"
-    >
-      <div className="shell rhythm">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-14">
-          <Reveal>
-            <p className="label">Now on Google Play</p>
-            <h2 id="mobile-heading" className="display-lg mt-6">
-              Mentors review from the train.{" "}
-              <span className="accent-serif">Not from their inbox.</span>
-            </h2>
-            <p className="lede mt-5">
-              A native Android app with the full five-tab experience for all
-              three roles: approvals, submissions, messages, schedule and
-              recognition. The same record as the web workspace, not a
-              read-only companion.
-            </p>
+    <section id="mobile" aria-labelledby="mobile-heading" className="scroll-mt-20 bg-surface">
+      <div className="shell py-6 lg:py-8">
+        <div className="lp-panel relative overflow-hidden rounded-[1.75rem] px-6 py-10 sm:px-10 lg:px-14 lg:py-0">
+          {/* Accent strokes, as in the store artwork. */}
+          <svg
+            viewBox="0 0 40 30"
+            aria-hidden
+            className="absolute left-8 top-6 hidden h-8 w-10 text-[var(--leaf)] lg:block"
+          >
+            <path d="M6 22 L2 8 M16 18 L16 2 M26 22 L34 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          </svg>
 
-            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <GooglePlayButton source="mobile_section" tone="light" />
-              <p className="text-sm leading-6 text-band-muted">
-                Free to download. Sign in with your
-                <br className="hidden sm:block" /> existing Pathment account.
-              </p>
-            </div>
-
-            <div className="mt-9 grid gap-4 sm:grid-cols-2">
-              <article className="rounded-2xl border border-band-line bg-white/[0.04] p-5">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-mint">
-                  <Monitor className="h-5 w-5" />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-band-ink">
-                  Web workspace
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-band-muted">
-                  The complete Admin, Mentor or Mentee workspace in the browser.
-                </p>
-                <Link
-                  href="/demo?device=web"
-                  className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-mint-bright"
-                >
-                  Open the web demo
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </article>
-
-              <article className="rounded-2xl bg-mint p-5 text-[#04110f]">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/70">
-                  <Smartphone className="h-5 w-5" />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold">
-                  Android app
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-[#04110f]/70">
-                  Native navigation for every role. Try every screen in the
-                  browser before you install.
-                </p>
-                <Link
-                  href="/demo?device=mobile"
-                  className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold"
-                >
-                  Open the mobile demo
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </article>
-            </div>
-          </Reveal>
-
-          {/* Three real captures, fanned so the middle one leads. */}
-          <Reveal delay={0.1}>
-            <ul className="flex items-center justify-center gap-3 sm:gap-4">
-              {mobileScreens.map((screen, index) => (
-                <li
-                  key={screen.src}
-                  className={`min-w-0 flex-1 ${
-                    index === 1 ? "lg:-translate-y-5" : ""
-                  }`}
-                >
-                  <figure>
-                    <div className="overflow-hidden rounded-[1.25rem] border border-white/12 bg-black/20 shadow-[0_40px_90px_-45px_rgba(0,0,0,0.9)]">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
+            <Reveal className="order-2 lg:order-1">
+              <ul className="flex items-end justify-center gap-2 pt-4 sm:gap-4 lg:pb-0 lg:pt-10">
+                {phones.map((phone) => (
+                  <li key={phone.src} className={`w-[31%] max-w-[11rem] ${phone.className}`}>
+                    <div className="lp-phone">
                       <Image
-                        src={screen.src}
-                        alt={screen.alt}
-                        width={540}
-                        height={1050}
-                        className="h-auto w-full"
+                        src={phone.src}
+                        alt={phone.alt}
+                        width={600}
+                        height={1285}
                         unoptimized
+                        className="h-auto w-full"
                       />
                     </div>
-                    <figcaption className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-band-muted">
-                      {screen.caption}
-                    </figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <div className="order-1 lg:order-2 lg:py-14">
+              <p className="lp-label !text-[#b9ecc9]">On the go</p>
+              <h2
+                id="mobile-heading"
+                className="mt-3 font-display text-[clamp(1.7rem,3vw,2.4rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-white"
+              >
+                The Android app keeps the program moving.
+              </h2>
+              <p className="mt-4 max-w-md text-[15px] leading-6 text-white/80">
+                Stay in the loop, review work, and track progress, anytime,
+                anywhere. The same record as the web workspace, for every role.
+              </p>
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <GooglePlayButton source="mobile_section" />
+                <Link
+                  href="/demo?device=mobile"
+                  className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--leaf)]"
+                >
+                  Try it in your browser
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
