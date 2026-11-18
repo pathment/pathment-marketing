@@ -68,18 +68,14 @@ under `components/landing/`:
 | Section | Component | Job |
 | --- | --- | --- |
 | Announcement | `AnnouncementBar` | Dismissible Google Play launch notice, remembered in local storage (key `-v2`) |
-| Hero | `Hero` | The claim, the rotating audience line, product facts, full-bleed admin screen |
-| Proof | `ProofBand` | Customer wordmarks and headline metrics |
-| Problem | `ProblemSection` | Week 3 / 6 / 10 decay timeline, then the Pathment resolve |
-| Product | `RoleWorkspaces` | Admin / Mentor / Mentee tabs over the real screenshots |
-| Capabilities | `CapabilityGrid` | Eight capabilities on a six-column grid |
-| Mechanism | `Lifecycle` | The four moves from empty workspace to recorded outcome |
-| Fit | `AudienceGrid` | Four audiences framed as the question each arrives with |
-| Voices | `Testimonials` | Quote cards; renders nothing when the array is empty |
-| Reach | `MobileExperience` | Web versus Android, with the real phone captures |
-| Price | `PricingPreview` | Live plans from `/api/plans` |
-| Objections | `HomeFaq` | Disclosure rows, also emitted as FAQPage structured data |
-| Ask | `FinalCta` | Dual CTA plus the buyer-interest form |
+| Hero | `Hero` | Forest-green claim with demo and Start free CTAs, admin screen in a laptop frame |
+| Proof | `ProofBand` | Dev Weekends with the verified headline and detail figures |
+| Mechanism | `HowItWorks` | Launch a cohort, keep everyone moving, prove the outcomes |
+| Product | `RoleWorkspaces` | Admin / Mentor / Mentee tabs over the real screenshots, with role highlights |
+| Capabilities | `Toolkit` | Four toolkit cards plus the audiences row the Solutions menu links to |
+| Reach | `MobileExperience` | Android band with real Google Play screens and the store badge |
+| Price | `PricingPreview` | Live plans from `/api/plans` as three compact cards |
+| Ask | `FinalCta` | Demo and free-workspace CTAs, with a link to the contact form |
 
 All copy lives in `components/landing/site-content.ts`. Edit that file to change
 what the site says; the components only decide how it looks.

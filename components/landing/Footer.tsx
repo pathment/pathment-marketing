@@ -45,7 +45,7 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer className="on-band-deep">
+    <footer className="on-band-deep !bg-[var(--forest-deep)]">
       <div className="shell py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)] lg:gap-16">
           <div>

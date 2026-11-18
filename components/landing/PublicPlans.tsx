@@ -6,7 +6,7 @@ import Link from "next/link";
 import { APP_REGISTER_URL } from "../../lib/links";
 import { track } from "../../lib/analytics";
 
-interface Plan {
+export interface Plan {
   id: string;
   name: string;
   description: string | null;
@@ -23,7 +23,7 @@ const labels: Record<string, string> = {
   sso: "Single sign-on",
   certificates: "Certificates",
 };
-const label = (key: string) =>
+export const label = (key: string) =>
   labels[key] ||
   key.replace(/([A-Z])/g, " $1").replace(/^./, (c) => c.toUpperCase());
 const endpoint = "/api/plans";
@@ -50,11 +50,8 @@ function isPlan(value: unknown): value is Plan {
   );
 }
 
-export function PublicPlans({
-  setupHref = "/pricing#getting-started",
-}: {
-  setupHref?: string;
-}) {
+/** Loads the published catalogue from /api/plans, with a retry handle. */
+export function usePublishedPlans() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   const [attempt, setAttempt] = useState(0);
@@ -90,6 +87,37 @@ export function PublicPlans({
       controller.abort();
     };
   }, [attempt]);
+  const retry = () => {
+    setState("loading");
+    setAttempt((n) => n + 1);
+  };
+  return { plans, state, retry };
+}
+
+/** Where a plan's call to action goes: signup for free, a conversation otherwise. */
+export function planHref(plan: Plan, setupHref: string) {
+  const [base, hash] = setupHref.split("#");
+  return plan.monthlyPriceCents === 0
+    ? APP_REGISTER_URL
+    : `${base || "/contact"}?plan=${encodeURIComponent(plan.name)}${hash ? `#${hash}` : ""}`;
+}
+
+export function formatPrice(plan: Plan) {
+  if (plan.monthlyPriceCents === 0) return "Free";
+  return new Intl.NumberFormat("en", {
+    style: "currency",
+    currency: plan.currency,
+    currencyDisplay: "narrowSymbol",
+    maximumFractionDigits: plan.monthlyPriceCents % 100 === 0 ? 0 : 2,
+  }).format(plan.monthlyPriceCents / 100);
+}
+
+export function PublicPlans({
+  setupHref = "/pricing#getting-started",
+}: {
+  setupHref?: string;
+}) {
+  const { plans, state, retry } = usePublishedPlans();
   if (state === "loading")
     return (
       <div role="status" aria-busy="true">
@@ -127,10 +155,7 @@ export function PublicPlans({
           for pricing guidance.
         </p>
         <button
-          onClick={() => {
-            setState("loading");
-            setAttempt((n) => n + 1);
-          }}
+          onClick={retry}
           className="mt-4 rounded-lg border border-zinc-300 px-4 py-2 text-sm font-semibold"
         >
           Try again
@@ -150,8 +175,7 @@ export function PublicPlans({
     >
       {plans.map((plan, index) => {
         const featured = plan.name.toLowerCase() === "growth";
-        const [base, hash] = setupHref.split("#");
-        const href = plan.monthlyPriceCents === 0 ? APP_REGISTER_URL : `${base || "/contact"}?plan=${encodeURIComponent(plan.name)}${hash ? `#${hash}` : ""}`;
+        const href = planHref(plan, setupHref);
         return (
           <article
             key={plan.id}

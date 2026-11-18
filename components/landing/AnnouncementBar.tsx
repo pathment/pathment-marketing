@@ -60,7 +60,7 @@ export function AnnouncementBar() {
   if (hidden) return null;
 
   return (
-    <div className="on-band-deep relative z-[60]">
+    <div className="on-band-deep relative z-[60] !bg-[var(--forest-deep)]">
       <div className="shell flex items-center justify-center gap-3 py-2.5 pr-10 text-center sm:pr-12">
         <p className="text-[13px] leading-5 text-band-ink/85">
           <span className="mr-2 hidden items-center gap-1.5 rounded-full bg-mint/15 px-2 py-0.5 align-[1px] font-mono text-[10px] uppercase tracking-[0.14em] text-mint sm:inline-flex">

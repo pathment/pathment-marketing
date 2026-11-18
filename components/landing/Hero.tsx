@@ -1,200 +1,135 @@
-"use client";
-
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
-import { useEffect, useState } from "react";
-import { heroActivity, heroRotation, proof } from "./site-content";
+import { ArrowRight, Check, PlayCircle } from "lucide-react";
+import { APP_REGISTER_URL } from "../../lib/links";
 import { TrackedLink } from "./TrackedLink";
 
-/** Longest word reserves the inline width so the line never reflows mid-cycle. */
-const widestWord = heroRotation.reduce((a, b) => (b.length > a.length ? b : a));
+const pillars = ["Applications", "Mentorship", "Learning", "Reviews", "Outcomes"] as const;
 
-function RotatingAudience() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+const books = [
+  { label: "Mentorship", tone: "from-[#1d5a45] to-[#123d2f]", offset: "translate-x-3" },
+  { label: "Cohorts", tone: "from-[#24694f] to-[#164835]", offset: "-translate-x-1" },
+  { label: "Programs", tone: "from-[#1a5241] to-[#0f372a]", offset: "translate-x-1" },
+] as const;
 
-  useEffect(() => {
-    if (paused) return;
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (media.matches) return;
-    const timer = setInterval(
-      () => setIndex((value) => (value + 1) % heroRotation.length),
-      2600,
-    );
-    return () => clearInterval(timer);
-  }, [paused]);
-
+/** A few stylised leaves behind the laptop, drawn rather than photographed. */
+function Plant() {
+  const leaves = [
+    { d: "M60 190 C 20 150, 10 90, 40 40 C 60 90, 70 140, 60 190Z", fill: "#2f7a52" },
+    { d: "M64 190 C 80 130, 120 90, 170 80 C 140 120, 110 160, 64 190Z", fill: "#3f9163" },
+    { d: "M62 190 C 40 140, 0 120, -20 120 C 0 160, 30 180, 62 190Z", fill: "#256643" },
+    { d: "M62 190 C 70 120, 100 50, 130 20 C 120 80, 100 140, 62 190Z", fill: "#4ea371" },
+    { d: "M60 190 C 50 150, 60 80, 90 60 C 90 110, 80 160, 60 190Z", fill: "#1f5a3b" },
+  ];
   return (
-    <span
-      className="relative inline-grid text-left align-baseline"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+    <svg
+      viewBox="-30 0 210 205"
+      aria-hidden
+      className="pointer-events-none absolute -left-4 bottom-14 z-0 hidden w-40 lg:block xl:-left-12 xl:w-48"
     >
-      <span aria-hidden className="invisible col-start-1 row-start-1">
-        {widestWord}
-      </span>
-      <span
-        key={index}
-        className="word-in col-start-1 row-start-1 text-[#8fe0ca]"
-      >
-        {heroRotation[index]}
-      </span>
-      {/* Screen readers get the full list once instead of a flickering word. */}
-      <span className="sr-only">
-        {heroRotation.join(", ")}, and other structured programs
-      </span>
-    </span>
+      {leaves.map((leaf) => (
+        <path key={leaf.d} d={leaf.d} fill={leaf.fill} />
+      ))}
+      <path d="M44 186 h36 l-5 18 h-26z" fill="#e9e4d8" />
+    </svg>
   );
 }
 
 export function Hero() {
-  // The two figures the side card shows. Pulled from the same verified block
-  // the proof band uses, so the hero can never quote a number the rest of the
-  // page has moved on from.
-  const headline = proof.metrics[1];
-  const speed = proof.metrics[2];
-
   return (
-    <section className="hero-cinema">
-      <div className="hero-cinema-light" aria-hidden />
-      <div className="hero-grid" aria-hidden />
-      <div className="hero-grain" aria-hidden />
-
-      <div className="shell pb-10 pt-20 text-center sm:pt-24 lg:pb-12 lg:pt-28">
-        <div className="hero-rise mx-auto max-w-4xl">
-          <p className="hero-kicker">
-            Built for <RotatingAudience />
+    <section className="lp-forest relative overflow-hidden">
+      <div className="shell grid items-center gap-12 pb-16 pt-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6 lg:pb-20 lg:pt-16">
+        <div className="hero-rise">
+          <p className="lp-label !text-[#b9ecc9]">
+            Built for mentorship programs
+            <span aria-hidden className="h-px w-14 bg-current opacity-50" />
           </p>
 
-          <h1 className="hero-title mt-7">
+          <h1 className="mt-6 font-display text-[clamp(2.6rem,5.2vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.035em] text-white">
             Run mentorship programs that{" "}
-            <span className="accent-serif">actually finish.</span>
+            <span className="font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-[var(--leaf)]">
+              actually deliver.
+            </span>
           </h1>
 
-          <p className="hero-sub mx-auto mt-6 max-w-xl">
-            One workspace from the application form to the certificate.
+          <p className="mt-6 max-w-md text-[1.05rem] leading-7 text-white/80">
+            One workspace to run applications, match people, manage learning,
+            review work, and prove outcomes.
           </p>
 
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <TrackedLink
               href="/demo"
               eventName="demo_started"
               eventProperties={{ source: "hero" }}
-              className="btn btn-lg snake"
+              className="lp-btn-leaf"
             >
-              <span className="snake-label">
-                <Play className="h-4 w-4" />
-                Explore the live demo
-              </span>
+              <PlayCircle className="h-[1.1rem] w-[1.1rem]" />
+              Explore live demo
             </TrackedLink>
-            <Link
-              href="/pricing"
-              className="group inline-flex items-center gap-2 px-3 py-3 text-sm font-semibold text-white/70 transition-colors hover:text-white"
+            <TrackedLink
+              href={APP_REGISTER_URL}
+              eventName="organization_signup_clicked"
+              eventProperties={{ source: "hero" }}
+              className="lp-btn-ghost group sm:min-w-[9.5rem]"
             >
-              See plans
+              Start free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </TrackedLink>
           </div>
 
-          {/* A real credential beats a generic reassurance line, and it does
-              not repeat the figures the proof band shows next. */}
-          <p className="mt-7 text-sm text-white/55">
-            Running the Dev Weekends engineering fellowship since June 2026.
-          </p>
-          <p className="hero-note mt-2">
-            No account needed. The demo uses fictional data and never touches a
-            live organization.
-          </p>
-        </div>
-      </div>
-
-      {/* Three planes, bleeding past the section edge so the product reads as
-          continuing below the fold rather than ending in a tidy box. */}
-      <div className="hero-stage">
-        <div className="hero-plane-main hero-rise">
-          <div className="flex items-center gap-3 border-b border-white/10 bg-white/[0.04] px-4 py-3">
-            <div className="flex gap-1.5" aria-hidden>
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            </div>
-            <span className="truncate rounded-md bg-black/30 px-2.5 py-1 font-mono text-[10px] text-white/45">
-              app.pathment.me/w/pathment-demo/overview
-            </span>
-          </div>
-          <Image
-            src="/product/admin-dashboard.webp"
-            alt="The Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks, completion distribution and ranked clan priorities."
-            width={1425}
-            height={989}
-            priority
-            unoptimized
-            className="h-auto w-full"
-          />
-        </div>
-
-        {/* Left plane: the product's core loop with faces on it. One task
-            moving between three people says more in a glance than a shrunken
-            second screenshot, and it puts people on a page that otherwise
-            shows nothing but charts. */}
-        <div className="hero-plane-side hero-plane-left">
-          <div className="flex items-center gap-2.5 border-b border-white/10 px-4 py-3">
-            <span className="hero-pulse" aria-hidden />
-            <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#8fe0ca]">
-              One task, three people
-            </span>
-          </div>
-          <ul className="divide-y divide-white/[0.07]">
-            {heroActivity.map((entry) => (
-              <li key={entry.name} className="flex items-start gap-3 px-4 py-3">
-                <Image
-                  src={entry.avatar}
-                  alt=""
-                  width={72}
-                  height={72}
-                  className="h-8 w-8 shrink-0 rounded-full object-cover ring-1 ring-white/15"
-                />
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-baseline gap-2">
-                    <span className="truncate text-[12px] font-semibold text-white">
-                      {entry.name}
-                    </span>
-                    <span className="shrink-0 rounded-full bg-white/10 px-1.5 py-px text-[8px] font-semibold uppercase tracking-[0.1em] text-white/60">
-                      {entry.role}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-[11px] leading-[1.45] text-white/55">
-                    {entry.action}
-                  </p>
-                </div>
-                <span className="numeric shrink-0 pt-0.5 text-[10px] text-white/35">
-                  {entry.time}
-                </span>
+          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-white/80">
+            {pillars.map((pillar) => (
+              <li key={pillar} className="inline-flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5 text-[var(--leaf)]" strokeWidth={2.5} />
+                {pillar}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Right plane: live numbers, not decoration. */}
-        <div className="hero-plane-side hero-plane-right">
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#8fe0ca]">
-            Last 4 months
-          </p>
-          <p className="numeric mt-3 font-display text-3xl font-semibold tracking-tight text-white">
-            {headline.value}
-          </p>
-          <p className="mt-1 text-xs leading-5 text-white/55">
-            {headline.label}
-          </p>
-          <div className="mt-4 border-t border-white/12 pt-3">
-            <p className="numeric font-display text-xl font-semibold tracking-tight text-white">
-              {speed.value}
-            </p>
-            <p className="mt-0.5 text-xs leading-5 text-white/55">
-              {speed.label}
-            </p>
+        {/* Laptop on a plinth, with the program books stacked beside it. */}
+        <div className="relative lg:pl-6">
+          <Plant />
+          <div className="lp-laptop relative z-10 mx-auto max-w-[640px] lg:ml-10">
+            <div className="lp-laptop-bezel">
+              <div className="mx-auto mb-2 h-1.5 w-1.5 rounded-full bg-white/20" aria-hidden />
+              <div className="overflow-hidden rounded-md bg-white">
+                <Image
+                  src="/product/admin-dashboard.webp"
+                  alt="Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks and completion distribution."
+                  width={1425}
+                  height={989}
+                  priority
+                  unoptimized
+                  className="h-auto w-full"
+                />
+              </div>
+            </div>
+            <div
+              aria-hidden
+              className="h-3 w-[106%] -translate-x-[2.8%] rounded-b-2xl bg-gradient-to-b from-[#3a3f42] to-[#151819]"
+            />
           </div>
+
+          {/* Plinth */}
+          <div
+            aria-hidden
+            className="relative z-0 mx-auto -mt-8 h-16 w-[100%] rounded-[50%] border-t border-[#8ee8ad]/25 bg-gradient-to-b from-[#26755a] via-[#164a39] to-[#0a2e23] shadow-[0_40px_60px_-30px_rgba(0,0,0,0.9)]"
+          />
+
+          <ul
+            aria-hidden
+            className="absolute -bottom-3 right-0 z-20 hidden w-44 flex-col gap-1 sm:flex lg:-right-6 xl:-right-14"
+          >
+            {books.map((book) => (
+              <li
+                key={book.label}
+                className={`rounded-l-md rounded-r-sm border-y border-l border-[#d9b96a]/35 bg-gradient-to-b ${book.tone} ${book.offset} px-4 py-2 [font-family:var(--font-fraunces)] text-[15px] font-semibold text-[#e7d7a6] shadow-[0_10px_20px_-10px_rgba(0,0,0,0.8)]`}
+              >
+                {book.label}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

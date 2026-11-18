@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono, Sora } from "next/font/google";
+import { Fraunces, Inter, Instrument_Serif, JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,6 +24,14 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
+/** Bold editorial serif for section headings and proof figures. */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -33,7 +41,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Pathment | Run mentorship programs that actually finish",
+    default: "Pathment | Run mentorship programs that actually deliver",
     template: "%s | Pathment",
   },
   description:
@@ -55,7 +63,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Pathment | Run mentorship programs that actually finish",
+    title: "Pathment | Run mentorship programs that actually deliver",
     description:
       "Admissions, learning roadmaps, mentor reviews, recognition and reporting on one record, with a workspace built for program leads, mentors and mentees.",
     url: "https://pathment.me",
@@ -65,7 +73,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pathment | Run mentorship programs that actually finish",
+    title: "Pathment | Run mentorship programs that actually deliver",
     description:
       "One workspace from the application form to the certificate, for program leads, mentors and mentees.",
   },
@@ -87,7 +95,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${sora.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+        className={`${inter.variable} ${sora.variable} ${instrumentSerif.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
       >
         <a
           href="#main-content"
