@@ -9,7 +9,7 @@ test("canonical application destinations are centralized and correct", async () 
   const links = await source("lib/links.ts");
   assert.match(links, /https:\/\/app\.pathment\.me\/login/);
   assert.match(links, /https:\/\/app\.pathment\.me\/register/);
-  assert.match(links, /https:\/\/play\.google\.com\/apps\/testing\/me\.pathment\.app/);
+  assert.match(links, /https:\/\/play\.google\.com\/store\/apps\/details\?id=me\.pathment\.app/);
   assert.doesNotMatch(links, /devweekends/i);
 });
 

@@ -152,7 +152,7 @@ const solutionsMenu: MenuGroup[] = [
       {
         href: "/#mobile",
         label: "Android app",
-        description: "The native five-tab experience",
+        description: "Now on Google Play",
         icon: Smartphone,
       },
     ],

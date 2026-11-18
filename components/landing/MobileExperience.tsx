@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Monitor, Smartphone } from "lucide-react";
-import { ANDROID_APP_URL } from "../../lib/links";
+import { ArrowRight, Monitor, Smartphone } from "lucide-react";
+import { GooglePlayButton } from "./GooglePlayButton";
 import { mobileScreens } from "./site-content";
 import { Reveal } from "./Reveal";
 
@@ -15,7 +15,7 @@ export function MobileExperience() {
       <div className="shell rhythm">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-14">
           <Reveal>
-            <p className="label">On the phone, too</p>
+            <p className="label">Now on Google Play</p>
             <h2 id="mobile-heading" className="display-lg mt-6">
               Mentors review from the train.{" "}
               <span className="accent-serif">Not from their inbox.</span>
@@ -26,6 +26,14 @@ export function MobileExperience() {
               recognition. The same record as the web workspace, not a
               read-only companion.
             </p>
+
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <GooglePlayButton source="mobile_section" tone="light" />
+              <p className="text-sm leading-6 text-band-muted">
+                Free to download. Sign in with your
+                <br className="hidden sm:block" /> existing Pathment account.
+              </p>
+            </div>
 
             <div className="mt-9 grid gap-4 sm:grid-cols-2">
               <article className="rounded-2xl border border-band-line bg-white/[0.04] p-5">
@@ -55,27 +63,16 @@ export function MobileExperience() {
                   Android app
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-[#04110f]/70">
-                  Native navigation for every role, with the full screen
-                  directory.
+                  Native navigation for every role. Try every screen in the
+                  browser before you install.
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-                  <Link
-                    href="/demo?device=mobile"
-                    className="inline-flex items-center gap-2 text-sm font-semibold"
-                  >
-                    Mobile demo
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <a
-                    href={ANDROID_APP_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold"
-                  >
-                    Google Play
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                </div>
+                <Link
+                  href="/demo?device=mobile"
+                  className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold"
+                >
+                  Open the mobile demo
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </article>
             </div>
           </Reveal>

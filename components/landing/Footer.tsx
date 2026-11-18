@@ -60,7 +60,7 @@ export function Footer() {
               rel="noreferrer"
               className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-mint-bright"
             >
-              Get the Android app
+              Get it on Google Play
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>

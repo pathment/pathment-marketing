@@ -67,7 +67,7 @@ under `components/landing/`:
 
 | Section | Component | Job |
 | --- | --- | --- |
-| Announcement | `AnnouncementBar` | Dismissible Android app notice, remembered in local storage |
+| Announcement | `AnnouncementBar` | Dismissible Google Play launch notice, remembered in local storage (key `-v2`) |
 | Hero | `Hero` | The claim, the rotating audience line, product facts, full-bleed admin screen |
 | Proof | `ProofBand` | Customer wordmarks and headline metrics |
 | Problem | `ProblemSection` | Week 3 / 6 / 10 decay timeline, then the Pathment resolve |
@@ -217,4 +217,4 @@ The interactive `/demo` route intentionally uses the fictional Dev Weekends seed
 
 The homepage keeps the device choice concise and links directly to the complete Web and Android explorers. The full preview at `/demo?device=mobile` follows the native Admin, Mentor, and Mentee tab structures, uses representative fictional data, and supports role switching, screen navigation, and clearly simulated actions.
 
-The Google Play destination is centralized in `lib/links.ts`. The current URL is `https://play.google.com/apps/testing/me.pathment.app` and can be replaced in one place when the public listing URL is available. Customer-facing copy intentionally calls it the Android app without discussing release-stage details.
+The Google Play destination is centralized in `lib/links.ts`. It points at the public listing, `https://play.google.com/store/apps/details?id=me.pathment.app`. Store links render through `GooglePlayButton` (or the announcement bar) and fire an `android_app_clicked` analytics event with the source section. Customer-facing copy intentionally calls it the Android app without discussing release-stage details.
