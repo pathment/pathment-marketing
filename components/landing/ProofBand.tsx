@@ -15,7 +15,7 @@ export function ProofBand() {
   if (!proof.showMetrics || proof.metrics.length === 0) return null;
 
   return (
-    <section aria-labelledby="proof-heading" className="lp-bg border-b border-line">
+    <section id="proof" aria-labelledby="proof-heading" className="lp-bg scroll-mt-20 border-b border-line">
       <div className="shell grid gap-10 py-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.6fr)] lg:items-center lg:gap-0 lg:py-14">
         <div className="lg:border-r lg:border-line lg:pr-12">
           <p className="lp-label">
