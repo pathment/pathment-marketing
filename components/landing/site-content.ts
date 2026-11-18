@@ -545,6 +545,6 @@ export const homeFaq = [
   {
     question: "Is there an Android app?",
     answer:
-      "Yes, a native five-tab app covering the Admin, Mentor and Mentee experiences. You can walk through every screen in the browser demo first, no account needed.",
+      "Yes. The Pathment Android app is free on Google Play and covers the Admin, Mentor and Mentee experiences with native five-tab navigation. Sign in with your existing workspace account, or walk through every screen in the browser demo first, no account needed.",
   },
 ] as const;

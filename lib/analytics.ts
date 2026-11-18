@@ -5,6 +5,7 @@ export type MarketingEvent =
   | "demo_completed"
   | "organization_signup_clicked"
   | "login_clicked"
+  | "android_app_clicked"
   | "buyer_form_started"
   | "buyer_form_submitted";
 

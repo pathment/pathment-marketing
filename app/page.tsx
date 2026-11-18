@@ -14,6 +14,7 @@ import { ProofBand } from "../components/landing/ProofBand";
 import { RoleWorkspaces } from "../components/landing/RoleWorkspaces";
 import { Testimonials } from "../components/landing/Testimonials";
 import { homeFaq } from "../components/landing/site-content";
+import { ANDROID_APP_URL } from "../lib/links";
 
 export default function HomePage() {
   const structuredData = [
@@ -24,6 +25,7 @@ export default function HomePage() {
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web, Android",
       url: "https://pathment.me",
+      installUrl: ANDROID_APP_URL,
       description:
         "Mentorship and learning program operations for organizations, admins, mentors, and mentees.",
     },
