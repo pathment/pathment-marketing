@@ -25,7 +25,7 @@ function Plant() {
     <svg
       viewBox="-30 0 210 205"
       aria-hidden
-      className="pointer-events-none absolute -left-4 bottom-14 z-0 hidden w-40 lg:block xl:-left-12 xl:w-48"
+      className="pointer-events-none absolute -left-10 -bottom-3 z-0 hidden w-36 lg:block xl:-left-16 xl:w-44"
     >
       {leaves.map((leaf) => (
         <path key={leaf.d} d={leaf.d} fill={leaf.fill} />
@@ -89,73 +89,77 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* Laptop on a plinth, with the program books stacked beside it. */}
-        <div className="relative lg:pl-6">
-          <Plant />
-          <div className="lp-laptop relative z-10 mx-auto max-w-[640px] lg:ml-10">
-            <div className="lp-laptop-bezel">
-              <div className="mx-auto mb-2 h-1.5 w-1.5 rounded-full bg-white/20" aria-hidden />
-              <div className="overflow-hidden rounded-md bg-white">
-                <Image
-                  src="/product/admin-dashboard-framed.webp"
-                  alt="Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks and completion distribution."
-                  width={1408}
-                  height={989}
-                  priority
-                  unoptimized
-                  className="h-auto w-full"
-                />
+        {/* One stage, so every accent is placed relative to the laptop: the
+            figures hang off its edges, the plant sits behind it and the books
+            rest on the plinth beside it, never over the product. */}
+        <div className="relative mx-auto w-full max-w-[44rem] pt-6 lg:pt-0">
+          <div className="relative">
+            <Plant />
+            <div className="lp-laptop relative z-10 w-full sm:w-[84%] lg:ml-6">
+              <div className="lp-laptop-bezel">
+                <div className="mx-auto mb-2 h-1.5 w-1.5 rounded-full bg-white/20" aria-hidden />
+                <div className="overflow-hidden rounded-md bg-white">
+                  <Image
+                    src="/product/admin-dashboard-framed.webp"
+                    alt="Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks and completion distribution."
+                    width={1408}
+                    height={989}
+                    priority
+                    unoptimized
+                    className="h-auto w-full"
+                  />
+                </div>
               </div>
+              <div
+                aria-hidden
+                className="h-3 w-[106%] -translate-x-[2.8%] rounded-b-2xl bg-gradient-to-b from-[#3a3f42] to-[#151819]"
+              />
             </div>
-            <div
-              aria-hidden
-              className="h-3 w-[106%] -translate-x-[2.8%] rounded-b-2xl bg-gradient-to-b from-[#3a3f42] to-[#151819]"
-            />
-          </div>
 
-          {/* Real figures from the verified proof block, floating over the scene. */}
-          <div className="lp-chip lp-float absolute -left-2 top-6 z-30 hidden items-center gap-3 rounded-2xl px-4 py-3 sm:flex lg:-left-8">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--leaf)]/20 text-[var(--leaf)]">
-              <MessageSquareCheck className="h-[1.1rem] w-[1.1rem]" />
-            </span>
-            <span className="leading-tight">
-              <span className="block font-display text-lg font-bold text-white">
-                {proof.metrics[1].value}
+            {/* Real figures from the verified proof block. */}
+            <div className="lp-chip lp-float absolute -left-3 -top-7 z-30 hidden items-center gap-3 rounded-2xl px-3.5 py-2.5 sm:flex lg:-left-10">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-[var(--leaf)]/20 text-[var(--leaf)]">
+                <MessageSquareCheck className="h-4 w-4" />
               </span>
-              <span className="block text-[11px] text-white/70">{proof.metrics[1].label}</span>
-            </span>
-          </div>
-          <div className="lp-chip lp-float-slow absolute bottom-24 left-0 z-30 hidden items-center gap-3 rounded-2xl px-4 py-3 md:flex lg:-left-10">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--leaf)]/20 text-[var(--leaf)]">
-              <Clock3 className="h-[1.1rem] w-[1.1rem]" />
-            </span>
-            <span className="leading-tight">
-              <span className="block font-display text-lg font-bold text-white">
-                {proof.metrics[2].value}
+              <span className="leading-tight">
+                <span className="block font-display text-base font-bold text-white">
+                  {proof.metrics[1].value}
+                </span>
+                <span className="block text-[11px] text-white/70">{proof.metrics[1].label}</span>
               </span>
-              <span className="block text-[11px] text-white/70">median time to review</span>
-            </span>
+            </div>
+            <div className="lp-chip lp-float-slow absolute -right-2 top-[34%] z-30 hidden items-center gap-3 rounded-2xl px-3.5 py-2.5 md:flex lg:-right-10 xl:-right-16">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-[var(--leaf)]/20 text-[var(--leaf)]">
+                <Clock3 className="h-4 w-4" />
+              </span>
+              <span className="leading-tight">
+                <span className="block font-display text-base font-bold text-white">
+                  {proof.metrics[2].value}
+                </span>
+                <span className="block text-[11px] text-white/70">median time to review</span>
+              </span>
+            </div>
+
+            <ul
+              aria-hidden
+              className="absolute -bottom-14 -right-2 z-20 hidden w-[9.5rem] flex-col gap-1 sm:flex lg:-right-8"
+            >
+              {books.map((book) => (
+                <li
+                  key={book.label}
+                  className={`rounded-l-md rounded-r-sm border-y border-l border-[#d9b96a]/35 bg-gradient-to-b ${book.tone} ${book.offset} px-3.5 py-1.5 [font-family:var(--font-fraunces)] text-sm font-semibold text-[#e7d7a6] shadow-[0_10px_20px_-10px_rgba(0,0,0,0.8)]`}
+                >
+                  {book.label}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Plinth */}
           <div
             aria-hidden
-            className="relative z-0 mx-auto -mt-8 h-16 w-[100%] rounded-[50%] border-t border-[#8ee8ad]/25 bg-gradient-to-b from-[#26755a] via-[#164a39] to-[#0a2e23] shadow-[0_40px_60px_-30px_rgba(0,0,0,0.9)]"
+            className="relative z-0 mx-auto -mt-6 h-14 w-[104%] -translate-x-[2%] rounded-[50%] border-t border-[#8ee8ad]/25 bg-gradient-to-b from-[#26755a] via-[#164a39] to-[#0a2e23] shadow-[0_40px_60px_-30px_rgba(0,0,0,0.9)]"
           />
-
-          <ul
-            aria-hidden
-            className="absolute -bottom-3 right-0 z-20 hidden w-44 flex-col gap-1 sm:flex lg:-right-6 xl:-right-14"
-          >
-            {books.map((book) => (
-              <li
-                key={book.label}
-                className={`rounded-l-md rounded-r-sm border-y border-l border-[#d9b96a]/35 bg-gradient-to-b ${book.tone} ${book.offset} px-4 py-2 [font-family:var(--font-fraunces)] text-[15px] font-semibold text-[#e7d7a6] shadow-[0_10px_20px_-10px_rgba(0,0,0,0.8)]`}
-              >
-                {book.label}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
