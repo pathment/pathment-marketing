@@ -40,12 +40,12 @@ export function PricingPreview() {
 
   return (
     <section id="pricing" aria-labelledby="pricing-heading" className="lp-bg scroll-mt-20">
-      <div className="shell grid gap-8 py-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,2.6fr)] lg:items-center lg:gap-10 lg:py-16">
+      <div className="shell grid gap-8 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)] lg:items-center lg:gap-10 lg:py-16">
         <div>
           <p className="lp-label">Pricing</p>
           <h2
             id="pricing-heading"
-            className="mt-3 font-display text-[clamp(1.6rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink"
+            className="mt-3 font-display text-[clamp(1.5rem,2.2vw,1.8rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-ink"
           >
             Simple, transparent pricing for programs of any size.
           </h2>

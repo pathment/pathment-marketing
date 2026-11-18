@@ -46,7 +46,7 @@ export function Hero() {
             <span aria-hidden className="h-px w-14 bg-current opacity-50" />
           </p>
 
-          <h1 className="mt-6 font-display text-[clamp(2.6rem,5.2vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.035em] text-white">
+          <h1 className="mt-6 font-display text-[clamp(2.4rem,4.3vw,3.7rem)] font-bold leading-[1.05] tracking-[-0.04em] text-white">
             Run mentorship programs that{" "}
             <span className="font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-[var(--leaf)]">
               actually deliver.
