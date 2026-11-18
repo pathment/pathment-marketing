@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { ArrowRight, Check, PlayCircle } from "lucide-react";
+import { ArrowRight, Check, Clock3, MessageSquareCheck, PlayCircle } from "lucide-react";
 import { APP_REGISTER_URL } from "../../lib/links";
+import { proof } from "./site-content";
 import { TrackedLink } from "./TrackedLink";
 
 const pillars = ["Applications", "Mentorship", "Learning", "Reviews", "Outcomes"] as const;
@@ -37,7 +38,8 @@ function Plant() {
 export function Hero() {
   return (
     <section className="lp-forest relative overflow-hidden">
-      <div className="shell grid items-center gap-12 pb-16 pt-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6 lg:pb-20 lg:pt-16">
+      <div aria-hidden className="lp-dots pointer-events-none absolute inset-0" />
+      <div className="shell relative grid items-center gap-12 pb-16 pt-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6 lg:pb-20 lg:pt-16">
         <div className="hero-rise">
           <p className="lp-label !text-[#b9ecc9]">
             Built for mentorship programs
@@ -95,9 +97,9 @@ export function Hero() {
               <div className="mx-auto mb-2 h-1.5 w-1.5 rounded-full bg-white/20" aria-hidden />
               <div className="overflow-hidden rounded-md bg-white">
                 <Image
-                  src="/product/admin-dashboard.webp"
+                  src="/product/admin-dashboard-framed.webp"
                   alt="Pathment admin overview: active mentees, clans needing support, pending approvals, open roadblocks and completion distribution."
-                  width={1425}
+                  width={1408}
                   height={989}
                   priority
                   unoptimized
@@ -109,6 +111,30 @@ export function Hero() {
               aria-hidden
               className="h-3 w-[106%] -translate-x-[2.8%] rounded-b-2xl bg-gradient-to-b from-[#3a3f42] to-[#151819]"
             />
+          </div>
+
+          {/* Real figures from the verified proof block, floating over the scene. */}
+          <div className="lp-chip lp-float absolute -left-2 top-6 z-30 hidden items-center gap-3 rounded-2xl px-4 py-3 sm:flex lg:-left-8">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--leaf)]/20 text-[var(--leaf)]">
+              <MessageSquareCheck className="h-[1.1rem] w-[1.1rem]" />
+            </span>
+            <span className="leading-tight">
+              <span className="block font-display text-lg font-bold text-white">
+                {proof.metrics[1].value}
+              </span>
+              <span className="block text-[11px] text-white/70">{proof.metrics[1].label}</span>
+            </span>
+          </div>
+          <div className="lp-chip lp-float-slow absolute bottom-24 left-0 z-30 hidden items-center gap-3 rounded-2xl px-4 py-3 md:flex lg:-left-10">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--leaf)]/20 text-[var(--leaf)]">
+              <Clock3 className="h-[1.1rem] w-[1.1rem]" />
+            </span>
+            <span className="leading-tight">
+              <span className="block font-display text-lg font-bold text-white">
+                {proof.metrics[2].value}
+              </span>
+              <span className="block text-[11px] text-white/70">median time to review</span>
+            </span>
           </div>
 
           {/* Plinth */}

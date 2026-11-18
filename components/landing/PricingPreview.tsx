@@ -39,7 +39,7 @@ export function PricingPreview() {
   const { plans, state, retry } = usePublishedPlans();
 
   return (
-    <section id="pricing" aria-labelledby="pricing-heading" className="scroll-mt-20 bg-surface">
+    <section id="pricing" aria-labelledby="pricing-heading" className="lp-bg scroll-mt-20">
       <div className="shell grid gap-8 py-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,2.6fr)] lg:items-center lg:gap-10 lg:py-16">
         <div>
           <p className="lp-label">Pricing</p>

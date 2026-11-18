@@ -8,7 +8,7 @@ export function FinalCta() {
     <section
       id="contact"
       aria-labelledby="final-cta-heading"
-      className="scroll-mt-20 bg-surface pb-10 lg:pb-14"
+      className="lp-bg scroll-mt-20 pb-10 lg:pb-14"
     >
       <div className="shell pt-4">
         <div className="lp-panel rounded-[1.75rem] px-6 py-10 text-center sm:px-10 lg:py-12">

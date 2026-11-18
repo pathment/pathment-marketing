@@ -36,7 +36,7 @@ export function Toolkit() {
     <section
       id="capabilities"
       aria-labelledby="capabilities-heading"
-      className="scroll-mt-20 bg-surface"
+      className="lp-bg scroll-mt-20"
     >
       <div className="shell grid gap-8 py-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,3fr)] lg:items-center lg:gap-8 lg:py-16">
         <div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Award, FileText, Users } from "lucide-react";
+import { CountUp } from "./CountUp";
 import { proof } from "./site-content";
 
 /** Icons for the three detail figures under the headline metrics. */
@@ -14,7 +15,7 @@ export function ProofBand() {
   if (!proof.showMetrics || proof.metrics.length === 0) return null;
 
   return (
-    <section aria-labelledby="proof-heading" className="border-b border-line bg-surface">
+    <section aria-labelledby="proof-heading" className="lp-bg border-b border-line">
       <div className="shell grid gap-10 py-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.6fr)] lg:items-center lg:gap-0 lg:py-14">
         <div className="lg:border-r lg:border-line lg:pr-12">
           <p className="lp-label">
@@ -23,11 +24,11 @@ export function ProofBand() {
           </p>
           <h2 id="proof-heading" className="mt-5 flex items-center gap-4">
             <Image
-              src="/demo/brand/dev-weekends-logo.svg"
-              alt=""
-              width={52}
-              height={52}
-              className="h-12 w-12 rounded-xl"
+              src="/brand/dev-weekends.png"
+              alt="Dev Weekends logo"
+              width={128}
+              height={128}
+              className="h-14 w-14 rounded-full dark:ring-1 dark:ring-white/25"
             />
             <span className="lp-heading text-[2.1rem] leading-none">
               {proof.featured.name}
@@ -50,7 +51,7 @@ export function ProofBand() {
                 <dt className="sr-only">{metric.label}</dt>
                 <dd>
                   <span className="lp-heading numeric block text-[2.6rem] leading-none">
-                    {metric.value}
+                    <CountUp value={metric.value} />
                   </span>
                   <span className="mt-2 block text-[15px] text-ink/80">
                     {metric.label}

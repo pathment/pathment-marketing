@@ -102,19 +102,19 @@ const steps = [
   {
     title: "Launch a cohort",
     body: "Take applications, set up the program and bring in your mentors and mentees.",
-    tint: "bg-[#e3f5e9] dark:bg-[#132a20]",
+    tint: "bg-[#e3f5e9] dark:bg-[#08170f] dark:ring-1 dark:ring-[#8ee8ad]/10",
     Art: LaunchArt,
   },
   {
     title: "Keep everyone moving",
     body: "Match mentors, run learning roadmaps, review submissions and unblock progress.",
-    tint: "bg-[#ece9fb] dark:bg-[#1d1b2c]",
+    tint: "bg-[#ece9fb] dark:bg-[#0f0d1a] dark:ring-1 dark:ring-[#a99cf5]/10",
     Art: MovingArt,
   },
   {
     title: "Prove the outcomes",
     body: "Award certificates, track engagement and measure real program impact.",
-    tint: "bg-[#fdefdc] dark:bg-[#2b2217]",
+    tint: "bg-[#fdefdc] dark:bg-[#170f06] dark:ring-1 dark:ring-[#f3b862]/10",
     Art: OutcomeArt,
   },
 ] as const;
@@ -124,7 +124,7 @@ export function HowItWorks() {
     <section
       id="lifecycle"
       aria-labelledby="lifecycle-heading"
-      className="scroll-mt-20 bg-surface"
+      className="lp-bg scroll-mt-20"
     >
       <div className="shell py-16 lg:py-20">
         <div className="text-center">

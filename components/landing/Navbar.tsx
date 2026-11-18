@@ -280,7 +280,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-[var(--forest)]/95 backdrop-blur-xl transition-colors ${
+      className={`sticky top-0 z-50 border-b bg-[var(--forest)]/95 backdrop-blur-xl dark:bg-black/85 transition-colors ${
         scrolled ? "border-white/10" : "border-transparent"
       }`}
     >
