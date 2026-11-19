@@ -18,12 +18,24 @@ const endpoints: { method: HttpMethod; path: string; href: string; scope: string
   { method: "POST", path: "/intakes/{intakeId}/applicants", href: "/docs/api/applicants#create-applicants", scope: "applicants:write", does: "Push up to 1,000 applicants." },
   { method: "GET", path: "/intakes/{intakeId}/applicants", href: "/docs/api/applicants#list-applicants", scope: "intakes:read", does: "List applicants in an intake." },
   { method: "GET", path: "/jobs/{jobId}", href: "/docs/api/jobs#retrieve-a-job", scope: "intakes:read or applicants:write", does: "Retrieve a push job." },
+  { method: "GET", path: "/programmes", href: "/docs/api/programmes#list-programmes", scope: "programmes:read", does: "List programmes." },
+  { method: "GET", path: "/programmes/{programmeId}", href: "/docs/api/programmes#retrieve-a-programme", scope: "programmes:read", does: "Retrieve one programme." },
+  { method: "GET", path: "/clans", href: "/docs/api/clans#list-clans", scope: "programmes:read", does: "List clans." },
+  { method: "GET", path: "/clans/{clanId}", href: "/docs/api/clans#retrieve-a-clan", scope: "programmes:read", does: "Retrieve one clan." },
+  { method: "GET", path: "/mentees", href: "/docs/api/mentees#list-mentees", scope: "mentees:read", does: "List mentees." },
+  { method: "GET", path: "/mentees/{menteeId}", href: "/docs/api/mentees#retrieve-a-mentee", scope: "mentees:read", does: "Retrieve one mentee." },
+  { method: "GET", path: "/mentees/{menteeId}/progress", href: "/docs/api/progress#mentee-progress", scope: "progress:read", does: "A mentee's progress in each programme." },
+  { method: "GET", path: "/programmes/{programmeId}/progress", href: "/docs/api/progress#programme-progress", scope: "progress:read", does: "Progress for everyone in a programme." },
 ];
 
 const objects = [
   { name: "Intake", href: "/docs/api/intakes#the-intake-object", does: "An admissions round for a programme." },
   { name: "Applicant", href: "/docs/api/applicants#the-applicant-object", does: "A person in an intake, with their stage and status." },
-  { name: "Job", href: "/docs/api/jobs#the-job-object", does: "The progress and result of one push." },
+  { name: "Job", href: "/docs/api/jobs#the-job-object", does: "The status and result of one push." },
+  { name: "Programme", href: "/docs/api/programmes#the-programme-object", does: "What people take part in." },
+  { name: "Clan", href: "/docs/api/clans#the-clan-object", does: "A group of mentees inside a programme." },
+  { name: "Mentee", href: "/docs/api/mentees#the-mentee-object", does: "A person placed in your clans, with their enrollments." },
+  { name: "Progress", href: "/docs/api/progress#the-progress-object", does: "How one mentee is doing in one programme." },
   { name: "Error", href: "#the-error-object", does: "What every failed request returns." },
 ];
 

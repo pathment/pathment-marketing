@@ -80,8 +80,21 @@ export default function AuthenticationPage() {
             <code key="s">applicants:write</code>,
             "Push applicants into an intake, and read the jobs that creates.",
           ],
+          [<code key="s">programmes:read</code>, "List and retrieve programmes and clans."],
+          [
+            <code key="s">mentees:read</code>,
+            "List and retrieve mentees: their names, emails and where they're enrolled. This is personal data, so grant it only to systems that should hold it.",
+          ],
+          [
+            <code key="s">progress:read</code>,
+            "Read progress. Progress objects carry the mentee's ID, not their name or email.",
+          ],
         ]}
       />
+      <p>
+        A key can carry any mix of scopes. A dashboard that shows progress without names needs only{" "}
+        <code>programmes:read</code>{" "}and <code>progress:read</code>.
+      </p>
       <p>
         Calling an endpoint without the right scope returns <code>403</code>{" "}with the code{" "}
         <code>insufficient_scope</code>. The message names the scope you&apos;re missing.

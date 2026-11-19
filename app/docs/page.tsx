@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpenText, Braces, Rocket, Shuffle } from "lucide-react";
+import { BarChart3, BookOpenText, Braces, Rocket, Shuffle } from "lucide-react";
 import { DocsPage } from "../../components/docs/DocsPage";
 import { CodeBlock } from "../../components/docs/CodeBlock";
 import { Callout } from "../../components/docs/Callout";
@@ -12,10 +12,6 @@ const HREF = "/docs";
 export const metadata = docsMetadata(HREF);
 
 const coming = [
-  {
-    title: "Read API",
-    body: "Programmes, cohorts and mentee progress, so you can show Pathment data in your own dashboards.",
-  },
   {
     title: "Webhooks",
     body: "We tell you when something changes, like an applicant submitting their assessment, instead of you polling.",
@@ -30,12 +26,13 @@ export default function DocsHome() {
   return (
     <DocsPage
       href={HREF}
-      lead="The Pathment API lets you bring people into an intake straight from your own systems, then see where each of them has got to. These docs show you how, one plain step at a time."
+      lead="The Pathment API lets you bring people into an intake straight from your own systems, see where each of them has got to, and read how your mentees are doing. These docs show you how, one plain step at a time."
     >
       <H2 id="what-you-can-do">What you can do today</H2>
       <p>
         Most programmes already keep a list of people somewhere: a CRM, a sign-up form, a spreadsheet, a
-        student system. Version 1 of the API connects that list to Pathment.
+        student system. The API connects that list to Pathment, and brings what happens in Pathment back
+        out.
       </p>
       <ul>
         <li>
@@ -54,6 +51,15 @@ export default function DocsHome() {
         <li>
           <strong>Track where everyone is.</strong>{" "}List applicants with their stage (added, assessment
           sent, submitted, accepted and so on) and ask for only what changed since your last check.
+        </li>
+        <li>
+          <strong>Read programmes, clans and mentees.</strong>{" "}See how your workspace is organised and who
+          is placed where, with your own IDs on people who came in through a sync.
+        </li>
+        <li>
+          <strong>Read progress.</strong>{" "}For every mentee in a programme: how much of their work is done,
+          overdue tasks, roadmap steps, attendance and certificates. Ideal for your own dashboards.{" "}
+          <Link href="/docs/guides/reading-progress">Reading progress</Link>
         </li>
       </ul>
 
@@ -97,6 +103,9 @@ export default function DocsHome() {
         <Card href="/docs/guides/syncing-users" title="Syncing users" icon={Shuffle}>
           The full picture: batching, retries, keeping people in step over time.
         </Card>
+        <Card href="/docs/guides/reading-progress" title="Reading progress" icon={BarChart3}>
+          Copy mentee progress into your own system every night.
+        </Card>
         <Card href="/docs/api" title="API reference" icon={Braces}>
           Every endpoint, parameter and object, with examples in three languages.
         </Card>
@@ -111,10 +120,10 @@ export default function DocsHome() {
 
       <H2 id="whats-coming">What&apos;s coming</H2>
       <p>
-        Version 1 is about getting people in. Next we&apos;re working on getting information out, and on
-        doing more of the work for you.
+        Next we&apos;re working on telling you when things change, and on doing more of the work for
+        you.
       </p>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         {coming.map((item) => (
           <div key={item.title} className="rounded-xl border border-dashed border-line bg-surface/60 p-5">
             <p className="flex items-center gap-2 font-semibold text-[var(--docs-heading)]">
