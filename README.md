@@ -71,11 +71,9 @@ under `components/landing/`:
 | Hero | `Hero` | Proof pill, centered claim, trust line, product shot with the Android phone and live activity card |
 | Proof | `ProofBand` | Dev Weekends with the verified headline and detail figures |
 | Problem | `ReplaceStack` | The five tools a program runs on today, against one record |
-| Mechanism | `HowItWorks` | Launch a cohort, keep everyone moving, prove the outcomes |
-| Product | `RoleWorkspaces` | Admin / Mentor / Mentee tabs over the real screenshots |
-| Capabilities | `Toolkit` | Bento of code-drawn UI vignettes, plus the audiences row |
-| Reach | `MobileExperience` | Android band with the Google Play artwork |
-| Trust | `TrustAndShipped` | Verified privacy and security points, and a dated "recently shipped" log |
+| Journey | `Journey` | One cohort from application to certificate: chapters scroll past a sticky product view (UI slices in `JourneyArt`), plus the audiences row |
+| Product | `RoleWorkspaces` | Admin / Mentor / Mentee tabs over the real screenshots, with the Android app as one row |
+| Trust | `TrustStrip` | A slim band of verified privacy and security facts |
 | Price | `PricingPreview` | Live plans, server-rendered from `lib/plans.ts` and refreshed on the client |
 | Objections | `HomeFaq` | Disclosure rows, also emitted as FAQPage structured data |
 | Ask | `FinalCta` | Demo and free-workspace CTAs, with a link to the contact form |

@@ -232,3 +232,18 @@ export const homeFaq = [
   },
 ] as const;
 
+/* -------------------------------------------------------------------------- */
+/* Changelog                                                                   */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Real releases from the product changelog. Keep this to the latest four or
+ * five and refresh it when something user-visible ships.
+ */
+export const shipped = [
+  { date: "Nov 18, 2026", title: "Audio answers and sections in assessments" },
+  { date: "Nov 18, 2026", title: "Each applicant gets the assessment for their level" },
+  { date: "Nov 17, 2026", title: "Video interviews with proctoring and screen sharing" },
+  { date: "Nov 17, 2026", title: "Approve several submissions at once from clan review" },
+  { date: "Nov 16, 2026", title: "AI intake review that reads an applicant's GitHub" },
+] as const;

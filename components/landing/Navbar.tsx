@@ -72,37 +72,37 @@ const productMenu: MenuGroup[] = [
     heading: "Capabilities",
     links: [
       {
-        href: "/#capabilities",
+        href: "/#how-it-works",
         label: "Admissions & intake",
         description: "Apply links, assessments, placement",
         icon: ClipboardList,
       },
       {
-        href: "/#capabilities",
+        href: "/#how-it-works",
         label: "Learning roadmaps",
         description: "Milestones and tasks that adjust",
         icon: Route,
       },
       {
-        href: "/#capabilities",
+        href: "/#how-it-works",
         label: "Recognition",
         description: "Points, badges and certificates",
         icon: Trophy,
       },
       {
-        href: "/#capabilities",
+        href: "/#how-it-works",
         label: "Scheduling & 1:1s",
         description: "Availability, booking and notes",
         icon: CalendarClock,
       },
       {
-        href: "/#capabilities",
+        href: "/#how-it-works",
         label: "Messaging & community",
         description: "Scoped feeds and direct messages",
         icon: MessageSquare,
       },
       {
-        href: "/#capabilities",
+        href: "/#how-it-works",
         label: "Insights",
         description: "At-risk detection and distribution",
         icon: BarChart3,
@@ -161,7 +161,7 @@ const solutionsMenu: MenuGroup[] = [
 ];
 
 const flatLinks = [
-  { href: "/#lifecycle", label: "How it works" },
+  { href: "/#how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
   { href: "/docs", label: "Docs" },
 ] as const;

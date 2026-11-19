@@ -1,48 +1,12 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import {
-  ArrowRight,
-  Building2,
-  Check,
-  Flag,
-  GraduationCap,
-  HeartHandshake,
-  Sparkles,
-  Users,
-} from "lucide-react";
-import { Reveal } from "./Reveal";
+import { ArrowRight, Check, Flag, Sparkles } from "lucide-react";
 
 /*
- * A bento of the product's moving parts. Every tile carries a small slice of
- * the real interface, drawn in code so it stays crisp in both themes. People
- * shown are the demo workspace's fictional personas; numbers are illustrative.
+ * Small slices of the real interface, drawn in code so they stay crisp in both
+ * themes. People are the demo workspace's fictional personas; numbers are
+ * illustrative. Used by the program journey on the homepage.
  */
-
-function Tile({
-  title,
-  body,
-  children,
-  className = "",
-  delay = 0,
-}: {
-  title: string;
-  body: string;
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <Reveal delay={delay} className={`h-full ${className}`}>
-      <article className="lp-card group flex h-full flex-col overflow-hidden transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-[var(--lp-green)]/30 hover:shadow-[0_30px_60px_-34px_rgba(7,42,32,0.55)]">
-        <div className="relative flex-1 overflow-hidden bg-[var(--lp-tint)] p-5">{children}</div>
-        <div className="border-t border-line p-5">
-          <h3 className="text-[15px] font-semibold text-ink">{title}</h3>
-          <p className="mt-1.5 text-[13.5px] leading-[1.55] text-muted">{body}</p>
-        </div>
-      </article>
-    </Reveal>
-  );
-}
 
 /** A small white surface inside a tile, like a card in the app. */
 function Pane({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -72,7 +36,7 @@ function Avatar({ name, size = 22 }: { name: string; size?: number }) {
 
 /* --- Vignettes ----------------------------------------------------------- */
 
-function AdmissionsArt() {
+export function AdmissionsArt() {
   const columns = [
     { label: "Applied", count: 42, people: ["elif-demir", "priya-sharma", "maya-patel"] },
     { label: "Assessed", count: 18, people: ["priya-sharma", "maya-patel"] },
@@ -103,7 +67,7 @@ function AdmissionsArt() {
   );
 }
 
-function ReviewQueueArt() {
+export function ReviewQueueArt() {
   const queue = [
     { name: "priya-sharma", who: "Priya Sharma", task: "Node module system", wait: "42h", urgent: true },
     { name: "elif-demir", who: "Elif Demir", task: "REST API skeleton", wait: "1d", urgent: true },
@@ -159,7 +123,7 @@ function ReviewQueueArt() {
   );
 }
 
-function RoadmapArt() {
+export function RoadmapArt() {
   const steps = [
     { label: "Setup", state: "done" },
     { label: "Build", state: "done" },
@@ -196,7 +160,7 @@ function RoadmapArt() {
   );
 }
 
-function RoadblockArt() {
+export function RoadblockArt() {
   return (
     <div className="space-y-2">
       <Pane className="flex items-start gap-2">
@@ -221,7 +185,7 @@ function RoadblockArt() {
   );
 }
 
-function RecognitionArt() {
+export function RecognitionArt() {
   return (
     <div className="flex h-full items-center gap-3">
       <Pane className="flex-1">
@@ -249,7 +213,7 @@ function RecognitionArt() {
   );
 }
 
-function InsightsArt() {
+export function InsightsArt() {
   const bars = [
     { label: "0–19%", value: 18 },
     { label: "20–39%", value: 60 },
@@ -277,7 +241,7 @@ function InsightsArt() {
   );
 }
 
-function AiArt() {
+export function AiArt() {
   const providers = ["OpenAI", "Anthropic", "Groq", "OpenRouter"];
   return (
     <div className="space-y-2">
@@ -300,102 +264,5 @@ function AiArt() {
         ))}
       </div>
     </div>
-  );
-}
-
-const audiences = [
-  { icon: GraduationCap, label: "Fellowships & bootcamps" },
-  { icon: Building2, label: "Internal L&D" },
-  { icon: Users, label: "Universities & career services" },
-  { icon: HeartHandshake, label: "Communities & nonprofits" },
-] as const;
-
-export function Toolkit() {
-  return (
-    <section id="capabilities" aria-labelledby="capabilities-heading" className="lp-bg scroll-mt-20">
-      <div className="shell py-16 lg:py-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="lp-label">Everything you need</p>
-          <h2
-            id="capabilities-heading"
-            className="lp-heading mt-3 text-[clamp(1.8rem,3.2vw,2.6rem)]"
-          >
-            Every step of the program, on one record.
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-[15px] leading-7 text-muted">
-            From the first application to the last certificate, each piece
-            already knows about the others. No exports, no copy-paste, no
-            chasing.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto]">
-          <Tile
-            className="lg:col-span-2"
-            title="Admissions without a spreadsheet"
-            body="Shareable apply links and your own assessments. Review applicants side by side, then accept and place them in one step."
-          >
-            <AdmissionsArt />
-          </Tile>
-          <Tile
-            className="lg:row-span-2"
-            delay={0.05}
-            title="A review queue ranked by who's waiting"
-            body="Mentors open to the person who needs them first. Approve or request changes right on the submitted work."
-          >
-            <ReviewQueueArt />
-          </Tile>
-          <Tile
-            delay={0.08}
-            title="Roadmaps with one obvious next step"
-            body="Goals break into milestones and tasks, and the roadmap moves forward when work is approved."
-          >
-            <RoadmapArt />
-          </Tile>
-          <Tile
-            delay={0.1}
-            title="Roadblocks reach the right person"
-            body="When someone is stuck they say so, and it travels from mentor to program lead before it becomes a dropout."
-          >
-            <RoadblockArt />
-          </Tile>
-          <Tile
-            delay={0.05}
-            title="Recognition earned from real work"
-            body="Points, badges and certificates generated from the approvals that earned them."
-          >
-            <RecognitionArt />
-          </Tile>
-          <Tile
-            delay={0.08}
-            title="Insights for the program lead"
-            body="Completion distribution and at-risk signals, so you know where to spend this week."
-          >
-            <InsightsArt />
-          </Tile>
-          <Tile
-            delay={0.1}
-            title="AI with your own key"
-            body="Bring any OpenAI-compatible provider. AI drafts roadmaps and evaluations; mentors still make every decision."
-          >
-            <AiArt />
-          </Tile>
-        </div>
-
-        {/* Who it is for. Anchored so the Solutions menu has a destination. */}
-        <div
-          id="audiences"
-          className="mt-12 flex scroll-mt-24 flex-col items-center gap-4 border-t border-line pt-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8"
-        >
-          <span className="lp-label !text-[10px]">Built for</span>
-          {audiences.map((audience) => (
-            <span key={audience.label} className="inline-flex items-center gap-2 text-sm font-medium text-ink/80">
-              <audience.icon className="h-4 w-4 text-[var(--lp-green)]" />
-              {audience.label}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }

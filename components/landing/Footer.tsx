@@ -9,8 +9,8 @@ const columns = [
     heading: "Product",
     links: [
       { href: "/#workspaces", label: "Role workspaces" },
-      { href: "/#capabilities", label: "Capabilities" },
-      { href: "/#lifecycle", label: "How it works" },
+      { href: "/changelog", label: "Changelog" },
+      { href: "/#how-it-works", label: "How it works" },
       { href: "/#mobile", label: "Android app" },
       { href: "/demo", label: "Interactive demo" },
       { href: "/docs", label: "Developer docs" },
@@ -20,7 +20,7 @@ const columns = [
     heading: "Solutions",
     links: [
       { href: "/#audiences", label: "Fellowships & bootcamps" },
-      { href: "/#audiences", label: "Internal L&D" },
+      { href: "/#audiences", label: "Company trainee programs" },
       { href: "/#audiences", label: "Universities" },
       { href: "/#audiences", label: "Communities & nonprofits" },
     ],

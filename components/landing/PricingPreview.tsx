@@ -64,7 +64,7 @@ export function PricingPreview({ initialPlans }: { initialPlans?: Plan[] | null 
             <p className="lp-label">Pricing</p>
             <h2
               id="pricing-heading"
-              className="mt-3 font-display text-[clamp(1.6rem,2.6vw,2.1rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink"
+              className="lp-heading mt-3 text-[clamp(1.8rem,3.2vw,2.6rem)]"
             >
               Simple, transparent pricing for programs of any size.
             </h2>
