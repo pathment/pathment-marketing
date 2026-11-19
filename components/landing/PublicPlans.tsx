@@ -8,10 +8,12 @@ import { track } from "../../lib/analytics";
 
 export interface Plan {
   id: string;
+  key?: string;
   name: string;
   description: string | null;
   currency: string;
   monthlyPriceCents: number;
+  annualPriceCents?: number;
   limits: Record<string, number>;
   features: Record<string, boolean>;
 }
@@ -23,6 +25,21 @@ const labels: Record<string, string> = {
   sso: "Single sign-on",
   certificates: "Certificates",
 };
+/** Plans are billed on participants (mentees); mentors and admins are free. */
+const limitLabels: Record<string, string> = { members: "participants" };
+export const limitLabel = (key: string) =>
+  limitLabels[key] ?? key.replace(/([A-Z])/g, " $1").toLowerCase();
+
+export const isFreePlan = (plan: Plan) =>
+  !plan.monthlyPriceCents && !Number(plan.annualPriceCents || 0);
+
+/** The plan most programs should start on; highlighted in every list. */
+export const isFeaturedPlan = (plan: Plan) =>
+  plan.key ? plan.key === "program" : plan.name.toLowerCase() === "program";
+
+/** Sold on an annual contract, so it gets "Talk to us" instead of a cart. */
+export const isContractPlan = (plan: Plan) => plan.key === "institution";
+
 export const label = (key: string) =>
   labels[key] ||
   key.replace(/([A-Z])/g, " $1").replace(/^./, (c) => c.toUpperCase());
@@ -102,19 +119,41 @@ export function usePublishedPlans(initialPlans?: Plan[] | null) {
 /** Where a plan's call to action goes: signup for free, a conversation otherwise. */
 export function planHref(plan: Plan, setupHref: string) {
   const [base, hash] = setupHref.split("#");
-  return plan.monthlyPriceCents === 0
+  return isFreePlan(plan)
     ? APP_REGISTER_URL
     : `${base || "/contact"}?plan=${encodeURIComponent(plan.name)}${hash ? `#${hash}` : ""}`;
 }
 
-export function formatPrice(plan: Plan) {
-  if (plan.monthlyPriceCents === 0) return "Free";
-  return new Intl.NumberFormat("en", {
+const money = (plan: Plan, cents: number) =>
+  new Intl.NumberFormat("en", {
     style: "currency",
     currency: plan.currency,
     currencyDisplay: "narrowSymbol",
-    maximumFractionDigits: plan.monthlyPriceCents % 100 === 0 ? 0 : 2,
-  }).format(plan.monthlyPriceCents / 100);
+    maximumFractionDigits: cents % 100 === 0 ? 0 : 2,
+  }).format(cents / 100);
+
+/**
+ * How a plan's price reads. A plan with an annual price is sold yearly, so the
+ * headline is its monthly equivalent ("$249 / month, billed yearly") with the
+ * month-to-month price as a note; a contract plan shows its yearly floor.
+ */
+export function priceParts(plan: Plan): { amount: string; unit: string; note: string } {
+  const annual = Number(plan.annualPriceCents || 0);
+  if (!plan.monthlyPriceCents && !annual) return { amount: "Free", unit: "forever", note: "" };
+  if (isContractPlan(plan) && annual)
+    return { amount: `From ${money(plan, annual)}`, unit: "/ year", note: "Annual contract" };
+  if (annual)
+    return {
+      amount: money(plan, Math.round(annual / 12)),
+      unit: "/ month, billed yearly",
+      note: plan.monthlyPriceCents ? `or ${money(plan, plan.monthlyPriceCents)} month to month` : "",
+    };
+  return { amount: money(plan, plan.monthlyPriceCents), unit: "/ month", note: "" };
+}
+
+/** Kept for callers that want a single string. */
+export function formatPrice(plan: Plan) {
+  return priceParts(plan).amount;
 }
 
 export function PublicPlans({
@@ -127,8 +166,8 @@ export function PublicPlans({
     return (
       <div role="status" aria-busy="true">
         <span className="sr-only">Loading published plans…</span>
-        <div aria-hidden="true" className="grid overflow-hidden rounded-[2rem] border border-line md:grid-cols-3">
-          {[0, 1, 2].map((i) => (
+        <div aria-hidden="true" className="grid overflow-hidden rounded-[2rem] border border-line md:grid-cols-2 xl:grid-cols-4">
+          {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
               className="min-h-[590px] border-line bg-surface p-8 md:border-l md:first:border-l-0"
@@ -176,25 +215,30 @@ export function PublicPlans({
   return (
     <section
       aria-label="Published plans"
-      className="grid items-stretch overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[0_32px_90px_-65px_rgba(7,61,59,.7)] md:grid-cols-3"
+      className="grid items-stretch overflow-hidden rounded-[2rem] border border-line bg-surface shadow-[0_32px_90px_-65px_rgba(7,61,59,.7)] md:grid-cols-2 xl:grid-cols-4"
     >
       {plans.map((plan, index) => {
-        const featured = plan.name.toLowerCase() === "growth";
+        const featured = isFeaturedPlan(plan);
+        const free = isFreePlan(plan);
+        const contract = isContractPlan(plan);
+        const price = priceParts(plan);
         const href = planHref(plan, setupHref);
         return (
           <article
             key={plan.id}
-            className={`relative flex flex-col overflow-hidden p-6 lg:p-8 ${index ? "border-t border-line md:border-l md:border-t-0" : ""} ${featured ? "bg-[linear-gradient(155deg,#0b514a_0%,#073d3b_60%,#062d29_100%)] text-white" : "bg-surface text-ink"}`}
+            className={`relative flex flex-col overflow-hidden p-6 lg:p-7 ${index ? "border-t border-line md:border-l xl:border-t-0" : ""} ${featured ? "bg-[linear-gradient(155deg,#0b514a_0%,#073d3b_60%,#062d29_100%)] text-white" : "bg-surface text-ink"}`}
           >
-            {featured ? <div className="absolute right-5 top-5 rounded-full bg-[#8fe0ca] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.14em] text-[#073d3b]">Best for growth</div> : null}
+            {featured ? <div className="absolute right-5 top-5 rounded-full bg-[#8fe0ca] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.14em] text-[#073d3b]">Most popular</div> : null}
             <p
               className={`mb-5 text-[10px] font-semibold uppercase tracking-[.15em] ${featured ? "text-[#b9deca]" : "text-accent"}`}
             >
-              {plan.monthlyPriceCents === 0
+              {free
                 ? "Start a pilot"
                 : featured
-                  ? "For growing programs"
-                  : "For established operations"}
+                  ? "For one program"
+                  : contract
+                    ? "For institutions"
+                    : "For training providers"}
             </p>
             <div className="flex items-end justify-between gap-3"><h2 className="text-2xl font-semibold tracking-tight">{plan.name}</h2><span className={`font-mono text-[10px] ${featured ? "text-white/35" : "text-muted"}`}>0{index + 1}</span></div>
             <p
@@ -203,35 +247,28 @@ export function PublicPlans({
               {plan.description}
             </p>
             <div className="my-7">
-              <p className="font-display text-4xl font-semibold tracking-tight lg:text-5xl">
-                {plan.monthlyPriceCents === 0
-                  ? "Free"
-                  : new Intl.NumberFormat("en", {
-                      style: "currency",
-                      currency: plan.currency,
-                      currencyDisplay: "narrowSymbol",
-                      maximumFractionDigits:
-                        plan.monthlyPriceCents % 100 === 0 ? 0 : 2,
-                    }).format(plan.monthlyPriceCents / 100)}
+              <p className={`font-display font-semibold tracking-tight ${contract ? "text-3xl" : "text-4xl lg:text-[2.6rem]"}`}>
+                {price.amount}
               </p>
               <p
                 className={`mt-2 text-xs ${featured ? "text-white/60" : "text-muted"}`}
               >
-                {plan.monthlyPriceCents === 0
-                  ? "Per workspace"
-                  : `${plan.currency.toUpperCase()} / workspace / month`}
+                {free ? "Per workspace" : `${plan.currency.toUpperCase()} ${price.unit}`}
+                {price.note ? <span className="block">{price.note}</span> : null}
               </p>
             </div>
             <Link
               href={href}
               onClick={() => {
-                if (plan.monthlyPriceCents === 0) track("organization_signup_clicked", { source: "pricing_plan" });
+                if (free) track("organization_signup_clicked", { source: "pricing_plan" });
               }}
               className={`mb-7 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3.5 text-sm font-semibold ${featured ? "bg-[#d9edbd] text-[#183a37] hover:bg-[#e4f3d0]" : "border border-line bg-soft text-accent hover:border-brand-300"}`}
             >
-              {plan.monthlyPriceCents === 0
+              {free
                 ? "Create an organization"
-                : `Talk about ${plan.name}`}
+                : contract
+                  ? "Talk to us"
+                  : `Start with ${plan.name}`}
               <ArrowRight size={15} />
             </Link>
             <div className={`mb-6 space-y-3 border-y py-5 ${featured ? "border-white/12" : "border-line"}`}>
@@ -252,7 +289,7 @@ export function PublicPlans({
                       <strong className="font-semibold">
                         {value < 0 ? "Unlimited" : value.toLocaleString("en")}
                       </strong>{" "}
-                      {label(key).toLowerCase()}
+                      {limitLabel(key)}
                     </span>
                   </div>
                 );

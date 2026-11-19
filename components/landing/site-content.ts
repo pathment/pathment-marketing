@@ -191,9 +191,9 @@ export const roleWorkspaces = [
 /** Rendered on the homepage and emitted as FAQPage structured data. */
 export const homeFaq = [
   {
-    question: "Is the Starter plan really free?",
+    question: "Is the Community plan really free?",
     answer:
-      "Yes. Starter is free for one small community: run a cohort end to end before you commit. Its member, program and clan limits are published on the pricing page, and no card is needed.",
+      "Yes. Community is free for up to 100 participants: run a cohort end to end before you commit. Mentors and admins never count toward any limit, and no card is needed.",
   },
   {
     question: "What does Pathment replace?",

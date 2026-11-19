@@ -16,7 +16,7 @@ import { TrackedLink } from "./TrackedLink";
  */
 const trust = [
   { icon: UserX, label: "Demo without signing up" },
-  { icon: Sprout, label: "Free Starter plan" },
+  { icon: Sprout, label: "Free Community plan" },
   { icon: MonitorSmartphone, label: "Web and Android" },
   { icon: Lock, label: "We never sell your data" },
 ] as const;
