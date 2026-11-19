@@ -159,12 +159,12 @@ export default function SyncingUsersPage() {
       <H2 id="pick-the-intake">1. Pick the intake</H2>
       <p>
         Applicants always belong to an intake: one admissions round of one programme. List your intakes
-        and note the <code>id</code> of the one you&apos;re filling.
+        and note the <code>id</code>{" "}of the one you&apos;re filling.
       </p>
       <CodeBlock samples={listIntakesSamples} title="GET /intakes" />
       <p>
-        Look at its <code>levels</code> too. If the intake has levels (say <code>beginner</code> and{" "}
-        <code>senior</code>), each person&apos;s <code>level</code> must match one of them by key or label,
+        Look at its <code>levels</code>{" "}too. If the intake has levels (say <code>beginner</code>{" "}and{" "}
+        <code>senior</code>), each person&apos;s <code>level</code>{" "}must match one of them by key or label,
         ignoring case, and it decides
         which assessment they get.
       </p>
@@ -178,9 +178,9 @@ export default function SyncingUsersPage() {
       <H2 id="shape-the-records">2. Shape the records</H2>
       <p>You have two choices.</p>
       <p>
-        <strong>Use Pathment&apos;s field names.</strong> Build each record with <code>email</code>,{" "}
+        <strong>Use Pathment&apos;s field names.</strong>{" "}Build each record with <code>email</code>,{" "}
         <code>firstName</code>, <code>lastName</code>, <code>phone</code>, <code>level</code>,{" "}
-        <code>country</code> and <code>externalId</code>. Anything else you include is kept under{" "}
+        <code>country</code>{" "}and <code>externalId</code>. Anything else you include is kept under{" "}
         <code>responses</code>, where reviewers can see it. Nothing is dropped.
       </p>
       <CodeBlock
@@ -199,19 +199,19 @@ export default function SyncingUsersPage() {
 }`}
       />
       <p>
-        Here <code>cohortPreference</code> isn&apos;t a Pathment field, so it ends up in{" "}
-        <code>responses</code> next to <code>github</code>.
+        Here <code>cohortPreference</code>{" "}isn&apos;t a Pathment field, so it ends up in{" "}
+        <code>responses</code>{" "}next to <code>github</code>.
       </p>
       <p>
-        <strong>Or send your own shape and let a connection map it.</strong> Set up a{" "}
-        <Link href="/docs/guides/field-mapping">connection</Link> in Pathment once, then send records
+        <strong>Or send your own shape and let a connection map it.</strong>{" "}Set up a{" "}
+        <Link href="/docs/guides/field-mapping">connection</Link>{" "}in Pathment once, then send records
         exactly as your system stores them, with <code>&quot;connection&quot;: &quot;&lt;connection ID&gt;&quot;</code>{" "}
         in the body. This is the better choice if a non-developer should be able to adjust the mapping
         later.
       </p>
       <Callout type="warning" title="Always send externalId">
         <p>
-          <code>externalId</code> is your own ID for the person, such as the row ID in your CRM. It&apos;s
+          <code>externalId</code>{" "}is your own ID for the person, such as the row ID in your CRM. It&apos;s
           optional, but strongly recommended: it&apos;s how Pathment recognises the same person next time,
           even if they change their email. See{" "}
           <Link href="/docs/guides/matching-and-updates">Matching and updates</Link>.
@@ -226,19 +226,19 @@ export default function SyncingUsersPage() {
       </p>
       <CodeBlock samples={pushSamples} title="POST /intakes/{intakeId}/applicants" />
       <p>
-        You get <code>202 Accepted</code> and a job straight away. A well-formed request is accepted even
+        You get <code>202 Accepted</code>{" "}and a job straight away. A well-formed request is accepted even
         if some records inside it are wrong. Those are reported on the job, one by one, so a single bad
         email never holds up the other 999.
       </p>
       <p>
-        If the request itself is wrong (not JSON, more than 1,000 records, no <code>records</code> array)
-        you get a <code>400</code> and nothing is queued.
+        If the request itself is wrong (not JSON, more than 1,000 records, no <code>records</code>{" "}array)
+        you get a <code>400</code>{" "}and nothing is queued.
       </p>
 
       <H2 id="wait-for-the-job">4. Wait for the job</H2>
       <p>
-        Poll <code>GET /jobs/&#123;jobId&#125;</code> every 2 seconds until <code>status</code> is{" "}
-        <code>succeeded</code>, <code>partial</code> or <code>failed</code>.
+        Poll <code>GET /jobs/&#123;jobId&#125;</code>{" "}every 2 seconds until <code>status</code>{" "}is{" "}
+        <code>succeeded</code>, <code>partial</code>{" "}or <code>failed</code>.
       </p>
       <CodeBlock samples={pollJobSamples} title="Poll the job" />
       <p>A finished job tells you what happened to every record:</p>
@@ -254,8 +254,8 @@ export default function SyncingUsersPage() {
         ]}
       />
       <p>
-        Each entry in <code>errors</code> has the record&apos;s <code>index</code> in your batch (counting
-        from 0), its <code>externalId</code> and <code>email</code>, and a <code>code</code> and{" "}
+        Each entry in <code>errors</code>{" "}has the record&apos;s <code>index</code>{" "}in your batch (counting
+        from 0), its <code>externalId</code>{" "}and <code>email</code>, and a <code>code</code>{" "}and{" "}
         <code>message</code>. Log these, fix the source data, and the next sync picks them up.
       </p>
       <Table
@@ -276,7 +276,7 @@ export default function SyncingUsersPage() {
       <Callout type="note" title="When an intake fills up">
         <p>
           If an intake has an application cap, new people stop being added once it&apos;s reached. They come
-          back on the job as <code>intake_full</code> errors and are counted in <code>failed</code>, while updates to existing applicants carry on as
+          back on the job as <code>intake_full</code>{" "}errors and are counted in <code>failed</code>, while updates to existing applicants carry on as
           normal. Raise the cap in Pathment, then run the sync again: the waiting people are added and
           everyone else comes back <code>unchanged</code>.
         </p>
@@ -309,8 +309,8 @@ export default function SyncingUsersPage() {
       <H2 id="example-sync">A complete sync script</H2>
       <p>
         Here&apos;s everything together: batching, an idempotency key per batch, retries for{" "}
-        <code>429</code> and <code>5xx</code>, polling and error reporting. Swap{" "}
-        <code>loadPeopleFromYourSystem</code> for your own query.
+        <code>429</code>{" "}and <code>5xx</code>, polling and error reporting. Swap{" "}
+        <code>loadPeopleFromYourSystem</code>{" "}for your own query.
       </p>
       <CodeBlock samples={syncScript} title="sync" />
 
@@ -325,7 +325,7 @@ export default function SyncingUsersPage() {
           <Link href="/docs/guides/field-mapping#value-maps">value map</Link>.
         </li>
         <li>
-          You&apos;ve run the sync as a <Link href="/docs/guides/dry-runs-and-reports">dry run</Link> and the
+          You&apos;ve run the sync as a <Link href="/docs/guides/dry-runs-and-reports">dry run</Link>{" "}and the
           report looks right.
         </li>
         <li>Retries reuse the batch&apos;s Idempotency-Key.</li>

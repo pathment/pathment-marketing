@@ -15,7 +15,7 @@ export default function PaginationPage() {
       <H2 id="how-pages-work">How pages work</H2>
       <p>
         An intake can hold thousands of applicants, so list endpoints hand them over a page at a time.
-        This applies to <code>GET /intakes</code> and <code>GET /intakes/&#123;intakeId&#125;/applicants</code>.
+        This applies to <code>GET /intakes</code>{" "}and <code>GET /intakes/&#123;intakeId&#125;/applicants</code>.
       </p>
       <ParamTable
         title="Query parameters"
@@ -31,7 +31,7 @@ export default function PaginationPage() {
             type: "string",
             description: (
               <p>
-                Where to carry on from. Pass the <code>nextCursor</code> from the previous response. Leave it
+                Where to carry on from. Pass the <code>nextCursor</code>{" "}from the previous response. Leave it
                 out for the first page.
               </p>
             ),
@@ -50,14 +50,14 @@ export default function PaginationPage() {
       />
       <ul>
         <li>
-          <code>data</code> is the items in this page.
+          <code>data</code>{" "}is the items in this page.
         </li>
         <li>
-          <code>hasMore</code> is <code>true</code> if there&apos;s at least one more page.
+          <code>hasMore</code>{" "}is <code>true</code>{" "}if there&apos;s at least one more page.
         </li>
         <li>
-          <code>nextCursor</code> is what you pass as <code>cursor</code> to get that page. It&apos;s{" "}
-          <code>null</code> on the last page.
+          <code>nextCursor</code>{" "}is what you pass as <code>cursor</code>{" "}to get that page. It&apos;s{" "}
+          <code>null</code>{" "}on the last page.
         </li>
       </ul>
       <Callout type="note">
@@ -69,7 +69,7 @@ export default function PaginationPage() {
 
       <H2 id="walking-every-page">Walking every page</H2>
       <p>
-        To fetch everything, keep asking for the next page until <code>hasMore</code> is{" "}
+        To fetch everything, keep asking for the next page until <code>hasMore</code>{" "}is{" "}
         <code>false</code>.
       </p>
       <CodeBlock samples={paginateSamples} title="Fetch every applicant" />
@@ -77,18 +77,18 @@ export default function PaginationPage() {
       <H2 id="incremental-reads">Incremental reads with updatedSince</H2>
       <p>
         If you check an intake regularly, there&apos;s no need to read everyone each time. Pass{" "}
-        <code>updatedSince</code> with an ISO 8601 timestamp to the applicants list, and you get only the
+        <code>updatedSince</code>{" "}with an ISO 8601 timestamp to the applicants list, and you get only the
         people who changed after it: new applicants, new stages, new decisions.
       </p>
       <CodeBlock samples={updatedSinceSamples} title="Only what changed" />
       <p>
-        Record the time just <em>before</em> each run starts and use it as <code>updatedSince</code> next
+        Record the time just <em>before</em>{" "}each run starts and use it as <code>updatedSince</code>{" "}next
         time. A change that lands while you&apos;re reading then shows up in the next run, instead of
         falling into a gap. Getting the same person twice is harmless; missing one is not.
       </p>
       <Callout type="tip">
         <p>
-          Results with <code>updatedSince</code> are paginated like any other list, so use the same loop.
+          Results with <code>updatedSince</code>{" "}are paginated like any other list, so use the same loop.
         </p>
       </Callout>
     </DocsPage>

@@ -20,7 +20,7 @@ export default function AuthenticationPage() {
       <p>A key looks like this:</p>
       <CodeBlock code="pk_live_9fK2mQ7xR4tL8wN1cV6bH3jD5sA0pZyE" language="text" title="Example key (not a real one)" />
       <p>
-        It&apos;s always <code>pk_live_</code> followed by 32 random characters. After you create it,
+        It&apos;s always <code>pk_live_</code>{" "}followed by 32 random characters. After you create it,
         Pathment only ever shows its <strong>prefix</strong>: the first 12 characters, such as{" "}
         <code>pk_live_9fK2</code>. That&apos;s enough to tell your keys apart, and useless to anyone who
         sees it over your shoulder.
@@ -37,7 +37,7 @@ export default function AuthenticationPage() {
         <Step title="Name it and pick scopes">
           <p>
             Name the key after what will use it, such as &ldquo;HubSpot sync&rdquo; or &ldquo;Nightly
-            student import&rdquo;. Choose only the <a href="#scopes">scopes</a> it needs. You can also set
+            student import&rdquo;. Choose only the <a href="#scopes">scopes</a>{" "}it needs. You can also set
             an expiry date.
           </p>
         </Step>
@@ -51,7 +51,7 @@ export default function AuthenticationPage() {
 
       <H2 id="sending-the-key">Sending the key</H2>
       <p>
-        Put the key in the <code>Authorization</code> header as a bearer token, on every request:
+        Put the key in the <code>Authorization</code>{" "}header as a bearer token, on every request:
       </p>
       <CodeBlock code="Authorization: Bearer pk_live_••••••••••••••••••••••••••••••••" language="http" title="Header" />
       <p>
@@ -60,7 +60,7 @@ export default function AuthenticationPage() {
       </p>
       <CodeBlock samples={meSamples} title="GET /me" />
       <p>
-        Requests must use HTTPS. <code>GET /me</code> works with any valid key, which makes it a handy
+        Requests must use HTTPS. <code>GET /me</code>{" "}works with any valid key, which makes it a handy
         health check for an integration.
       </p>
 
@@ -83,7 +83,7 @@ export default function AuthenticationPage() {
         ]}
       />
       <p>
-        Calling an endpoint without the right scope returns <code>403</code> with the code{" "}
+        Calling an endpoint without the right scope returns <code>403</code>{" "}with the code{" "}
         <code>insufficient_scope</code>. The message names the scope you&apos;re missing.
       </p>
       <ResponseBlock
@@ -105,11 +105,11 @@ export default function AuthenticationPage() {
 
       <H2 id="expiry-and-revoking">Expiry and revoking</H2>
       <p>
-        You can give a key an <strong>expiry date</strong> when you create it. After that date, requests
+        You can give a key an <strong>expiry date</strong>{" "}when you create it. After that date, requests
         with it fail with <code>expired_api_key</code>. Keys without an expiry last until revoked.
       </p>
       <p>
-        You can <strong>revoke</strong> a key at any time from the same settings page. It stops working
+        You can <strong>revoke</strong>{" "}a key at any time from the same settings page. It stops working
         immediately, on the very next request, with <code>revoked_api_key</code>. Revoke a key the moment
         you think it might have leaked.
       </p>
@@ -136,15 +136,15 @@ export default function AuthenticationPage() {
       <H2 id="good-habits">Good habits</H2>
       <ul>
         <li>
-          <strong>One key per integration.</strong> If your CRM sync and your student import share a key,
+          <strong>One key per integration.</strong>{" "}If your CRM sync and your student import share a key,
           you can&apos;t revoke one without breaking the other.
         </li>
         <li>
-          <strong>Server-side only.</strong> Never put a key in front-end JavaScript, a mobile app or
+          <strong>Server-side only.</strong>{" "}Never put a key in front-end JavaScript, a mobile app or
           anywhere a user could read it.
         </li>
         <li>
-          <strong>Smallest scopes that work.</strong> A reporting script only needs{" "}
+          <strong>Smallest scopes that work.</strong>{" "}A reporting script only needs{" "}
           <code>intakes:read</code>.
         </li>
         <li>
@@ -160,8 +160,8 @@ export default function AuthenticationPage() {
 
       <H2 id="auth-errors">Authentication errors</H2>
       <p>
-        All of these return <code>401</code> with the type <code>authentication_error</code>. The{" "}
-        <code>code</code> tells you what to fix.
+        All of these return <code>401</code>{" "}with the type <code>authentication_error</code>. The{" "}
+        <code>code</code>{" "}tells you what to fix.
       </p>
       <Table
         head={["Code", "What it means"]}
@@ -173,7 +173,7 @@ export default function AuthenticationPage() {
         ]}
       />
       <p>
-        See <Link href="/docs/errors">Errors</Link> for every other error the API can return.
+        See <Link href="/docs/errors">Errors</Link>{" "}for every other error the API can return.
       </p>
     </DocsPage>
   );

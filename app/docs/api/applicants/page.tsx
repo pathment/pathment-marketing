@@ -76,7 +76,7 @@ export default function ApplicantsPage() {
               type: "string",
               description: (
                 <p>
-                  How they arrived, for example <code>api</code> for a push or <code>import</code> for a file
+                  How they arrived, for example <code>api</code>{" "}for a push or <code>import</code>{" "}for a file
                   upload in the app. More values may appear.
                 </p>
               ),
@@ -93,19 +93,19 @@ export default function ApplicantsPage() {
             <strong>
               <code>stage</code>
             </strong>{" "}
-            is <em>where they are</em> in the pipeline. It&apos;s the step list admins see in Pathment, and
+            is <em>where they are</em>{" "}in the pipeline. It&apos;s the step list admins see in Pathment, and
             it moves forward as things happen.
           </li>
           <li>
             <strong>
               <code>status</code>
             </strong>{" "}
-            is <em>the decision</em> an admin has made about them.
+            is <em>the decision</em>{" "}an admin has made about them.
           </li>
         </ul>
         <p>
           For example, someone who has submitted their assessment but hasn&apos;t been reviewed yet has the
-          stage <code>submitted</code> and the status <code>under_review</code>.
+          stage <code>submitted</code>{" "}and the status <code>under_review</code>.
         </p>
         <Table
           head={["Stage", "Means"]}
@@ -168,12 +168,12 @@ export default function ApplicantsPage() {
         <p>
           Sends a batch of up to 1,000 people to an intake. Pathment creates new applicants, updates ones it
           already has and reports each record&apos;s outcome on a <Link href="/docs/api/jobs">job</Link>.
-          Requires the <code>applicants:write</code> scope.
+          Requires the <code>applicants:write</code>{" "}scope.
         </p>
         <p>
-          The work happens in the background. You get <code>202 Accepted</code> with a queued job right
-          away; poll <Link href="/docs/api/jobs#retrieve-a-job">GET /jobs/&#123;jobId&#125;</Link> for the
-          result. See <Link href="/docs/guides/syncing-users">Syncing users</Link> for the whole flow.
+          The work happens in the background. You get <code>202 Accepted</code>{" "}with a queued job right
+          away; poll <Link href="/docs/api/jobs#retrieve-a-job">GET /jobs/&#123;jobId&#125;</Link>{" "}for the
+          result. See <Link href="/docs/guides/syncing-users">Syncing users</Link>{" "}for the whole flow.
         </p>
         <ParamTable
           title="Path parameters"
@@ -216,7 +216,7 @@ export default function ApplicantsPage() {
               type: "string",
               description: (
                 <p>
-                  The ID of a connection whose <Link href="/docs/guides/field-mapping">field mapping</Link> to
+                  The ID of a connection whose <Link href="/docs/guides/field-mapping">field mapping</Link>{" "}to
                   apply to every record.
                 </p>
               ),
@@ -258,10 +258,10 @@ export default function ApplicantsPage() {
               description: (
                 <p>
                   If the intake has levels, this must match one of them by key or label, ignoring case:{" "}
-                  <code>senior</code>, <code>Senior</code> and <code>SENIOR</code> all match a level keyed{" "}
+                  <code>senior</code>, <code>Senior</code>{" "}and <code>SENIOR</code>{" "}all match a level keyed{" "}
                   <code>senior</code>. If it matches none, the record fails with <code>invalid_level</code>. If
-                  the intake has no levels, the value is stored as <code>responses.level</code> instead. With a
-                  connection, the mapping&apos;s <code>map</code> and <code>default</code> are applied first; see{" "}
+                  the intake has no levels, the value is stored as <code>responses.level</code>{" "}instead. With a
+                  connection, the mapping&apos;s <code>map</code>{" "}and <code>default</code>{" "}are applied first; see{" "}
                   <Link href="/docs/guides/field-mapping#value-maps">value maps</Link>.
                 </p>
               ),
@@ -285,8 +285,8 @@ export default function ApplicantsPage() {
           dropped.
         </p>
         <p>
-          <strong>Returns</strong> <code>202</code> with <code>&#123; &quot;job&quot;: Job &#125;</code> (status{" "}
-          <code>queued</code>), or <code>200</code> with the existing job on an idempotent replay.
+          <strong>Returns</strong> <code>202</code>{" "}with <code>&#123; &quot;job&quot;: Job &#125;</code>{" "}(status{" "}
+          <code>queued</code>), or <code>200</code>{" "}with the existing job on an idempotent replay.
         </p>
       </RefSplit>
 
@@ -302,7 +302,7 @@ export default function ApplicantsPage() {
         <Endpoint method="GET" path="/intakes/{intakeId}/applicants" />
         <p>
           Returns the applicants in an intake, with their current stage and status. Requires the{" "}
-          <code>intakes:read</code> scope.
+          <code>intakes:read</code>{" "}scope.
         </p>
         <ParamTable
           title="Path parameters"
@@ -317,7 +317,7 @@ export default function ApplicantsPage() {
               type: "string",
               description: (
                 <p>
-                  The <code>nextCursor</code> from the previous page.
+                  The <code>nextCursor</code>{" "}from the previous page.
                 </p>
               ),
             },
@@ -345,8 +345,8 @@ export default function ApplicantsPage() {
           ]}
         />
         <p>
-          <strong>Returns</strong> a list object: <code>data</code> (an array of Applicant objects),{" "}
-          <code>hasMore</code> and <code>nextCursor</code>.
+          <strong>Returns</strong>{" "}a list object: <code>data</code>{" "}(an array of Applicant objects),{" "}
+          <code>hasMore</code>{" "}and <code>nextCursor</code>.
         </p>
       </RefSplit>
     </DocsPage>

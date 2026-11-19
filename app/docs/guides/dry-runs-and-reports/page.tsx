@@ -14,7 +14,7 @@ export default function DryRunsPage() {
     <DocsPage href={HREF}>
       <H2 id="what-a-dry-run-does">What a dry run does</H2>
       <p>
-        A dry run is a rehearsal. Add <code>&quot;dryRun&quot;: true</code> to a push and Pathment does every
+        A dry run is a rehearsal. Add <code>&quot;dryRun&quot;: true</code>{" "}to a push and Pathment does every
         step of a real sync except the last one:
       </p>
       <Table
@@ -29,7 +29,7 @@ export default function DryRunsPage() {
         ]}
       />
       <p>
-        So the report says exactly what <em>would</em> happen: how many people would be created, updated,
+        So the report says exactly what <em>would</em>{" "}happen: how many people would be created, updated,
         unchanged, skipped or failed, and why each failure would fail.
       </p>
 
@@ -38,7 +38,7 @@ export default function DryRunsPage() {
       <CodeBlock samples={dryRunSamples} title="Dry run" />
       <p>
         You get a job back just like a real push, and poll it the same way. The job has{" "}
-        <code>&quot;dryRun&quot;: true</code> so it can&apos;t be mistaken for a real one later.
+        <code>&quot;dryRun&quot;: true</code>{" "}so it can&apos;t be mistaken for a real one later.
       </p>
       <Callout type="note">
         <p>
@@ -53,16 +53,16 @@ export default function DryRunsPage() {
       <p>Read it top down:</p>
       <ul>
         <li>
-          <strong><code>counts</code></strong> is the headline. Here, 461 people would be created and 39
+          <strong><code>counts</code></strong>{" "}is the headline. Here, 461 people would be created and 39
           would fail.
         </li>
         <li>
-          <strong><code>errors</code></strong> says why. Each entry has the record&apos;s <code>index</code>{" "}
-          in your batch, its IDs, the <code>field</code> and a <code>code</code>. Up to 500 errors are
+          <strong><code>errors</code></strong>{" "}says why. Each entry has the record&apos;s <code>index</code>{" "}
+          in your batch, its IDs, the <code>field</code>{" "}and a <code>code</code>. Up to 500 errors are
           listed per job.
         </li>
         <li>
-          <strong>A pattern is a mapping problem.</strong> 39 <code>missing_email</code> errors usually
+          <strong>A pattern is a mapping problem.</strong>{" "}39 <code>missing_email</code>{" "}errors usually
           mean those records keep their email somewhere your mapping doesn&apos;t read. One or two are
           usually just bad data.
         </li>
@@ -110,7 +110,7 @@ export default function DryRunsPage() {
         <Step title="Turn on sending">
           <p>
             Once you&apos;re happy, turn on{" "}
-            <Link href="/docs/guides/sending-assessments">sending assessments</Link> for future syncs.
+            <Link href="/docs/guides/sending-assessments">sending assessments</Link>{" "}for future syncs.
           </p>
         </Step>
       </Steps>

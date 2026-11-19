@@ -19,7 +19,7 @@ export default function ChangelogPage() {
   return (
     <DocsPage href={HREF}>
       <p>
-        Every change to the API, newest first. Additive changes land in <code>v1</code> without notice, as
+        Every change to the API, newest first. Additive changes land in <code>v1</code>{" "}without notice, as
         described in <Link href="/docs/versioning">Versioning</Link>. Breaking changes will always be
         announced here first.
       </p>
@@ -32,32 +32,32 @@ export default function ChangelogPage() {
       <p>The first public version of the Pathment API. It&apos;s about one job: getting people into intakes.</p>
       <ul>
         <li>
-          <strong>API keys.</strong> Workspace admins create keys under Settings → Integrations → API keys,
-          with <code>intakes:read</code> and <code>applicants:write</code> scopes, optional expiry and instant
+          <strong>API keys.</strong>{" "}Workspace admins create keys under Settings → Integrations → API keys,
+          with <code>intakes:read</code>{" "}and <code>applicants:write</code>{" "}scopes, optional expiry and instant
           revoking. <Link href="/docs/authentication">Authentication</Link>
         </li>
         <li>
-          <strong>Read intakes.</strong> <code>GET /intakes</code> and{" "}
-          <code>GET /intakes/&#123;intakeId&#125;</code>, plus <code>GET /me</code> to check a key.{" "}
+          <strong>Read intakes.</strong> <code>GET /intakes</code>{" "}and{" "}
+          <code>GET /intakes/&#123;intakeId&#125;</code>, plus <code>GET /me</code>{" "}to check a key.{" "}
           <Link href="/docs/api/intakes">Intakes</Link>
         </li>
         <li>
-          <strong>Push applicants.</strong> <code>POST /intakes/&#123;intakeId&#125;/applicants</code> takes up
+          <strong>Push applicants.</strong> <code>POST /intakes/&#123;intakeId&#125;/applicants</code>{" "}takes up
           to 1,000 records, with matching that never creates duplicates, idempotency keys, dry runs and an
           optional assessment email for new applicants.{" "}
           <Link href="/docs/api/applicants">Applicants</Link>
         </li>
         <li>
-          <strong>Connections and field mapping.</strong> Send records in your own shape and map them in the
+          <strong>Connections and field mapping.</strong>{" "}Send records in your own shape and map them in the
           app, with transforms and value maps. <Link href="/docs/guides/field-mapping">Field mapping</Link>
         </li>
         <li>
-          <strong>Jobs.</strong> <code>GET /jobs/&#123;jobId&#125;</code> reports counts, per-record errors and
+          <strong>Jobs.</strong> <code>GET /jobs/&#123;jobId&#125;</code>{" "}reports counts, per-record errors and
           assessments sent. Every job also appears in Sync history in the app.{" "}
           <Link href="/docs/api/jobs">Jobs</Link>
         </li>
         <li>
-          <strong>List applicants</strong> with their stage and status, filtered by stage, email, external ID
+          <strong>List applicants</strong>{" "}with their stage and status, filtered by stage, email, external ID
           or <code>updatedSince</code>.
         </li>
       </ul>
@@ -69,15 +69,15 @@ export default function ChangelogPage() {
       </p>
       <ul>
         <li>
-          <strong>Read API.</strong> Programmes, cohorts and mentee progress, so you can bring Pathment data
+          <strong>Read API.</strong>{" "}Programmes, cohorts and mentee progress, so you can bring Pathment data
           into your own reporting.
         </li>
         <li>
-          <strong>Webhooks.</strong> Pathment calls you when something changes, such as an applicant
+          <strong>Webhooks.</strong>{" "}Pathment calls you when something changes, such as an applicant
           submitting their assessment or a job finishing, so you don&apos;t need to poll.
         </li>
         <li>
-          <strong>Pull connectors.</strong> Connect a source you already use and Pathment fetches new people
+          <strong>Pull connectors.</strong>{" "}Connect a source you already use and Pathment fetches new people
           on a schedule, using the same connections and field mapping.
         </li>
       </ul>

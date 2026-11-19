@@ -39,20 +39,20 @@ export default function DocsHome() {
       </p>
       <ul>
         <li>
-          <strong>Push applicants into an intake.</strong> Send up to 1,000 people per request. Pathment
+          <strong>Push applicants into an intake.</strong>{" "}Send up to 1,000 people per request. Pathment
           creates new applicants, updates the ones it has seen before and never makes duplicates.
         </li>
         <li>
-          <strong>Send records in your own shape.</strong> A{" "}
-          <Link href="/docs/guides/field-mapping">connection</Link> maps your field names to ours, so you
+          <strong>Send records in your own shape.</strong>{" "}A{" "}
+          <Link href="/docs/guides/field-mapping">connection</Link>{" "}maps your field names to ours, so you
           don&apos;t have to reshape your data first.
         </li>
         <li>
-          <strong>Send the assessment automatically.</strong> New applicants can get the assessment for
+          <strong>Send the assessment automatically.</strong>{" "}New applicants can get the assessment for
           their level by email as soon as the sync finishes.
         </li>
         <li>
-          <strong>Track where everyone is.</strong> List applicants with their stage (added, assessment
+          <strong>Track where everyone is.</strong>{" "}List applicants with their stage (added, assessment
           sent, submitted, accepted and so on) and ask for only what changed since your last check.
         </li>
       </ul>
@@ -61,7 +61,7 @@ export default function DocsHome() {
       <p>Every endpoint lives under one address. Requests and responses are JSON.</p>
       <CodeBlock code={API_BASE_URL} language="text" title="Base URL" />
       <p>
-        You authenticate with an API key in the <code>Authorization</code> header. Here is the smallest
+        You authenticate with an API key in the <code>Authorization</code>{" "}header. Here is the smallest
         useful request: it tells you which workspace your key belongs to.
       </p>
       <CodeBlock samples={meSamples} title="GET /me" />
@@ -83,7 +83,7 @@ export default function DocsHome() {
         </Step>
         <Step title="Check the job">
           <p>
-            Poll <code>GET /jobs/&#123;jobId&#125;</code> until it finishes. It tells you how many people
+            Poll <code>GET /jobs/&#123;jobId&#125;</code>{" "}until it finishes. It tells you how many people
             were created, updated or skipped, and exactly which records had a problem.
           </p>
         </Step>
@@ -103,7 +103,7 @@ export default function DocsHome() {
       </CardGrid>
       <Callout type="tip" title="New to APIs?">
         <p>
-          That&apos;s fine. The <Link href="/docs/quickstart">Quickstart</Link> works by copying and pasting,
+          That&apos;s fine. The <Link href="/docs/quickstart">Quickstart</Link>{" "}works by copying and pasting,
           and every example comes in cURL, Node.js and Python. Pick your language once and every page
           remembers it.
         </p>
@@ -126,7 +126,7 @@ export default function DocsHome() {
         ))}
       </div>
       <p>
-        See the <Link href="/docs/changelog">changelog</Link> for what has shipped and what&apos;s next.
+        See the <Link href="/docs/changelog">changelog</Link>{" "}for what has shipped and what&apos;s next.
       </p>
     </DocsPage>
   );

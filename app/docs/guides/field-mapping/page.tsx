@@ -17,13 +17,13 @@ export default function FieldMappingPage() {
     <DocsPage href={HREF}>
       <H2 id="what-a-connection-is">What a connection is</H2>
       <p>
-        Your system has its own names for things. Maybe it says <code>email_address</code> where Pathment
+        Your system has its own names for things. Maybe it says <code>email_address</code>{" "}where Pathment
         says <code>email</code>, keeps the full name in one field, or calls levels &ldquo;Beginner&rdquo; and
         &ldquo;Advanced&rdquo;. You could reshape every record in code before sending it. A connection lets
         you skip that.
       </p>
       <p>
-        A <strong>connection</strong> is a saved setup in Pathment for one source of people. It has:
+        A <strong>connection</strong>{" "}is a saved setup in Pathment for one source of people. It has:
       </p>
       <ul>
         <li>
@@ -37,12 +37,12 @@ export default function FieldMappingPage() {
         </li>
         <li>
           <strong>What happens after each sync</strong>: nothing, or{" "}
-          <Link href="/docs/guides/sending-assessments">send the assessment</Link> to new applicants.
+          <Link href="/docs/guides/sending-assessments">send the assessment</Link>{" "}to new applicants.
         </li>
       </ul>
       <p>
         Admins create connections in <strong>Settings → Integrations → Connections</strong>. The API
-        refers to one by its ID. Send <code>&quot;connection&quot;: &quot;&lt;connection ID&gt;&quot;</code> with a push and
+        refers to one by its ID. Send <code>&quot;connection&quot;: &quot;&lt;connection ID&gt;&quot;</code>{" "}with a push and
         Pathment applies that mapping to every record.
       </p>
       <Callout type="tip">
@@ -66,9 +66,9 @@ export default function FieldMappingPage() {
             description: (
               <p>
                 If the intake has levels, this must match one of them by key or label, ignoring case (so{" "}
-                <code>senior</code>, <code>Senior</code> and <code>SENIOR</code> all match a level with the key{" "}
+                <code>senior</code>, <code>Senior</code>{" "}and <code>SENIOR</code>{" "}all match a level with the key{" "}
                 <code>senior</code>, and is stored as that key), or the record fails with <code>invalid_level</code>. If the intake has no
-                levels, the value is stored as <code>responses.level</code> instead. It
+                levels, the value is stored as <code>responses.level</code>{" "}instead. It
                 decides which assessment the person gets.
               </p>
             ),
@@ -121,7 +121,7 @@ export default function FieldMappingPage() {
             type: "string",
             description: (
               <p>
-                Used when there&apos;s a <code>map</code> and your value isn&apos;t in it.
+                Used when there&apos;s a <code>map</code>{" "}and your value isn&apos;t in it.
               </p>
             ),
           },
@@ -130,7 +130,7 @@ export default function FieldMappingPage() {
 
       <H3 id="paths">Reading nested values</H3>
       <p>
-        <code>from</code> takes a path. Use dots to step into objects and square brackets to pick from a
+        <code>from</code>{" "}takes a path. Use dots to step into objects and square brackets to pick from a
         list:
       </p>
       <Table
@@ -165,7 +165,7 @@ export default function FieldMappingPage() {
 
       <H3 id="value-maps">Value maps and defaults</H3>
       <p>
-        <code>map</code> translates values. It&apos;s most useful for <code>level</code>, where your words
+        <code>map</code>{" "}translates values. It&apos;s most useful for <code>level</code>, where your words
         rarely match the intake&apos;s levels:
       </p>
       <CodeBlock
@@ -180,12 +180,12 @@ export default function FieldMappingPage() {
       <p>For each record, Pathment works out the value in this order:</p>
       <ol>
         <li>
-          If your value is in <code>map</code>, it&apos;s translated. <code>&quot;Advanced&quot;</code> becomes{" "}
+          If your value is in <code>map</code>, it&apos;s translated. <code>&quot;Advanced&quot;</code>{" "}becomes{" "}
           <code>senior</code>.
         </li>
         <li>
           Otherwise, if the rule has a <code>default</code>, the default is used.{" "}
-          <code>&quot;Expert&quot;</code> becomes <code>beginner</code>.
+          <code>&quot;Expert&quot;</code>{" "}becomes <code>beginner</code>.
         </li>
         <li>Otherwise, your value is kept exactly as you sent it.</li>
       </ol>
@@ -193,24 +193,24 @@ export default function FieldMappingPage() {
       <ul>
         <li>
           <strong>If the intake has levels</strong>, the value must match one of them by key or by label,
-          ignoring case. <code>senior</code>, <code>Senior</code> and <code>SENIOR</code> all match a level
-          with the key <code>senior</code> or the label &ldquo;Senior&rdquo;. A match is always stored as the
-          level&apos;s key: send &ldquo;Senior&rdquo; and the applicant&apos;s <code>level</code> is{" "}
+          ignoring case. <code>senior</code>, <code>Senior</code>{" "}and <code>SENIOR</code>{" "}all match a level
+          with the key <code>senior</code>{" "}or the label &ldquo;Senior&rdquo;. A match is always stored as the
+          level&apos;s key: send &ldquo;Senior&rdquo; and the applicant&apos;s <code>level</code>{" "}is{" "}
           <code>senior</code>. If it matches none, the record fails with <code>invalid_level</code>.
         </li>
         <li>
           <strong>If the intake has no levels</strong>, the value isn&apos;t checked. It&apos;s stored under{" "}
-          <code>responses.level</code> instead.
+          <code>responses.level</code>{" "}instead.
         </li>
       </ul>
       <p>
-        Leaving out <code>default</code> is often what you want: when a new value appears in your system,
-        you see <code>invalid_level</code> errors instead of people quietly landing on the wrong level.
+        Leaving out <code>default</code>{" "}is often what you want: when a new value appears in your system,
+        you see <code>invalid_level</code>{" "}errors instead of people quietly landing on the wrong level.
       </p>
 
       <H3 id="keep-unmapped">Keeping everything else</H3>
       <p>
-        <code>keepUnmapped</code> is on unless you turn it off. Every field you didn&apos;t map is stored on
+        <code>keepUnmapped</code>{" "}is on unless you turn it off. Every field you didn&apos;t map is stored on
         the applicant under <code>responses</code>, so reviewers still see things like a portfolio link or
         a motivation statement. Turn it off if your records carry internal data that reviewers
         shouldn&apos;t see.
@@ -227,8 +227,8 @@ export default function FieldMappingPage() {
         <Step title="Paste a sample record">
           <p>
             Paste one real record from your system as JSON. Pathment suggests a mapping by recognising
-            common names, such as <code>email_address</code> for email, <code>mobile</code> for phone, or{" "}
-            <code>full_name</code> for first and last name.
+            common names, such as <code>email_address</code>{" "}for email, <code>mobile</code>{" "}for phone, or{" "}
+            <code>full_name</code>{" "}for first and last name.
           </p>
         </Step>
         <Step title="Adjust and preview">
@@ -323,23 +323,23 @@ export default function FieldMappingPage() {
 }`}
       />
       <p>
-        With <code>keepUnmapped</code> off, the second email address is not stored.
+        With <code>keepUnmapped</code>{" "}off, the second email address is not stored.
       </p>
 
       <H2 id="using-it">Using a connection from the API</H2>
       <p>
-        Add <code>connection</code> to the push body and send your records untouched. You can still
+        Add <code>connection</code>{" "}to the push body and send your records untouched. You can still
         override the connection&apos;s &ldquo;after each sync&rdquo; setting per request with{" "}
         <code>sendAssessment</code>.
       </p>
       <CodeBlock samples={pushWithConnectionSamples} title="Push with a connection" />
       <ul>
         <li>
-          When you use a connection, <code>externalId</code> matching is scoped to that connection. Your
+          When you use a connection, <code>externalId</code>{" "}matching is scoped to that connection. Your
           CRM&apos;s ID 1042 and your form tool&apos;s ID 1042 are different people.
         </li>
         <li>
-          If a rule can&apos;t be applied to a record, that record fails with <code>mapping_failed</code> and
+          If a rule can&apos;t be applied to a record, that record fails with <code>mapping_failed</code>{" "}and
           the rest carry on.
         </li>
         <li>

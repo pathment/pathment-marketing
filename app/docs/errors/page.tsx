@@ -74,7 +74,7 @@ export default function ErrorsPage() {
             required: true,
             description: (
               <p>
-                The ID of this request. It matches the <code>X-Request-Id</code> header.
+                The ID of this request. It matches the <code>X-Request-Id</code>{" "}header.
               </p>
             ),
           },
@@ -95,7 +95,7 @@ export default function ErrorsPage() {
         ]}
       />
       <p>
-        Successful requests return <code>200</code>, or <code>202</code> when work has been queued, as
+        Successful requests return <code>200</code>, or <code>202</code>{" "}when work has been queued, as
         with pushing applicants.
       </p>
 
@@ -103,7 +103,7 @@ export default function ErrorsPage() {
       <Table
         head={["Code", "Status", "What to do"]}
         rows={[
-          [c("validation_failed"), "400", <>A field is missing or has the wrong type. <code>field</code> points at it.</>],
+          [c("validation_failed"), "400", <>A field is missing or has the wrong type. <code>field</code>{" "}points at it.</>],
           [c("too_many_records"), "400", "You sent more than 1,000 records. Split the batch."],
           [c("invalid_json"), "400", "The body isn't valid JSON. Check quoting and the Content-Type header."],
           [c("missing_api_key"), "401", "Send Authorization: Bearer pk_live_..."],
@@ -120,14 +120,14 @@ export default function ErrorsPage() {
       />
       <Callout type="note">
         <p>
-          We may add new codes over time. Treat an unknown <code>code</code> by falling back to its{" "}
+          We may add new codes over time. Treat an unknown <code>code</code>{" "}by falling back to its{" "}
           <code>type</code>, which never changes for a given status.
         </p>
       </Callout>
 
       <H2 id="request-ids">Request IDs</H2>
       <p>
-        Every response, successful or not, has an <code>X-Request-Id</code> header. Errors repeat it in
+        Every response, successful or not, has an <code>X-Request-Id</code>{" "}header. Errors repeat it in
         the body as <code>requestId</code>. Log it alongside the error. If you ever need our help, the
         request ID lets us find exactly what happened in seconds.
       </p>
@@ -135,22 +135,22 @@ export default function ErrorsPage() {
       <H2 id="record-errors">Errors inside a job</H2>
       <p>
         Pushing applicants is different. The request itself succeeds as long as the batch is well formed,
-        and problems with <em>individual</em> records, like one bad email address in 500, are reported on
+        and problems with <em>individual</em>{" "}records, like one bad email address in 500, are reported on
         the job instead. One bad record never sinks the rest of the batch.
       </p>
       <p>
-        Those record-level codes (<code>invalid_email</code>, <code>duplicate_in_batch</code> and so on)
+        Those record-level codes (<code>invalid_email</code>, <code>duplicate_in_batch</code>{" "}and so on)
         are listed on the <Link href="/docs/api/jobs#record-error-codes">Job object</Link>.
       </p>
 
       <H2 id="handling-errors">Handling errors well</H2>
       <ul>
         <li>
-          <strong>Don&apos;t retry 4xx errors</strong> (except 429). The same request will fail the same
+          <strong>Don&apos;t retry 4xx errors</strong>{" "}(except 429). The same request will fail the same
           way. Fix it first.
         </li>
         <li>
-          <strong>Retry 429 and 5xx</strong> with a growing wait. For 429, wait the number of seconds in{" "}
+          <strong>Retry 429 and 5xx</strong>{" "}with a growing wait. For 429, wait the number of seconds in{" "}
           <code>Retry-After</code>.
         </li>
         <li>
