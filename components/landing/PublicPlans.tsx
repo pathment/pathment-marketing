@@ -51,11 +51,16 @@ function isPlan(value: unknown): value is Plan {
 }
 
 /** Loads the published catalogue from /api/plans, with a retry handle. */
-export function usePublishedPlans() {
-  const [plans, setPlans] = useState<Plan[]>([]);
-  const [state, setState] = useState<"loading" | "ready" | "error">("loading");
+export function usePublishedPlans(initialPlans?: Plan[] | null) {
+  const [plans, setPlans] = useState<Plan[]>(initialPlans ?? []);
+  // Server-rendered plans skip the first client fetch; a retry always fetches.
+  const [hadInitialPlans] = useState(Boolean(initialPlans?.length));
+  const [state, setState] = useState<"loading" | "ready" | "error">(
+    initialPlans?.length ? "ready" : "loading",
+  );
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
+    if (attempt === 0 && hadInitialPlans) return;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 12000);
     let current = true;
@@ -86,7 +91,7 @@ export function usePublishedPlans() {
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [attempt]);
+  }, [attempt, hadInitialPlans]);
   const retry = () => {
     setState("loading");
     setAttempt((n) => n + 1);

@@ -2,16 +2,25 @@ import { AnnouncementBar } from "../components/landing/AnnouncementBar";
 import { FinalCta } from "../components/landing/FinalCta";
 import { Footer } from "../components/landing/Footer";
 import { Hero } from "../components/landing/Hero";
+import { HomeFaq } from "../components/landing/HomeFaq";
 import { HowItWorks } from "../components/landing/HowItWorks";
 import { MobileExperience } from "../components/landing/MobileExperience";
 import { Navbar } from "../components/landing/Navbar";
 import { PricingPreview } from "../components/landing/PricingPreview";
 import { ProofBand } from "../components/landing/ProofBand";
+import { ReplaceStack } from "../components/landing/ReplaceStack";
 import { RoleWorkspaces } from "../components/landing/RoleWorkspaces";
+import { homeFaq } from "../components/landing/site-content";
 import { Toolkit } from "../components/landing/Toolkit";
+import { TrustAndShipped } from "../components/landing/TrustAndShipped";
 import { ANDROID_APP_URL } from "../lib/links";
+import { getPublishedPlansOrNull } from "../lib/plans";
 
-export default function HomePage() {
+/** Re-render at most every five minutes so published prices stay current. */
+export const revalidate = 300;
+
+export default async function HomePage() {
+  const plans = await getPublishedPlansOrNull();
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -23,6 +32,15 @@ export default function HomePage() {
       installUrl: ANDROID_APP_URL,
       description:
         "Mentorship and learning program operations for organizations, admins, mentors, and mentees.",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: homeFaq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
     },
   ];
 
@@ -37,14 +55,18 @@ export default function HomePage() {
       <AnnouncementBar />
       <Navbar />
       <main id="main-content">
-        {/* Claim → proof → mechanism → product → reach → price → ask. */}
+        {/* Claim → proof → the problem → the loop → each seat → the parts →
+            reach → trust → price → objections → ask. */}
         <Hero />
         <ProofBand />
+        <ReplaceStack />
         <HowItWorks />
         <RoleWorkspaces />
         <Toolkit />
         <MobileExperience />
-        <PricingPreview />
+        <TrustAndShipped />
+        <PricingPreview initialPlans={plans} />
+        <HomeFaq />
         <FinalCta />
       </main>
       <Footer />

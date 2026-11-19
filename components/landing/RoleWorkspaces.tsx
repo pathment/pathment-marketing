@@ -40,7 +40,7 @@ export function RoleWorkspaces() {
         aria-hidden
         className="pointer-events-none absolute left-[22%] top-24 h-80 w-80 rounded-full bg-[var(--leaf)]/20 blur-3xl"
       />
-      <div className="shell relative grid gap-10 pt-14 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.5fr)_minmax(0,0.75fr)] lg:gap-8 lg:pt-16">
+      <div className="shell relative grid gap-10 pt-14 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.7fr)_minmax(0,0.7fr)] lg:gap-8 lg:pt-16">
         <div className="lg:pt-6">
           <p className="lp-label">Tailored for every role</p>
           <h2
@@ -96,7 +96,7 @@ export function RoleWorkspaces() {
             role="tabpanel"
             id={`workspace-panel-${workspace.id}`}
             aria-labelledby={`workspace-tab-${workspace.id}`}
-            className="mt-6 h-[15rem] overflow-hidden sm:h-[22rem] lg:h-[20rem]"
+            className="mt-6 h-[15rem] overflow-hidden sm:h-[24rem] lg:h-[25rem] xl:h-[27rem]"
           >
             <div className="rounded-t-[1.6rem] border border-b-0 border-black/10 bg-gradient-to-b from-[#d5d9da] to-[#b9bfc1] p-2.5 pb-0 shadow-[0_30px_70px_-35px_rgba(7,42,32,0.7)] dark:from-[#2b3033] dark:to-[#1a1d1f]">
               <div className="overflow-hidden rounded-t-[1.1rem] bg-white">
