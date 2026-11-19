@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BarChart3, BookOpenText, Braces, Rocket, Shuffle } from "lucide-react";
+import { BarChart3, Braces, Rocket, Shuffle } from "lucide-react";
 import { DocsPage } from "../../components/docs/DocsPage";
 import { CodeBlock } from "../../components/docs/CodeBlock";
 import { Callout } from "../../components/docs/Callout";
@@ -10,13 +10,6 @@ import { API_BASE_URL } from "../../lib/docs/nav";
 
 const HREF = "/docs";
 export const metadata = docsMetadata(HREF);
-
-const coming = [
-  {
-    title: "Pull connectors",
-    body: "Point Pathment at a source you already use and it fetches new people on a schedule. No code on your side.",
-  },
-];
 
 export default function DocsHome() {
   return (
@@ -62,6 +55,12 @@ export default function DocsHome() {
           applicant is accepted, a mentee joins a clan, a certificate is issued or a sync finishes, so you
           don&apos;t have to keep asking.{" "}
           <Link href="/docs/guides/webhooks">Webhooks</Link>
+        </li>
+        <li>
+          <strong>Let Pathment fetch your people.</strong>{" "}Point a connection at a JSON or CSV URL, or a
+          published Google Sheet, and Pathment pulls everyone into your intake on a schedule. No code on your
+          side.{" "}
+          <Link href="/docs/guides/pulling">Pulling from a URL</Link>
         </li>
       </ul>
 
@@ -120,23 +119,8 @@ export default function DocsHome() {
         </p>
       </Callout>
 
-      <H2 id="whats-coming">What&apos;s coming</H2>
       <p>
-        Next we&apos;re working on doing more of the work for you.
-      </p>
-      <div className="grid max-w-md gap-4">
-        {coming.map((item) => (
-          <div key={item.title} className="rounded-xl border border-dashed border-line bg-surface/60 p-5">
-            <p className="flex items-center gap-2 font-semibold text-[var(--docs-heading)]">
-              <BookOpenText className="h-4 w-4 text-accent" aria-hidden />
-              {item.title}
-            </p>
-            <p className="mt-2 text-[0.9rem] leading-6 text-muted">{item.body}</p>
-          </div>
-        ))}
-      </div>
-      <p>
-        See the <Link href="/docs/changelog">changelog</Link>{" "}for what has shipped and what&apos;s next.
+        See the <Link href="/docs/changelog">changelog</Link>{" "}for what has shipped and when.
       </p>
     </DocsPage>
   );

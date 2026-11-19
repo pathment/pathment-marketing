@@ -24,6 +24,40 @@ export default function ChangelogPage() {
         announced here first.
       </p>
 
+      <H2 id="pull-connectors">20 November 2026: Pull connectors</H2>
+      <p className="flex flex-wrap gap-2">
+        <Tag>New</Tag>
+        <Tag>Additive</Tag>
+      </p>
+      <p>
+        <strong>Pull connectors.</strong>{" "}Pathment can now fetch your people from a URL, so you don&apos;t
+        have to push them.
+      </p>
+      <ul>
+        <li>
+          <strong>Set up in the app.</strong>{" "}Under Settings → Integrations → Connections, choose
+          &ldquo;Pathment fetches them&rdquo;, enter a URL and pick a schedule: Pull now only, every hour,
+          every 6 hours or once a day.
+        </li>
+        <li>
+          <strong>JSON, CSV and Google Sheets.</strong>{" "}JSON with automatic record detection and
+          pagination (a next-page path or a <code>Link</code>{" "}header), CSV with a header row, and published
+          Google Sheets.
+        </li>
+        <li>
+          <strong>Sign-in.</strong>{" "}None, a bearer token, a custom header, or username and password.
+          Credentials are stored encrypted and only sent to the URL&apos;s own host.
+        </li>
+        <li>
+          <strong>Same results as pushing.</strong>{" "}Pulls use the same matching and field mapping, show up in
+          Sync history as &ldquo;Pulled&rdquo;, and fire <code>sync.job.completed</code>. Scheduled pulls with
+          nothing new are skipped.
+        </li>
+        <li>
+          <Link href="/docs/guides/pulling">Pulling from a URL</Link>
+        </li>
+      </ul>
+
       <H2 id="webhooks">20 November 2026: Webhooks</H2>
       <p className="flex flex-wrap gap-2">
         <Tag>New</Tag>
@@ -132,17 +166,10 @@ export default function ChangelogPage() {
         </li>
       </ul>
 
-      <H2 id="roadmap">On the roadmap</H2>
+      <H2 id="roadmap">What&apos;s next</H2>
       <p>
-        These are what we&apos;re working on next. They aren&apos;t available yet, and details may change
-        before they ship.
+        Everything we&apos;ve announced so far has shipped.
       </p>
-      <ul>
-        <li>
-          <strong>Pull connectors.</strong>{" "}Connect a source you already use and Pathment fetches new people
-          on a schedule, using the same connections and field mapping.
-        </li>
-      </ul>
       <Callout type="tip" title="Tell us what you need">
         <p>
           Building something the API can&apos;t do yet? <Link href="/contact">Get in touch</Link>. Real use

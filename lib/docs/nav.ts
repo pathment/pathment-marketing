@@ -38,6 +38,7 @@ export interface DocGroup {
 const LAUNCH = "2026-11-19";
 const READ_API = "2026-11-20";
 const WEBHOOKS = "2026-11-20";
+const PULL = "2026-11-20";
 
 function h2(id: string, title: string): TocItem {
   return { id, title, level: 2 };
@@ -61,7 +62,6 @@ export const docsNav: DocGroup[] = [
           h2("base-url", "Base URL"),
           h2("three-steps", "The path in three steps"),
           h2("start-here", "Start here"),
-          h2("whats-coming", "What's coming"),
         ],
         keywords: ["introduction", "api", "developer"],
       },
@@ -197,6 +197,34 @@ export const docsNav: DocGroup[] = [
           h2("checklist", "Before you go live"),
         ],
         keywords: ["import", "push", "integration", "batch", "cron", "nightly"],
+      },
+      {
+        href: "/docs/guides/pulling",
+        title: "Let Pathment fetch your people",
+        navTitle: "Pulling from a URL",
+        description:
+          "Point a connection at a JSON or CSV URL, or a published Google Sheet, and Pathment pulls everyone into your intake on a schedule.",
+        updated: PULL,
+        toc: [
+          h2("pull-or-push", "Pull or push?"),
+          h2("setting-up", "Setting up a pull"),
+          h2("the-url", "The URL"),
+          h2("formats", "Formats"),
+          h3("json", "JSON"),
+          h3("pagination", "Pagination"),
+          h3("csv", "CSV"),
+          h3("google-sheets", "Google Sheets"),
+          h2("sign-in", "Sign-in"),
+          h2("testing", "Testing"),
+          h2("schedule", "Schedule"),
+          h2("what-a-pull-does", "What a pull does"),
+          h3("nothing-new", "When nothing has changed"),
+          h2("limits", "Limits"),
+          h2("when-it-fails", "When a pull fails"),
+          h2("build-your-endpoint", "What to build on your side"),
+          h2("security-checklist", "Security checklist"),
+        ],
+        keywords: ["pull", "connector", "fetch", "csv", "google sheets", "json feed", "schedule", "Pathment-Sync", "user agent", "import"],
       },
       {
         href: "/docs/guides/field-mapping",
@@ -468,10 +496,11 @@ export const docsNav: DocGroup[] = [
         description: "What changed in the API, newest first, and what we're building next.",
         updated: WEBHOOKS,
         toc: [
+          h2("pull-connectors", "20 November 2026: Pull connectors"),
           h2("webhooks", "20 November 2026: Webhooks"),
           h2("read-api", "20 November 2026: Read API"),
           h2("v1-launch", "19 November 2026: v1"),
-          h2("roadmap", "On the roadmap"),
+          h2("roadmap", "What's next"),
         ],
         keywords: ["release notes", "roadmap", "webhooks", "new"],
       },
