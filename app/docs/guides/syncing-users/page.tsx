@@ -144,6 +144,14 @@ export default function SyncingUsersPage() {
         In v1, your system does the sending. Whenever you have people Pathment should know about, you push
         them to an intake. Pathment works out who is new and who it already has, and reports back.
       </p>
+      <Callout type="tip" title="Would you rather Pathment fetched them?">
+        <p>
+          If your people are already behind a URL (a JSON export, a CSV file or a published Google Sheet),
+          you don&apos;t need to write a sync at all. A{" "}
+          <Link href="/docs/guides/pulling">pull connection</Link>{" "}fetches them on a schedule, with the same
+          matching and the same jobs as pushing.
+        </p>
+      </Callout>
       <p>That gives you one simple loop:</p>
       <ol>
         <li>Collect the people from your system.</li>
