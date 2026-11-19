@@ -32,6 +32,7 @@ const objects = [
   { name: "Intake", href: "/docs/api/intakes#the-intake-object", does: "An admissions round for a programme." },
   { name: "Applicant", href: "/docs/api/applicants#the-applicant-object", does: "A person in an intake, with their stage and status." },
   { name: "Job", href: "/docs/api/jobs#the-job-object", does: "The status and result of one push." },
+  { name: "Event", href: "/docs/api/webhook-events#the-event-envelope", does: "What Pathment sends to your webhook endpoints." },
   { name: "Programme", href: "/docs/api/programmes#the-programme-object", does: "What people take part in." },
   { name: "Clan", href: "/docs/api/clans#the-clan-object", does: "A group of mentees inside a programme." },
   { name: "Mentee", href: "/docs/api/mentees#the-mentee-object", does: "A person placed in your clans, with their enrollments." },
@@ -83,6 +84,11 @@ export default function ApiIndexPage() {
         </ul>
         <p>
           The scope each endpoint needs is listed on its page. Paths are relative to the base URL.
+        </p>
+        <p>
+          Pathment can also call you. <Link href="/docs/guides/webhooks">Webhooks</Link>{" "}send events to
+          your server when things happen; every event is listed in{" "}
+          <Link href="/docs/api/webhook-events">Webhook events</Link>.
         </p>
 
         <H2 id="objects">Objects</H2>

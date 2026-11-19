@@ -37,6 +37,7 @@ export interface DocGroup {
 
 const LAUNCH = "2026-11-19";
 const READ_API = "2026-11-20";
+const WEBHOOKS = "2026-11-20";
 
 function h2(id: string, title: string): TocItem {
   return { id, title, level: 2 };
@@ -54,7 +55,7 @@ export const docsNav: DocGroup[] = [
         title: "Overview",
         description:
           "What the Pathment API does today, where it lives, and the three steps from an API key to applicants in your intake.",
-        updated: READ_API,
+        updated: WEBHOOKS,
         toc: [
           h2("what-you-can-do", "What you can do today"),
           h2("base-url", "Base URL"),
@@ -184,7 +185,7 @@ export const docsNav: DocGroup[] = [
         navTitle: "Syncing users",
         description:
           "The push model end to end: from records in your system to applicants in a Pathment intake, and how to keep them in step.",
-        updated: LAUNCH,
+        updated: WEBHOOKS,
         toc: [
           h2("the-push-model", "The push model"),
           h2("pick-the-intake", "1. Pick the intake"),
@@ -286,6 +287,26 @@ export const docsNav: DocGroup[] = [
         ],
         keywords: ["progress", "dashboard", "export", "nightly", "report", "mentees", "attendance", "read api"],
       },
+      {
+        href: "/docs/guides/webhooks",
+        title: "Get told when things happen",
+        navTitle: "Webhooks",
+        description:
+          "Webhooks send events to your server the moment something happens. Set up an endpoint, verify signatures, and handle retries, duplicates and order.",
+        updated: WEBHOOKS,
+        toc: [
+          h2("setting-up", "Setting up an endpoint"),
+          h2("the-request", "The request"),
+          h2("verifying-signatures", "Verifying signatures"),
+          h2("a-complete-receiver", "A complete receiver"),
+          h2("responding-and-retries", "Responding and retries"),
+          h2("duplicates-and-order", "Duplicates and order"),
+          h2("testing", "Testing with Send test and the delivery log"),
+          h2("turning-off", "Turning endpoints off"),
+          h2("security-checklist", "Security checklist"),
+        ],
+        keywords: ["webhook", "events", "signature", "hmac", "whsec", "retry", "endpoint", "notifications", "ping"],
+      },
     ],
   },
   {
@@ -297,7 +318,7 @@ export const docsNav: DocGroup[] = [
         navTitle: "Introduction",
         description:
           "Conventions shared by every endpoint, the objects the API returns, and the full list of endpoints.",
-        updated: READ_API,
+        updated: WEBHOOKS,
         toc: [
           h2("conventions", "Conventions"),
           h2("endpoints", "Endpoints"),
@@ -348,7 +369,7 @@ export const docsNav: DocGroup[] = [
         title: "Jobs",
         description:
           "Every push becomes a job. Poll it to see counts, errors and how many assessments were sent.",
-        updated: LAUNCH,
+        updated: WEBHOOKS,
         method: "GET",
         toc: [
           h2("the-job-object", "The Job object"),
@@ -414,6 +435,28 @@ export const docsNav: DocGroup[] = [
         ],
         keywords: ["progress", "completion", "tasks", "overdue", "attendance", "certificates", "roadmap", "points"],
       },
+      {
+        href: "/docs/api/webhook-events",
+        title: "Webhook events",
+        description: "The envelope, headers and data of every event Pathment sends to your webhook endpoints.",
+        updated: WEBHOOKS,
+        toc: [
+          h2("the-event-envelope", "The event envelope"),
+          h2("event-types", "Event types"),
+          h2("applicant-created", "applicant.created"),
+          h2("applicant-assessment-sent", "applicant.assessment_sent"),
+          h2("applicant-assessment-submitted", "applicant.assessment_submitted"),
+          h2("applicant-accepted", "applicant.accepted"),
+          h2("applicant-rejected", "applicant.rejected"),
+          h2("mentee-joined", "mentee.joined"),
+          h2("task-approved", "task.approved"),
+          h2("roadmap-completed", "roadmap.completed"),
+          h2("certificate-issued", "certificate.issued"),
+          h2("sync-job-completed", "sync.job.completed"),
+          h2("ping", "ping"),
+        ],
+        keywords: ["webhook", "event", "payload", "applicant.accepted", "sync.job.completed", "mentee.joined", "certificate.issued"],
+      },
     ],
   },
   {
@@ -423,8 +466,9 @@ export const docsNav: DocGroup[] = [
         href: "/docs/changelog",
         title: "Changelog",
         description: "What changed in the API, newest first, and what we're building next.",
-        updated: READ_API,
+        updated: WEBHOOKS,
         toc: [
+          h2("webhooks", "20 November 2026: Webhooks"),
           h2("read-api", "20 November 2026: Read API"),
           h2("v1-launch", "19 November 2026: v1"),
           h2("roadmap", "On the roadmap"),
