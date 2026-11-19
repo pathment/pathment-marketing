@@ -163,6 +163,7 @@ const solutionsMenu: MenuGroup[] = [
 const flatLinks = [
   { href: "/#lifecycle", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/docs", label: "Docs" },
 ] as const;
 
 type OpenMenu = "product" | "solutions" | null;
