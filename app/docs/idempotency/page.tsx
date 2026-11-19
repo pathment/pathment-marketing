@@ -25,7 +25,7 @@ export default function IdempotencyPage() {
 
       <H2 id="how-it-works">How it works</H2>
       <p>
-        Add an <code>Idempotency-Key</code> header to <code>POST /intakes/&#123;intakeId&#125;/applicants</code>.
+        Add an <code>Idempotency-Key</code>{" "}header to <code>POST /intakes/&#123;intakeId&#125;/applicants</code>.
         It can be any string you like, up to 255 characters.
       </p>
       <CodeBlock language="http" title="Header" code="Idempotency-Key: 6f1c2a9e-4b7d-4c1e-9a53-2f8d0b7e1c44" />
@@ -35,11 +35,11 @@ export default function IdempotencyPage() {
         rows={[
           ["A key it hasn't seen", <>A new job, with <code>202 Accepted</code>.</>],
           ["The same key and the same body", <>The original job, with <code>200 OK</code>. Nothing new is created.</>],
-          ["The same key with a different body", <><code>409</code> with <code>idempotency_key_reused</code>.</>],
+          ["The same key with a different body", <><code>409</code>{" "}with <code>idempotency_key_reused</code>.</>],
         ]}
       />
       <p>
-        That <code>409</code> protects you from a real bug: reusing one key for two different batches,
+        That <code>409</code>{" "}protects you from a real bug: reusing one key for two different batches,
         which would otherwise quietly drop the second batch.
       </p>
       <ResponseBlock
@@ -72,7 +72,7 @@ export default function IdempotencyPage() {
         <li>Make the key once, before the first attempt.</li>
         <li>On a timeout, a dropped connection or a <code>5xx</code>, retry with the same key and the same body.</li>
         <li>
-          On a <code>200</code> or <code>202</code>, carry on with the job you got back, whichever attempt
+          On a <code>200</code>{" "}or <code>202</code>, carry on with the job you got back, whichever attempt
           it came from.
         </li>
         <li>Never change the records and reuse the key. A changed batch is a new batch and needs a new key.</li>

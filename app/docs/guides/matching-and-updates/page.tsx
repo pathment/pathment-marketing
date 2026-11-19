@@ -20,13 +20,13 @@ export default function MatchingPage() {
       <p>For each record in a batch, Pathment looks for an existing applicant in two steps:</p>
       <ol>
         <li>
-          <strong>By <code>externalId</code>.</strong> If the record has one, Pathment looks for an
+          <strong>By <code>externalId</code>.</strong>{" "}If the record has one, Pathment looks for an
           applicant with the same ID. When you push through a{" "}
           <Link href="/docs/guides/field-mapping">connection</Link>, IDs are matched within that connection.
           Without a connection, they&apos;re matched across your workspace.
         </li>
         <li>
-          <strong>By email, within the same intake.</strong> If no ID matched, Pathment looks for an
+          <strong>By email, within the same intake.</strong>{" "}If no ID matched, Pathment looks for an
           applicant in this intake with the same email address.
         </li>
       </ol>
@@ -35,8 +35,8 @@ export default function MatchingPage() {
       </p>
       <Callout type="tip" title="Why externalId comes first">
         <p>
-          People change email addresses. If Ada moves from <code>ada@example.com</code> to{" "}
-          <code>ada.okafor@example.com</code> in your CRM, her <code>externalId</code> still finds her, and
+          People change email addresses. If Ada moves from <code>ada@example.com</code>{" "}to{" "}
+          <code>ada.okafor@example.com</code>{" "}in your CRM, her <code>externalId</code>{" "}still finds her, and
           her email is updated instead of a second Ada appearing.
         </p>
       </Callout>
@@ -74,7 +74,7 @@ export default function MatchingPage() {
         code={`{ "externalId": "u_1042", "email": "ada@example.com", "firstName": "Ada", "phone": "+447700900123", "level": "beginner" }`}
       />
       <p>
-        Then a programme admin reviews Ada and moves her to <code>senior</code> in Pathment. Next week your
+        Then a programme admin reviews Ada and moves her to <code>senior</code>{" "}in Pathment. Next week your
         sync sends a new phone number, and still says <code>beginner</code>:
       </p>
       <CodeBlock
@@ -104,7 +104,7 @@ export default function MatchingPage() {
       <H2 id="closed-applicants">Closed applicants stay closed</H2>
       <p>
         If someone was rejected, withdrew or was removed, a sync never brings them back. Their record is
-        skipped and listed in the job&apos;s <code>errors</code> with the code <code>applicant_closed</code>,
+        skipped and listed in the job&apos;s <code>errors</code>{" "}with the code <code>applicant_closed</code>,
         so you can see it happened. Nothing about them changes.
       </p>
       <p>
@@ -123,7 +123,7 @@ export default function MatchingPage() {
       <H2 id="duplicates-in-a-batch">Duplicates in one batch</H2>
       <p>
         If two records in the same batch share an email or an <code>externalId</code>, the first one is
-        processed and the later one fails with <code>duplicate_in_batch</code>. Its <code>index</code> in
+        processed and the later one fails with <code>duplicate_in_batch</code>. Its <code>index</code>{" "}in
         the job&apos;s errors tells you which row to look at.
       </p>
       <p>

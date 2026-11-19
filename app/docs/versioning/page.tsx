@@ -24,7 +24,7 @@ export default function VersioningPage() {
 
       <H2 id="additive-changes">Changes we make without a new version</H2>
       <p>
-        We keep improving <code>v1</code> in ways that don&apos;t break working code. These can arrive at
+        We keep improving <code>v1</code>{" "}in ways that don&apos;t break working code. These can arrive at
         any time:
       </p>
       <ul>
@@ -43,7 +43,7 @@ export default function VersioningPage() {
         making an optional parameter required, ships as a new version: <code>/v2</code>.
       </p>
       <p>
-        When that happens, <code>v1</code> keeps working for at least <strong>six months</strong> after we
+        When that happens, <code>v1</code>{" "}keeps working for at least <strong>six months</strong>{" "}after we
         announce <code>v2</code>. The announcement goes in the <Link href="/docs/changelog">changelog</Link>,
         along with what changed and how to move over.
       </p>
@@ -59,7 +59,7 @@ export default function VersioningPage() {
       </Callout>
       <ul>
         <li>
-          Branch on error <code>type</code> as a fallback when you meet an unfamiliar <code>code</code>.
+          Branch on error <code>type</code>{" "}as a fallback when you meet an unfamiliar <code>code</code>.
         </li>
         <li>Treat IDs and cursors as opaque strings. Don&apos;t parse them or assume a length.</li>
         <li>

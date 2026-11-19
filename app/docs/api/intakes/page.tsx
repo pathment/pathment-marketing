@@ -36,7 +36,7 @@ export default function IntakesPage() {
               type: "object",
               description: (
                 <p>
-                  The programme this intake belongs to, as <code>id</code> and <code>name</code>.
+                  The programme this intake belongs to, as <code>id</code>{" "}and <code>name</code>.
                 </p>
               ),
             },
@@ -47,9 +47,9 @@ export default function IntakesPage() {
                 <>
                   <p>Where the intake is in its life:</p>
                   <p>
-                    <code>planning</code> being set up · <code>open</code> taking applications ·{" "}
-                    <code>running</code> under way · <code>closed</code> no longer taking applications ·{" "}
-                    <code>completed</code> finished.
+                    <code>planning</code>{" "}being set up · <code>open</code>{" "}taking applications ·{" "}
+                    <code>running</code>{" "}under way · <code>closed</code>{" "}no longer taking applications ·{" "}
+                    <code>completed</code>{" "}finished.
                   </p>
                 </>
               ),
@@ -59,8 +59,8 @@ export default function IntakesPage() {
               type: "array of objects",
               description: (
                 <p>
-                  The levels applicants can be placed at, each with a <code>key</code> and a{" "}
-                  <code>label</code> (what people see). An applicant&apos;s <code>level</code> can match either,
+                  The levels applicants can be placed at, each with a <code>key</code>{" "}and a{" "}
+                  <code>label</code>{" "}(what people see). An applicant&apos;s <code>level</code>{" "}can match either,
                   ignoring case. Empty if
                   the intake doesn&apos;t use levels.
                 </p>
@@ -106,7 +106,7 @@ export default function IntakesPage() {
               type: "string",
               description: (
                 <p>
-                  The <code>nextCursor</code> from the previous page. See{" "}
+                  The <code>nextCursor</code>{" "}from the previous page. See{" "}
                   <Link href="/docs/pagination">Pagination</Link>.
                 </p>
               ),
@@ -114,8 +114,8 @@ export default function IntakesPage() {
           ]}
         />
         <p>
-          <strong>Returns</strong> a list object: <code>data</code> (an array of Intake objects),{" "}
-          <code>hasMore</code> and <code>nextCursor</code>.
+          <strong>Returns</strong>{" "}a list object: <code>data</code>{" "}(an array of Intake objects),{" "}
+          <code>hasMore</code>{" "}and <code>nextCursor</code>.
         </p>
       </RefSplit>
 
@@ -135,15 +135,15 @@ export default function IntakesPage() {
         <H2 id="retrieve-an-intake">Retrieve an intake</H2>
         <Endpoint method="GET" path="/intakes/{intakeId}" />
         <p>
-          Returns one intake. Useful for checking its <code>status</code> and <code>levels</code> before a
-          sync. Requires the <code>intakes:read</code> scope.
+          Returns one intake. Useful for checking its <code>status</code>{" "}and <code>levels</code>{" "}before a
+          sync. Requires the <code>intakes:read</code>{" "}scope.
         </p>
         <ParamTable
           title="Path parameters"
           params={[{ name: "intakeId", type: "string", required: true, description: "The intake's ID." }]}
         />
         <p>
-          <strong>Returns</strong> an Intake object, or <code>404</code> with <code>intake_not_found</code>{" "}
+          <strong>Returns</strong>{" "}an Intake object, or <code>404</code>{" "}with <code>intake_not_found</code>{" "}
           if there&apos;s no such intake in this workspace.
         </p>
       </RefSplit>

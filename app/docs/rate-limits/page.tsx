@@ -55,7 +55,7 @@ X-RateLimit-Reset: 1795082520`}
 
       <H2 id="when-limited">When you hit the limit</H2>
       <p>
-        Go over and you get <code>429</code> with a <code>Retry-After</code> header: the number of
+        Go over and you get <code>429</code>{" "}with a <code>Retry-After</code>{" "}header: the number of
         seconds to wait before trying again. Nothing about your request was processed, so it&apos;s safe to
         send again once the wait is over.
       </p>
@@ -69,22 +69,22 @@ X-RateLimit-Reset: 1795082520`}
       <H2 id="staying-under">Staying comfortably under</H2>
       <ul>
         <li>
-          <strong>Send full batches.</strong> One request with 1,000 records beats 1,000 requests with one.
+          <strong>Send full batches.</strong>{" "}One request with 1,000 records beats 1,000 requests with one.
         </li>
         <li>
-          <strong>Poll jobs gently.</strong> Every 2 seconds is plenty. Most jobs finish in seconds.
+          <strong>Poll jobs gently.</strong>{" "}Every 2 seconds is plenty. Most jobs finish in seconds.
         </li>
         <li>
-          <strong>Read only what changed.</strong> Use <code>updatedSince</code> on the applicants list
+          <strong>Read only what changed.</strong>{" "}Use <code>updatedSince</code>{" "}on the applicants list
           instead of fetching everyone every time. See <Link href="/docs/pagination">Pagination</Link>.
         </li>
         <li>
-          <strong>Watch <code>X-RateLimit-Remaining</code></strong> and slow down before it reaches zero.
+          <strong>Watch <code>X-RateLimit-Remaining</code></strong>{" "}and slow down before it reaches zero.
         </li>
       </ul>
       <Callout type="tip">
         <p>
-          Need more than this for a one-off migration? <Link href="/contact">Tell us</Link> what you&apos;re
+          Need more than this for a one-off migration? <Link href="/contact">Tell us</Link>{" "}what you&apos;re
           moving and we&apos;ll help.
         </p>
       </Callout>

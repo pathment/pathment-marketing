@@ -39,9 +39,9 @@ export default function ApiIndexPage() {
         <Table
           rows={[
             ["Base URL", <code key="v">{API_BASE_URL}</code>],
-            ["Format", <>JSON in and out. Send <code>Content-Type: application/json</code> with a body.</>],
-            ["Auth", <><code>Authorization: Bearer pk_live_...</code> on every request. See <Link key="l" href="/docs/authentication">Authentication</Link>.</>],
-            ["Request IDs", <>Every response has an <code>X-Request-Id</code> header. Errors repeat it as <code>requestId</code>.</>],
+            ["Format", <>JSON in and out. Send <code>Content-Type: application/json</code>{" "}with a body.</>],
+            ["Auth", <><code>Authorization: Bearer pk_live_...</code>{" "}on every request. See <Link key="l" href="/docs/authentication">Authentication</Link>.</>],
+            ["Request IDs", <>Every response has an <code>X-Request-Id</code>{" "}header. Errors repeat it as <code>requestId</code>.</>],
             ["Times", "ISO 8601 strings in UTC, such as 2026-11-19T10:02:11Z."],
             ["IDs", "Opaque strings. Store them as they are, don't parse them."],
             ["Lists", <>Cursor paginated. See <Link key="l" href="/docs/pagination">Pagination</Link>.</>],
@@ -109,7 +109,7 @@ X-Request-Id: 2d7f4c1a-9b3e-4a68-8c52-e6a0b9d1f374`}
         <H2 id="the-error-object">The Error object</H2>
         <p>
           Every failed request returns this shape, with an HTTP status that matches <code>error.type</code>.
-          The full list of codes is on the <Link href="/docs/errors">Errors</Link> page.
+          The full list of codes is on the <Link href="/docs/errors">Errors</Link>{" "}page.
         </p>
         <ParamTable
           title="Attributes"

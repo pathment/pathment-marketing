@@ -20,7 +20,7 @@ export default function SendingAssessmentsPage() {
 
       <H2 id="how-it-works">How it works</H2>
       <p>
-        When sending is on and the intake has an assessment set up, each <strong>new</strong> applicant
+        When sending is on and the intake has an assessment set up, each <strong>new</strong>{" "}applicant
         created by the job is emailed the assessment for their level. Their stage moves from
         &ldquo;Added&rdquo; to &ldquo;Assessment sent&rdquo;.
       </p>
@@ -41,12 +41,12 @@ export default function SendingAssessmentsPage() {
         rows={[
           [
             "On the connection",
-            <>Set &ldquo;After each sync&rdquo; to <strong>Send assessment</strong> in Settings → Integrations → Connections.</>,
+            <>Set &ldquo;After each sync&rdquo; to <strong>Send assessment</strong>{" "}in Settings → Integrations → Connections.</>,
             "Every push that uses this connection.",
           ],
           [
             "On the request",
-            <>Send <code>&quot;sendAssessment&quot;: true</code> (or <code>false</code>) in the push body.</>,
+            <>Send <code>&quot;sendAssessment&quot;: true</code>{" "}(or <code>false</code>) in the push body.</>,
             "This push only. Overrides the connection.",
           ],
         ]}
@@ -58,7 +58,7 @@ export default function SendingAssessmentsPage() {
       <CodeBlock samples={pushWithConnectionSamples} title="Push and send assessments" />
       <Callout type="tip" title="Importing an old list?">
         <p>
-          Pass <code>&quot;sendAssessment&quot;: false</code> when you import historical data through a
+          Pass <code>&quot;sendAssessment&quot;: false</code>{" "}when you import historical data through a
           connection that normally sends. People who applied months ago probably shouldn&apos;t get a
           surprise test today.
         </p>
@@ -66,7 +66,7 @@ export default function SendingAssessmentsPage() {
 
       <H2 id="what-they-receive">What the applicant receives</H2>
       <p>
-        Each new applicant gets one email from Pathment with a <strong>private link</strong> to the
+        Each new applicant gets one email from Pathment with a <strong>private link</strong>{" "}to the
         assessment for their <code>level</code>. The link is theirs alone, so treat the email address you
         send as the place the assessment will go.
       </p>
@@ -79,7 +79,7 @@ export default function SendingAssessmentsPage() {
       <p>Pathment never sends someone the same assessment twice by accident. These people are left out:</p>
       <ul>
         <li>
-          <strong>Existing applicants</strong> that the job updated or left unchanged. Only people the job
+          <strong>Existing applicants</strong>{" "}that the job updated or left unchanged. Only people the job
           created are emailed.
         </li>
         <li>
@@ -89,13 +89,13 @@ export default function SendingAssessmentsPage() {
           <strong>Records that failed or were skipped</strong>, including closed applicants.
         </li>
         <li>
-          <strong>Everyone in a dry run.</strong> A dry run never sends anything.
+          <strong>Everyone in a dry run.</strong>{" "}A dry run never sends anything.
         </li>
       </ul>
 
       <H2 id="checking-it-worked">Checking it worked</H2>
       <p>
-        The finished job has an <code>assessmentsSent</code> count. For a first sync of new people it
+        The finished job has an <code>assessmentsSent</code>{" "}count. For a first sync of new people it
         normally matches <code>counts.created</code>.
       </p>
       <ResponseBlock
@@ -109,7 +109,7 @@ export default function SendingAssessmentsPage() {
 }`}
       />
       <p>
-        If <code>assessmentsSent</code> is <code>0</code> when you expected more, check that sending was on
+        If <code>assessmentsSent</code>{" "}is <code>0</code>{" "}when you expected more, check that sending was on
         (on the connection or in the request) and that the intake has an assessment for each level.
       </p>
     </DocsPage>

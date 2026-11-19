@@ -37,7 +37,7 @@ export default function JobsPage() {
               description: (
                 <p>
                   How many records were <code>created</code>, <code>updated</code>, <code>unchanged</code>,{" "}
-                  <code>skipped</code> and <code>failed</code>. Zero until the job finishes.
+                  <code>skipped</code>{" "}and <code>failed</code>. Zero until the job finishes.
                 </p>
               ),
             },
@@ -46,7 +46,7 @@ export default function JobsPage() {
               type: "integer",
               description: (
                 <p>
-                  How many new applicants were emailed their assessment. Always <code>0</code> for a dry run.
+                  How many new applicants were emailed their assessment. Always <code>0</code>{" "}for a dry run.
                 </p>
               ),
             },
@@ -56,8 +56,8 @@ export default function JobsPage() {
               description: (
                 <p>
                   One entry per record that failed or was skipped, up to 500. Each has the record&apos;s{" "}
-                  <code>index</code> in your batch (from 0), its <code>externalId</code> and <code>email</code>,
-                  the <code>field</code> at fault if there is one, a <code>code</code> and a{" "}
+                  <code>index</code>{" "}in your batch (from 0), its <code>externalId</code>{" "}and <code>email</code>,
+                  the <code>field</code>{" "}at fault if there is one, a <code>code</code>{" "}and a{" "}
                   <code>message</code>.
                 </p>
               ),
@@ -80,7 +80,7 @@ export default function JobsPage() {
           ]}
         />
         <p>
-          Poll until the status is <code>succeeded</code>, <code>partial</code> or <code>failed</code>. Those
+          Poll until the status is <code>succeeded</code>, <code>partial</code>{" "}or <code>failed</code>. Those
           three are final.
         </p>
 
@@ -105,7 +105,7 @@ export default function JobsPage() {
           ]}
         />
         <p>
-          The <Link href="/docs/guides/syncing-users#wait-for-the-job">syncing guide</Link> says what to do
+          The <Link href="/docs/guides/syncing-users#wait-for-the-job">syncing guide</Link>{" "}says what to do
           about each.
         </p>
       </RefSplit>
@@ -126,15 +126,15 @@ export default function JobsPage() {
         <H2 id="retrieve-a-job">Retrieve a job</H2>
         <Endpoint method="GET" path="/jobs/{jobId}" />
         <p>
-          Returns a job and its results so far. Requires the <code>intakes:read</code> or the{" "}
-          <code>applicants:write</code> scope, so a push-only key can always check its own jobs.
+          Returns a job and its results so far. Requires the <code>intakes:read</code>{" "}or the{" "}
+          <code>applicants:write</code>{" "}scope, so a push-only key can always check its own jobs.
         </p>
         <ParamTable
           title="Path parameters"
           params={[{ name: "jobId", type: "string", required: true, description: "The job's ID, from the push response." }]}
         />
         <p>
-          <strong>Returns</strong> a Job object, or <code>404</code> with <code>job_not_found</code>.
+          <strong>Returns</strong>{" "}a Job object, or <code>404</code>{" "}with <code>job_not_found</code>.
         </p>
         <p>To wait for a job, poll every 2 seconds until it reaches a final status:</p>
         <CodeBlock samples={pollJobSamples} title="Poll until finished" />
