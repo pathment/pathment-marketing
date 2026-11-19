@@ -5,10 +5,14 @@
  */
 export interface PublishedPlan {
   id: string;
+  /** Stable plan key (community plans are keyed "starter"). */
+  key: string;
   name: string;
   description: string | null;
   currency: string;
   monthlyPriceCents: number;
+  /** 0 when the plan has no annual price. */
+  annualPriceCents: number;
   limits: Record<string, number>;
   features: Record<string, boolean>;
 }
@@ -20,10 +24,12 @@ const apiBase = () =>
 function toPublic(plan: Record<string, unknown>): PublishedPlan {
   return {
     id: plan.id as string,
+    key: String(plan.key ?? ""),
     name: plan.name as string,
     description: (plan.description as string | null) ?? null,
     currency: plan.currency as string,
     monthlyPriceCents: plan.monthlyPriceCents as number,
+    annualPriceCents: Number(plan.annualPriceCents ?? 0),
     limits: plan.limits as Record<string, number>,
     features: plan.features as Record<string, boolean>,
   };
