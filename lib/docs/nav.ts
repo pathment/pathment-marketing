@@ -36,6 +36,7 @@ export interface DocGroup {
 }
 
 const LAUNCH = "2026-11-19";
+const READ_API = "2026-11-20";
 
 function h2(id: string, title: string): TocItem {
   return { id, title, level: 2 };
@@ -53,7 +54,7 @@ export const docsNav: DocGroup[] = [
         title: "Overview",
         description:
           "What the Pathment API does today, where it lives, and the three steps from an API key to applicants in your intake.",
-        updated: LAUNCH,
+        updated: READ_API,
         toc: [
           h2("what-you-can-do", "What you can do today"),
           h2("base-url", "Base URL"),
@@ -87,7 +88,7 @@ export const docsNav: DocGroup[] = [
         title: "Authentication",
         description:
           "API keys, how to send them, what scopes they carry, and how to rotate one without downtime.",
-        updated: LAUNCH,
+        updated: READ_API,
         toc: [
           h2("api-keys", "API keys"),
           h2("creating-a-key", "Creating a key"),
@@ -106,7 +107,7 @@ export const docsNav: DocGroup[] = [
         title: "Errors",
         description:
           "Every error has the same shape. Here are the types, the codes, the HTTP statuses, and what to do about each one.",
-        updated: LAUNCH,
+        updated: READ_API,
         toc: [
           h2("error-shape", "The error shape"),
           h2("status-codes", "Status codes and types"),
@@ -267,6 +268,24 @@ export const docsNav: DocGroup[] = [
         ],
         keywords: ["dryRun", "test", "preview", "csv", "report", "history"],
       },
+      {
+        href: "/docs/guides/reading-progress",
+        title: "Show Pathment progress in your own system",
+        navTitle: "Reading progress",
+        description:
+          "Copy mentee progress into your own system every night: the scopes to use, paging, incremental changes and matching people back.",
+        updated: READ_API,
+        toc: [
+          h2("what-you-need", "What you need"),
+          h2("the-shape-of-the-job", "The shape of the job"),
+          h2("paging-through-progress", "Paging through progress"),
+          h2("incremental-changes", "Incremental changes with updatedSince"),
+          h2("matching-mentees", "Matching mentees to your records"),
+          h2("nightly-script", "A complete nightly script"),
+          h2("privacy", "Privacy"),
+        ],
+        keywords: ["progress", "dashboard", "export", "nightly", "report", "mentees", "attendance", "read api"],
+      },
     ],
   },
   {
@@ -278,7 +297,7 @@ export const docsNav: DocGroup[] = [
         navTitle: "Introduction",
         description:
           "Conventions shared by every endpoint, the objects the API returns, and the full list of endpoints.",
-        updated: LAUNCH,
+        updated: READ_API,
         toc: [
           h2("conventions", "Conventions"),
           h2("endpoints", "Endpoints"),
@@ -339,6 +358,62 @@ export const docsNav: DocGroup[] = [
         ],
         keywords: ["job", "poll", "status", "counts", "partial", "errors"],
       },
+      {
+        href: "/docs/api/programmes",
+        title: "Programmes",
+        description: "Programmes are what people take part in. List them and fetch one by ID.",
+        updated: READ_API,
+        method: "GET",
+        toc: [
+          h2("the-programme-object", "The Programme object"),
+          h2("list-programmes", "List programmes"),
+          h2("retrieve-a-programme", "Retrieve a programme"),
+        ],
+        keywords: ["programme", "program", "fellowship", "internship", "read api"],
+      },
+      {
+        href: "/docs/api/clans",
+        title: "Clans",
+        description: "Clans are the groups mentees are placed in within a programme. List them and fetch one by ID.",
+        updated: READ_API,
+        method: "GET",
+        toc: [
+          h2("the-clan-object", "The Clan object"),
+          h2("list-clans", "List clans"),
+          h2("retrieve-a-clan", "Retrieve a clan"),
+        ],
+        keywords: ["clan", "cohort", "group", "lead mentor", "read api"],
+      },
+      {
+        href: "/docs/api/mentees",
+        title: "Mentees",
+        description:
+          "Mentees are the people placed in your clans. List them with their clans and enrollments, or fetch one.",
+        updated: READ_API,
+        method: "GET",
+        toc: [
+          h2("the-mentee-object", "The Mentee object"),
+          h3("enrollment-statuses", "Enrollment statuses"),
+          h2("list-mentees", "List mentees"),
+          h2("retrieve-a-mentee", "Retrieve a mentee"),
+        ],
+        keywords: ["mentee", "student", "enrollment", "externalId", "personal data", "read api"],
+      },
+      {
+        href: "/docs/api/progress",
+        title: "Progress",
+        description:
+          "How each mentee is doing in a programme: completion, tasks, roadmaps, attendance and certificates.",
+        updated: READ_API,
+        method: "GET",
+        toc: [
+          h2("the-progress-object", "The Progress object"),
+          h3("task-counts", "Task counts"),
+          h2("mentee-progress", "Retrieve a mentee's progress"),
+          h2("programme-progress", "List progress for a programme"),
+        ],
+        keywords: ["progress", "completion", "tasks", "overdue", "attendance", "certificates", "roadmap", "points"],
+      },
     ],
   },
   {
@@ -348,8 +423,9 @@ export const docsNav: DocGroup[] = [
         href: "/docs/changelog",
         title: "Changelog",
         description: "What changed in the API, newest first, and what we're building next.",
-        updated: LAUNCH,
+        updated: READ_API,
         toc: [
+          h2("read-api", "20 November 2026: Read API"),
           h2("v1-launch", "19 November 2026: v1"),
           h2("roadmap", "On the roadmap"),
         ],

@@ -24,6 +24,41 @@ export default function ChangelogPage() {
         announced here first.
       </p>
 
+      <H2 id="read-api">20 November 2026: Read API</H2>
+      <p className="flex flex-wrap gap-2">
+        <Tag>New</Tag>
+        <Tag>Additive</Tag>
+      </p>
+      <p>
+        <strong>Read API: programmes, clans, mentees and progress.</strong>{" "}You can now read what happens in
+        Pathment, not just push people in. Nothing existing changed.
+      </p>
+      <ul>
+        <li>
+          <strong>Programmes and clans.</strong>{" "}<code>GET /programmes</code>,{" "}
+          <code>GET /programmes/&#123;programmeId&#125;</code>,{" "}<code>GET /clans</code>{" "}and{" "}
+          <code>GET /clans/&#123;clanId&#125;</code>, with the new <code>programmes:read</code>{" "}scope.{" "}
+          <Link href="/docs/api/programmes">Programmes</Link>,{" "}<Link href="/docs/api/clans">Clans</Link>
+        </li>
+        <li>
+          <strong>Mentees.</strong>{" "}<code>GET /mentees</code>{" "}and{" "}
+          <code>GET /mentees/&#123;menteeId&#125;</code>, with their clans, enrollments and your{" "}
+          <code>externalId</code>. Filter by programme, clan, email, external ID or{" "}
+          <code>updatedSince</code>. New <code>mentees:read</code>{" "}scope.{" "}
+          <Link href="/docs/api/mentees">Mentees</Link>
+        </li>
+        <li>
+          <strong>Progress.</strong>{" "}<code>GET /mentees/&#123;menteeId&#125;/progress</code>{" "}and{" "}
+          <code>GET /programmes/&#123;programmeId&#125;/progress</code>: completion, tasks, roadmap steps,
+          attendance and certificates. New <code>progress:read</code>{" "}scope.{" "}
+          <Link href="/docs/api/progress">Progress</Link>
+        </li>
+        <li>
+          <strong>New guide:</strong>{" "}
+          <Link href="/docs/guides/reading-progress">Show Pathment progress in your own system</Link>.
+        </li>
+      </ul>
+
       <H2 id="v1-launch">19 November 2026: v1</H2>
       <p className="flex flex-wrap gap-2">
         <Tag>New</Tag>
@@ -68,10 +103,6 @@ export default function ChangelogPage() {
         before they ship.
       </p>
       <ul>
-        <li>
-          <strong>Read API.</strong>{" "}Programmes, cohorts and mentee progress, so you can bring Pathment data
-          into your own reporting.
-        </li>
         <li>
           <strong>Webhooks.</strong>{" "}Pathment calls you when something changes, such as an applicant
           submitting their assessment or a job finishing, so you don&apos;t need to poll.
