@@ -241,6 +241,16 @@ export default function SyncingUsersPage() {
         <code>succeeded</code>, <code>partial</code>{" "}or <code>failed</code>.
       </p>
       <CodeBlock samples={pollJobSamples} title="Poll the job" />
+      <Callout type="tip" title="Rather not poll?">
+        <p>
+          Subscribe a <Link href="/docs/guides/webhooks">webhook</Link>{" "}endpoint to{" "}
+          <Link href="/docs/api/webhook-events#sync-job-completed">
+            <code>sync.job.completed</code>
+          </Link>
+          . Pathment sends you the finished job, counts and errors included, as soon as it&apos;s done,
+          whatever its status.
+        </p>
+      </Callout>
       <p>A finished job tells you what happened to every record:</p>
       <ResponseBlock status={200} title="A partial job" body={jobPartialObject} />
       <Table

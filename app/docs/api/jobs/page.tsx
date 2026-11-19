@@ -138,6 +138,13 @@ export default function JobsPage() {
         </p>
         <p>To wait for a job, poll every 2 seconds until it reaches a final status:</p>
         <CodeBlock samples={pollJobSamples} title="Poll until finished" />
+        <p>
+          Or skip polling: a <Link href="/docs/guides/webhooks">webhook</Link>{" "}endpoint subscribed to{" "}
+          <Link href="/docs/api/webhook-events#sync-job-completed">
+            <code>sync.job.completed</code>
+          </Link>{" "}
+          receives this same Job object as soon as the job finishes, whatever its status.
+        </p>
       </RefSplit>
     </DocsPage>
   );

@@ -24,6 +24,41 @@ export default function ChangelogPage() {
         announced here first.
       </p>
 
+      <H2 id="webhooks">20 November 2026: Webhooks</H2>
+      <p className="flex flex-wrap gap-2">
+        <Tag>New</Tag>
+        <Tag>Additive</Tag>
+      </p>
+      <p>
+        <strong>Webhooks.</strong>{" "}Pathment now tells your server when things happen, so you don&apos;t have
+        to poll.
+      </p>
+      <ul>
+        <li>
+          <strong>Endpoints in the app.</strong>{" "}Admins add them under Settings → Integrations → Webhooks,
+          pick events, and get a signing secret they can reveal or rotate. Each endpoint has Send test, a
+          delivery log and Redeliver.
+        </li>
+        <li>
+          <strong>Signed requests.</strong>{" "}Every event carries a <code>Pathment-Signature</code>{" "}header:
+          HMAC-SHA256 over the timestamp and raw body.
+        </li>
+        <li>
+          <strong>Retries.</strong>{" "}Failed deliveries are retried 7 times over just under two days.
+        </li>
+        <li>
+          <strong>Events:</strong>{" "}<code>applicant.created</code>, <code>applicant.assessment_sent</code>,{" "}
+          <code>applicant.assessment_submitted</code>, <code>applicant.accepted</code>,{" "}
+          <code>applicant.rejected</code>, <code>mentee.joined</code>, <code>task.approved</code>,{" "}
+          <code>roadmap.completed</code>, <code>certificate.issued</code>, <code>sync.job.completed</code>{" "}
+          and <code>ping</code>.
+        </li>
+        <li>
+          <Link href="/docs/guides/webhooks">Webhooks guide</Link>{" "}and{" "}
+          <Link href="/docs/api/webhook-events">event reference</Link>.
+        </li>
+      </ul>
+
       <H2 id="read-api">20 November 2026: Read API</H2>
       <p className="flex flex-wrap gap-2">
         <Tag>New</Tag>
@@ -103,10 +138,6 @@ export default function ChangelogPage() {
         before they ship.
       </p>
       <ul>
-        <li>
-          <strong>Webhooks.</strong>{" "}Pathment calls you when something changes, such as an applicant
-          submitting their assessment or a job finishing, so you don&apos;t need to poll.
-        </li>
         <li>
           <strong>Pull connectors.</strong>{" "}Connect a source you already use and Pathment fetches new people
           on a schedule, using the same connections and field mapping.

@@ -13,10 +13,6 @@ export const metadata = docsMetadata(HREF);
 
 const coming = [
   {
-    title: "Webhooks",
-    body: "We tell you when something changes, like an applicant submitting their assessment, instead of you polling.",
-  },
-  {
     title: "Pull connectors",
     body: "Point Pathment at a source you already use and it fetches new people on a schedule. No code on your side.",
   },
@@ -60,6 +56,12 @@ export default function DocsHome() {
           <strong>Read progress.</strong>{" "}For every mentee in a programme: how much of their work is done,
           overdue tasks, roadmap steps, attendance and certificates. Ideal for your own dashboards.{" "}
           <Link href="/docs/guides/reading-progress">Reading progress</Link>
+        </li>
+        <li>
+          <strong>Get told when things happen.</strong>{" "}Webhooks send an event to your server when an
+          applicant is accepted, a mentee joins a clan, a certificate is issued or a sync finishes, so you
+          don&apos;t have to keep asking.{" "}
+          <Link href="/docs/guides/webhooks">Webhooks</Link>
         </li>
       </ul>
 
@@ -120,10 +122,9 @@ export default function DocsHome() {
 
       <H2 id="whats-coming">What&apos;s coming</H2>
       <p>
-        Next we&apos;re working on telling you when things change, and on doing more of the work for
-        you.
+        Next we&apos;re working on doing more of the work for you.
       </p>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid max-w-md gap-4">
         {coming.map((item) => (
           <div key={item.title} className="rounded-xl border border-dashed border-line bg-surface/60 p-5">
             <p className="flex items-center gap-2 font-semibold text-[var(--docs-heading)]">
