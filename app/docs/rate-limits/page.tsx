@@ -13,8 +13,8 @@ export default function RateLimitsPage() {
   return (
     <DocsPage href={HREF}>
       <p>
-        Limits keep the API fast for everyone. They&apos;re generous enough that a normal sync never gets
-        close, and every response tells you where you stand.
+        A normal sync stays well under these limits, and every response tells you how much room you have
+        left.
       </p>
 
       <H2 id="limits">The limits</H2>
@@ -66,20 +66,21 @@ X-RateLimit-Reset: 1795082520`}
       />
       <CodeBlock samples={retrySamples} title="Retry with backoff" />
 
-      <H2 id="staying-under">Staying comfortably under</H2>
+      <H2 id="staying-under">Staying under the limit</H2>
       <ul>
         <li>
-          <strong>Send full batches.</strong>{" "}One request with 1,000 records beats 1,000 requests with one.
+          Send full batches. One request with 1,000 records costs one request; 1,000 requests with one record
+          each cost 1,000.
         </li>
         <li>
-          <strong>Poll jobs gently.</strong>{" "}Every 2 seconds is plenty. Most jobs finish in seconds.
+          Poll jobs every 2 seconds, not faster. Most jobs finish in a few seconds.
         </li>
         <li>
-          <strong>Read only what changed.</strong>{" "}Use <code>updatedSince</code>{" "}on the applicants list
-          instead of fetching everyone every time. See <Link href="/docs/pagination">Pagination</Link>.
+          Read only what changed. Use <code>updatedSince</code>{" "}on the applicants list instead of
+          fetching everyone every time. See <Link href="/docs/pagination">Pagination</Link>.
         </li>
         <li>
-          <strong>Watch <code>X-RateLimit-Remaining</code></strong>{" "}and slow down before it reaches zero.
+          Watch <code>X-RateLimit-Remaining</code>{" "}and slow down before it reaches zero.
         </li>
       </ul>
       <Callout type="tip">

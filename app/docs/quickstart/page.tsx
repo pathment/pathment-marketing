@@ -36,7 +36,7 @@ export default function QuickstartPage() {
         </li>
         <li>
           The workspace needs at least one <strong>open intake</strong>. If you don&apos;t have one, create
-          it in Pathment first. A test intake is perfect.
+          it in Pathment first. A test intake works well.
         </li>
         <li>
           Pick a language: cURL in a terminal, Node.js 18 or newer, or Python 3.8 or newer with{" "}
@@ -106,8 +106,7 @@ export default function QuickstartPage() {
           <Callout type="tip" title="Why the Idempotency-Key?">
             <p>
               If your network drops and you send the same batch again with the same key, Pathment hands
-              back the original job instead of starting a second one. It&apos;s a free safety net. Read
-              more in <Link href="/docs/idempotency">Idempotency</Link>.
+              back the original job instead of starting a second one. Read more in <Link href="/docs/idempotency">Idempotency</Link>.
             </p>
           </Callout>
         </Step>

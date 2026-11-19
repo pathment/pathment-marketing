@@ -168,12 +168,12 @@ export default function WebhooksGuidePage() {
       <p>Two things to build for from the start:</p>
       <ul>
         <li>
-          <strong>You may get an event more than once.</strong>{" "}Delivery is at least once: if your answer
-          gets lost, Pathment sends the event again. Store each event&apos;s <code>id</code>{" "}and ignore ones
+          You may get an event more than once. Delivery is at least once: if your answer gets
+          lost, Pathment sends the event again. Store each event&apos;s <code>id</code>{" "}and ignore ones
           you&apos;ve already handled.
         </li>
         <li>
-          <strong>Events can arrive out of order.</strong>{" "}A retry can land after a newer event. Use the
+          Events can arrive out of order. A retry can land after a newer event. Use the
           event&apos;s <code>createdAt</code>, or the object&apos;s own <code>updatedAt</code>, to decide which
           is newest, and don&apos;t let an older event overwrite newer data.
         </li>
@@ -221,7 +221,7 @@ export default function WebhooksGuidePage() {
         <li>Rotate the secret if it may have leaked, and update your receiver straight away.</li>
         <li>Ignore duplicate event IDs, and never let an older event overwrite newer data.</li>
         <li>
-          <strong>Mind personal data.</strong>{" "}<code>applicant.*</code>{" "}events and{" "}
+          <code>applicant.*</code>{" "}events and{" "}
           <code>mentee.joined</code>{" "}carry names and email addresses. Only point them at systems that are
           allowed to hold that information.
         </li>

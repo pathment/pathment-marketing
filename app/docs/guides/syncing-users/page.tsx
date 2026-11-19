@@ -152,7 +152,7 @@ export default function SyncingUsersPage() {
           matching and the same jobs as pushing.
         </p>
       </Callout>
-      <p>That gives you one simple loop:</p>
+      <p>The loop looks like this:</p>
       <ol>
         <li>Collect the people from your system.</li>
         <li>Send them in batches of up to 1,000.</li>
@@ -186,7 +186,7 @@ export default function SyncingUsersPage() {
       <H2 id="shape-the-records">2. Shape the records</H2>
       <p>You have two choices.</p>
       <p>
-        <strong>Use Pathment&apos;s field names.</strong>{" "}Build each record with <code>email</code>,{" "}
+        The first is to use Pathment&apos;s field names. Build each record with <code>email</code>,{" "}
         <code>firstName</code>, <code>lastName</code>, <code>phone</code>, <code>level</code>,{" "}
         <code>country</code>{" "}and <code>externalId</code>. Anything else you include is kept under{" "}
         <code>responses</code>, where reviewers can see it. Nothing is dropped.
@@ -211,7 +211,7 @@ export default function SyncingUsersPage() {
         <code>responses</code>{" "}next to <code>github</code>.
       </p>
       <p>
-        <strong>Or send your own shape and let a connection map it.</strong>{" "}Set up a{" "}
+        The second is to send records in your own shape and let a connection map them. Set up a{" "}
         <Link href="/docs/guides/field-mapping">connection</Link>{" "}in Pathment once, then send records
         exactly as your system stores them, with <code>&quot;connection&quot;: &quot;&lt;connection ID&gt;&quot;</code>{" "}
         in the body. This is the better choice if a non-developer should be able to adjust the mapping
@@ -348,7 +348,7 @@ export default function SyncingUsersPage() {
         </li>
         <li>Retries reuse the batch&apos;s Idempotency-Key.</li>
         <li>
-          Someone looks at job errors. A log line nobody reads is the same as no log line.
+          Someone is responsible for reading job errors, not only logging them.
         </li>
       </ul>
     </DocsPage>

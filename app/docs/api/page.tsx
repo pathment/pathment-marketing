@@ -45,7 +45,7 @@ export default function ApiIndexPage() {
     <DocsPage
       href={HREF}
       layout="reference"
-      lead="Everything the Pathment API can do, endpoint by endpoint. Start with the conventions below: they apply to every request."
+      lead="Every endpoint and object in the Pathment API. The conventions below apply to every request."
     >
       <div className="docs-prose max-w-[46rem]">
         <H2 id="conventions">Conventions</H2>

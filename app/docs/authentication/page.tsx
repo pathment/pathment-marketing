@@ -22,8 +22,8 @@ export default function AuthenticationPage() {
       <p>
         It&apos;s always <code>pk_live_</code>{" "}followed by 32 random characters. After you create it,
         Pathment only ever shows its <strong>prefix</strong>: the first 12 characters, such as{" "}
-        <code>pk_live_9fK2</code>. That&apos;s enough to tell your keys apart, and useless to anyone who
-        sees it over your shoulder.
+        <code>pk_live_9fK2</code>. That&apos;s enough to tell your keys apart, but not enough for anyone
+        to use one.
       </p>
 
       <H2 id="creating-a-key">Creating a key</H2>
@@ -60,8 +60,8 @@ export default function AuthenticationPage() {
       </p>
       <CodeBlock samples={meSamples} title="GET /me" />
       <p>
-        Requests must use HTTPS. <code>GET /me</code>{" "}works with any valid key, which makes it a handy
-        health check for an integration.
+        Requests must use HTTPS. <code>GET /me</code>{" "}works with any valid key, so it makes a good health
+        check for an integration.
       </p>
 
       <H2 id="scopes">Scopes</H2>
@@ -123,7 +123,7 @@ export default function AuthenticationPage() {
       </p>
       <p>
         You can <strong>revoke</strong>{" "}a key at any time from the same settings page. It stops working
-        immediately, on the very next request, with <code>revoked_api_key</code>. Revoke a key the moment
+        from the next request, with <code>revoked_api_key</code>. Revoke a key the moment
         you think it might have leaked.
       </p>
 
@@ -149,19 +149,18 @@ export default function AuthenticationPage() {
       <H2 id="good-habits">Good habits</H2>
       <ul>
         <li>
-          <strong>One key per integration.</strong>{" "}If your CRM sync and your student import share a key,
-          you can&apos;t revoke one without breaking the other.
+          Give each integration its own key. If your CRM sync and your student import share one, you
+          can&apos;t revoke it for one without breaking the other.
         </li>
         <li>
-          <strong>Server-side only.</strong>{" "}Never put a key in front-end JavaScript, a mobile app or
-          anywhere a user could read it.
+          Keep keys on the server. Never put one in front-end JavaScript, a mobile app or anywhere a user
+          could read it.
         </li>
         <li>
-          <strong>Smallest scopes that work.</strong>{" "}A reporting script only needs{" "}
-          <code>intakes:read</code>.
+          Give a key only the scopes it uses. A reporting script only needs <code>intakes:read</code>.
         </li>
         <li>
-          <strong>Rotate on a schedule</strong>, and straight away when someone with access leaves.
+          Rotate keys on a schedule, and straight away when someone with access leaves.
         </li>
       </ul>
       <Callout type="note">

@@ -335,7 +335,7 @@ export default function ApplicantsPage() {
               type: "string (ISO 8601)",
               description: (
                 <p>
-                  Only applicants changed after this time. Ideal for regular syncs. See{" "}
+                  Only applicants changed after this time. See{" "}
                   <Link href="/docs/pagination#incremental-reads">incremental reads</Link>.
                 </p>
               ),

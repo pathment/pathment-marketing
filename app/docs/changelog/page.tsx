@@ -30,8 +30,7 @@ export default function ChangelogPage() {
         <Tag>Additive</Tag>
       </p>
       <p>
-        <strong>Pull connectors.</strong>{" "}Pathment can now fetch your people from a URL, so you don&apos;t
-        have to push them.
+        Pathment can now fetch your people from a URL, so you don&apos;t have to push them.
       </p>
       <ul>
         <li>
@@ -64,8 +63,7 @@ export default function ChangelogPage() {
         <Tag>Additive</Tag>
       </p>
       <p>
-        <strong>Webhooks.</strong>{" "}Pathment now tells your server when things happen, so you don&apos;t have
-        to poll.
+        Pathment now tells your server when things happen, so you don&apos;t have to poll.
       </p>
       <ul>
         <li>
@@ -99,8 +97,8 @@ export default function ChangelogPage() {
         <Tag>Additive</Tag>
       </p>
       <p>
-        <strong>Read API: programmes, clans, mentees and progress.</strong>{" "}You can now read what happens in
-        Pathment, not just push people in. Nothing existing changed.
+        You can now read programmes, clans, mentees and progress, as well as push people in. Nothing that
+        already existed changed.
       </p>
       <ul>
         <li>
@@ -124,7 +122,7 @@ export default function ChangelogPage() {
         </li>
         <li>
           <strong>New guide:</strong>{" "}
-          <Link href="/docs/guides/reading-progress">Show Pathment progress in your own system</Link>.
+          <Link href="/docs/guides/reading-progress">Reading progress</Link>.
         </li>
       </ul>
 
@@ -133,7 +131,7 @@ export default function ChangelogPage() {
         <Tag>New</Tag>
         <Tag>v1</Tag>
       </p>
-      <p>The first public version of the Pathment API. It&apos;s about one job: getting people into intakes.</p>
+      <p>The first public version of the Pathment API. It covers getting people into intakes.</p>
       <ul>
         <li>
           <strong>API keys.</strong>{" "}Workspace admins create keys under Settings → Integrations → API keys,

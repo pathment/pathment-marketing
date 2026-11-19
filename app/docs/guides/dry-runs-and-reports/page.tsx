@@ -37,13 +37,13 @@ export default function DryRunsPage() {
       <p>It&apos;s the same request as a real push, with one extra field:</p>
       <CodeBlock samples={dryRunSamples} title="Dry run" />
       <p>
-        You get a job back just like a real push, and poll it the same way. The job has{" "}
+        You get a job back as with a real push, and poll it the same way. The job has{" "}
         <code>&quot;dryRun&quot;: true</code>{" "}so it can&apos;t be mistaken for a real one later.
       </p>
       <Callout type="note">
         <p>
           A dry run doesn&apos;t need an <code>Idempotency-Key</code>, since it changes nothing. Sending one is
-          harmless. Just don&apos;t reuse the dry run&apos;s key for the real push: the body differs, so you&apos;d
+          harmless, but don&apos;t reuse the dry run&apos;s key for the real push: the body differs, so you&apos;d
           get a <code>409</code>.
         </p>
       </Callout>
@@ -53,18 +53,16 @@ export default function DryRunsPage() {
       <p>Read it top down:</p>
       <ul>
         <li>
-          <strong><code>counts</code></strong>{" "}is the headline. Here, 461 people would be created and 39
-          would fail.
+          <code>counts</code>{" "}gives the totals. Here, 461 people would be created and 39 would fail.
         </li>
         <li>
-          <strong><code>errors</code></strong>{" "}says why. Each entry has the record&apos;s <code>index</code>{" "}
+          <code>errors</code>{" "}says why. Each entry has the record&apos;s <code>index</code>{" "}
           in your batch, its IDs, the <code>field</code>{" "}and a <code>code</code>. Up to 500 errors are
           listed per job.
         </li>
         <li>
-          <strong>A pattern is a mapping problem.</strong>{" "}39 <code>missing_email</code>{" "}errors usually
-          mean those records keep their email somewhere your mapping doesn&apos;t read. One or two are
-          usually just bad data.
+          Look for patterns. 39 <code>missing_email</code>{" "}errors usually mean those records keep their
+          email somewhere your mapping doesn&apos;t read. One or two are more likely bad data in the source.
         </li>
       </ul>
       <p>
@@ -85,8 +83,8 @@ export default function DryRunsPage() {
         which connection and intake it used, and its counts.
       </p>
       <p>
-        Each job also has a <strong>downloadable CSV of its errors</strong>. It&apos;s the easiest way to
-        hand a list of bad rows to whoever owns the source data, without anyone reading API responses.
+        Each job also has a <strong>downloadable CSV of its errors</strong>. Use it to hand a list of bad
+        rows to whoever owns the source data, without anyone reading API responses.
       </p>
 
       <H2 id="a-safe-rollout">A safe rollout</H2>

@@ -88,7 +88,7 @@ export default function ReadingProgressPage() {
       </p>
       <CodeBlock samples={menteesUpdatedSinceSamples} title="GET /mentees?updatedSince=..." />
       <p>
-        Save the time just <em>before</em>{" "}each run starts, and use it next time. A change that lands while
+        Save the time <em>before</em>{" "}each run starts, and use it next time. A change that lands while
         the job runs then shows up the following night instead of slipping through.
       </p>
 
@@ -96,16 +96,16 @@ export default function ReadingProgressPage() {
       <p>To link a Pathment mentee to a person in your system:</p>
       <ol>
         <li>
-          <strong>Use <code>externalId</code>{" "}first.</strong>{" "}If the person came into Pathment through a{" "}
+          Try <code>externalId</code>{" "}first. If the person came into Pathment through a{" "}
           <Link href="/docs/guides/syncing-users">sync</Link>, it holds the ID you sent, so the match is
           exact.
         </li>
         <li>
-          <strong>Fall back to email.</strong>{" "}For people added another way, <code>externalId</code>{" "}is{" "}
+          If that&apos;s empty, use email. For people added another way, <code>externalId</code>{" "}is{" "}
           <code>null</code>. Match on email, ignoring case.
         </li>
         <li>
-          <strong>Then store Pathment&apos;s <code>id</code>.</strong>{" "}Once you&apos;ve matched someone, keep
+          Once you&apos;ve matched someone, store Pathment&apos;s <code>id</code>{" "}and keep
           their mentee <code>id</code>{" "}against your record. Progress rows only carry{" "}
           <code>menteeId</code>, so that&apos;s what joins them up.
         </li>
@@ -124,20 +124,20 @@ export default function ReadingProgressPage() {
       <H2 id="privacy">Privacy</H2>
       <ul>
         <li>
-          <strong>Progress on its own has no names.</strong>{" "}A key with only <code>progress:read</code>{" "}sees
+          Progress on its own has no names. A key with only <code>progress:read</code>{" "}sees
           mentee IDs and how they&apos;re doing, nothing that says who they are. If your reporting only needs
           totals and trends, that&apos;s all you need.
         </li>
         <li>
-          <strong><code>mentees:read</code>{" "}is personal data.</strong>{" "}It returns names and email addresses.
+          <code>mentees:read</code>{" "}returns personal data: names and email addresses.
           Grant it only to systems that should hold that information.
         </li>
         <li>
-          <strong>Keep only what you use.</strong>{" "}If your system doesn&apos;t show attendance, don&apos;t store
+          Keep only what you use. If your system doesn&apos;t show attendance, don&apos;t store
           it.
         </li>
         <li>
-          <strong>Mind who can see it.</strong>{" "}Once progress is in your system, your access rules apply,
+          Once progress is in your system, your access rules apply,
           not Pathment&apos;s. Show a mentee&apos;s progress only to the people who could see it in Pathment.
         </li>
       </ul>

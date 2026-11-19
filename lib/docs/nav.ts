@@ -60,7 +60,7 @@ export const docsNav: DocGroup[] = [
         toc: [
           h2("what-you-can-do", "What you can do today"),
           h2("base-url", "Base URL"),
-          h2("three-steps", "The path in three steps"),
+          h2("three-steps", "Your first sync in three steps"),
           h2("start-here", "Start here"),
         ],
         keywords: ["introduction", "api", "developer"],
@@ -107,7 +107,7 @@ export const docsNav: DocGroup[] = [
         href: "/docs/errors",
         title: "Errors",
         description:
-          "Every error has the same shape. Here are the types, the codes, the HTTP statuses, and what to do about each one.",
+          "The shape of every error, each type and code with its HTTP status, and what to do about each one.",
         updated: READ_API,
         toc: [
           h2("error-shape", "The error shape"),
@@ -129,7 +129,7 @@ export const docsNav: DocGroup[] = [
           h2("limits", "The limits"),
           h2("headers", "Rate limit headers"),
           h2("when-limited", "When you hit the limit"),
-          h2("staying-under", "Staying comfortably under"),
+          h2("staying-under", "Staying under the limit"),
         ],
         keywords: ["429", "throttle", "retry-after", "batch size", "quota"],
       },
@@ -164,7 +164,7 @@ export const docsNav: DocGroup[] = [
         href: "/docs/versioning",
         title: "Versioning",
         description:
-          "The version lives in the path. What we change without warning, and what we never do.",
+          "The version is in the path. What can change within v1, and how breaking changes are handled.",
         updated: LAUNCH,
         toc: [
           h2("current-version", "The current version"),
@@ -184,7 +184,7 @@ export const docsNav: DocGroup[] = [
         title: "Syncing users into an intake",
         navTitle: "Syncing users",
         description:
-          "The push model end to end: from records in your system to applicants in a Pathment intake, and how to keep them in step.",
+          "How to push records from your system into a Pathment intake, and keep them up to date over time.",
         updated: WEBHOOKS,
         toc: [
           h2("the-push-model", "The push model"),
@@ -200,8 +200,7 @@ export const docsNav: DocGroup[] = [
       },
       {
         href: "/docs/guides/pulling",
-        title: "Let Pathment fetch your people",
-        navTitle: "Pulling from a URL",
+        title: "Pulling from a URL",
         description:
           "Point a connection at a JSON or CSV URL, or a published Google Sheet, and Pathment pulls everyone into your intake on a schedule.",
         updated: PULL,
@@ -299,8 +298,7 @@ export const docsNav: DocGroup[] = [
       },
       {
         href: "/docs/guides/reading-progress",
-        title: "Show Pathment progress in your own system",
-        navTitle: "Reading progress",
+        title: "Reading progress",
         description:
           "Copy mentee progress into your own system every night: the scopes to use, paging, incremental changes and matching people back.",
         updated: READ_API,
@@ -317,10 +315,9 @@ export const docsNav: DocGroup[] = [
       },
       {
         href: "/docs/guides/webhooks",
-        title: "Get told when things happen",
-        navTitle: "Webhooks",
+        title: "Webhooks",
         description:
-          "Webhooks send events to your server the moment something happens. Set up an endpoint, verify signatures, and handle retries, duplicates and order.",
+          "Pathment sends events to your server when things happen. How to set up an endpoint, verify signatures, and handle retries, duplicates and ordering.",
         updated: WEBHOOKS,
         toc: [
           h2("setting-up", "Setting up an endpoint"),
@@ -493,7 +490,7 @@ export const docsNav: DocGroup[] = [
       {
         href: "/docs/changelog",
         title: "Changelog",
-        description: "What changed in the API, newest first, and what we're building next.",
+        description: "Changes to the API, newest first.",
         updated: WEBHOOKS,
         toc: [
           h2("pull-connectors", "20 November 2026: Pull connectors"),

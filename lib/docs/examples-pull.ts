@@ -86,7 +86,7 @@ app.get("/api/students", async (req, res) => {
   if (!authorised(req)) return res.sendStatus(401);
 
   const page = Math.max(1, Number(req.query.page) || 1);
-  // Everyone who should be in the intake, not just recent changes, in a stable order.
+  // Everyone who should be in the intake, not only recent changes, in a stable order.
   const { rows, total } = await db.students.list({
     status: "applying",
     orderBy: "id",
@@ -127,7 +127,7 @@ def students():
         abort(401)
 
     page = max(1, request.args.get("page", 1, type=int))
-    # Everyone who should be in the intake, not just recent changes, in a stable order.
+    # Everyone who should be in the intake, not only recent changes, in a stable order.
     rows, total = db.list_students(
         status="applying", order_by="id", offset=(page - 1) * PAGE_SIZE, limit=PAGE_SIZE
     )

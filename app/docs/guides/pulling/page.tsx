@@ -35,8 +35,8 @@ export default function PullingPage() {
 
       <H2 id="pull-or-push">Pull or push?</H2>
       <p>
-        There are two ways to get people into an intake. Both end in exactly the same place: the same
-        matching, the same jobs, the same Sync history.
+        There are two ways to get people into an intake. Both use the same matching, create the same
+        jobs and show up in the same Sync history.
       </p>
       <Table
         head={["", "Pull (this guide)", "Push"]}
@@ -345,26 +345,26 @@ export default function PullingPage() {
 
       <H2 id="build-your-endpoint">What to build on your side</H2>
       <p>
-        If you&apos;re a developer making a URL for Pathment to pull from, keep it simple:
+        If you&apos;re building a URL for Pathment to pull from, it needs:
       </p>
       <ul>
         <li>
-          <strong>A plain GET</strong>{" "}that returns JSON (or CSV).
+          A plain GET that returns JSON (or CSV).
         </li>
         <li>
-          <strong>Everyone who should be in the intake, every time</strong>, not just recent changes. Pathment
-          works out what&apos;s new itself, and skips the pull if nothing changed.
+          Everyone who should be in the intake, every time, not only recent changes. Pathment works out
+          what&apos;s new itself, and skips a scheduled pull when nothing changed.
         </li>
         <li>
-          <strong>A stable ID for each person</strong>{" "}that never changes and is never reused. Map it to{" "}
+          A stable ID for each person that never changes and is never reused. Map it to{" "}
           <code>externalId</code>.
         </li>
         <li>
-          <strong>Pages</strong>, if the list is long: a next link in the body or a <code>Link</code>{" "}header,
+          Pages, if the list is long: a next link in the body or a <code>Link</code>{" "}header,
           on the same host. 500 records a page fits the 10,000 limit in 20 pages.
         </li>
         <li>
-          <strong>A read-only token</strong>{" "}made just for this export.
+          A read-only token made only for this export.
         </li>
       </ul>
       <CodeBlock samples={exportEndpointSamples} title="Your export endpoint" />

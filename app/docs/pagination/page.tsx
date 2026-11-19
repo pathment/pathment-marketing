@@ -82,7 +82,7 @@ export default function PaginationPage() {
       </p>
       <CodeBlock samples={updatedSinceSamples} title="Only what changed" />
       <p>
-        Record the time just <em>before</em>{" "}each run starts and use it as <code>updatedSince</code>{" "}next
+        Record the time <em>before</em>{" "}each run starts and use it as <code>updatedSince</code>{" "}next
         time. A change that lands while you&apos;re reading then shows up in the next run, instead of
         falling into a gap. Getting the same person twice is harmless; missing one is not.
       </p>

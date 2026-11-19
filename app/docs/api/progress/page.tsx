@@ -224,7 +224,7 @@ export default function ProgressPage() {
         </p>
         <p>
           For a complete nightly job, see{" "}
-          <Link href="/docs/guides/reading-progress">Show Pathment progress in your own system</Link>.
+          <Link href="/docs/guides/reading-progress">Reading progress</Link>.
         </p>
       </RefSplit>
     </DocsPage>

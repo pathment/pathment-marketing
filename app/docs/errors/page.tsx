@@ -131,15 +131,15 @@ export default function ErrorsPage() {
       <H2 id="request-ids">Request IDs</H2>
       <p>
         Every response, successful or not, has an <code>X-Request-Id</code>{" "}header. Errors repeat it in
-        the body as <code>requestId</code>. Log it alongside the error. If you ever need our help, the
-        request ID lets us find exactly what happened in seconds.
+        the body as <code>requestId</code>. Log it alongside the error. If you ever need our help, send
+        us the request ID and we can find the request in our logs.
       </p>
 
       <H2 id="record-errors">Errors inside a job</H2>
       <p>
         Pushing applicants is different. The request itself succeeds as long as the batch is well formed,
         and problems with <em>individual</em>{" "}records, like one bad email address in 500, are reported on
-        the job instead. One bad record never sinks the rest of the batch.
+        the job instead. One bad record doesn&apos;t stop the rest of the batch.
       </p>
       <p>
         Those record-level codes (<code>invalid_email</code>, <code>duplicate_in_batch</code>{" "}and so on)
@@ -149,16 +149,15 @@ export default function ErrorsPage() {
       <H2 id="handling-errors">Handling errors well</H2>
       <ul>
         <li>
-          <strong>Don&apos;t retry 4xx errors</strong>{" "}(except 429). The same request will fail the same
-          way. Fix it first.
+          Don&apos;t retry 4xx errors other than 429. The same request will fail the same way, so fix
+          it first.
         </li>
         <li>
-          <strong>Retry 429 and 5xx</strong>{" "}with a growing wait. For 429, wait the number of seconds in{" "}
+          Retry 429 and 5xx with a growing wait. For 429, wait the number of seconds in{" "}
           <code>Retry-After</code>.
         </li>
         <li>
-          <strong>Retry pushes with the same Idempotency-Key</strong>, so a retry can never create a second
-          job.
+          Retry a push with the same Idempotency-Key, so the retry can&apos;t create a second job.
         </li>
       </ul>
       <CodeBlock samples={retrySamples} title="Retry with backoff" />

@@ -27,16 +27,16 @@ export default function FieldMappingPage() {
       </p>
       <ul>
         <li>
-          <strong>A name</strong>, like &ldquo;HubSpot contacts&rdquo;.
+          A name, such as &ldquo;HubSpot contacts&rdquo;.
         </li>
         <li>
-          <strong>A target intake</strong>, used as the default when you run syncs from the app.
+          A target intake, used as the default when you run syncs from the app.
         </li>
         <li>
-          <strong>A field mapping</strong>: how to turn one of your records into a Pathment applicant.
+          A field mapping, which says how to turn one of your records into a Pathment applicant.
         </li>
         <li>
-          <strong>What happens after each sync</strong>: nothing, or{" "}
+          What happens after each sync: nothing, or{" "}
           <Link href="/docs/guides/sending-assessments">send the assessment</Link>{" "}to new applicants.
         </li>
       </ul>
@@ -142,7 +142,7 @@ export default function FieldMappingPage() {
           [c("answers[2].value"), "value from the third answer."],
         ]}
       />
-      <p>If a path doesn&apos;t exist in a record, the field is simply left empty for that record.</p>
+      <p>If a path doesn&apos;t exist in a record, the field is left empty for that record.</p>
 
       <H3 id="transforms">Transforms</H3>
       <p>

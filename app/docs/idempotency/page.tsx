@@ -17,10 +17,9 @@ export default function IdempotencyPage() {
         before the response arrives. Did Pathment get it? You can&apos;t tell, so you send it again.
       </p>
       <p>
-        Pathment never creates duplicate applicants, so a resend is never a disaster. But without
+        Pathment never creates duplicate applicants, so resending can&apos;t add anyone twice. But without
         idempotency you&apos;d get two jobs for one batch, two entries in your sync history, and two rounds
-        of work. With an <code>Idempotency-Key</code>, the second request simply hands you back the first
-        job.
+        of work. With an <code>Idempotency-Key</code>, the second request returns the first job instead.
       </p>
 
       <H2 id="how-it-works">How it works</H2>
@@ -55,14 +54,14 @@ export default function IdempotencyPage() {
 
       <H2 id="choosing-a-key">Choosing a key</H2>
       <p>
-        Generate a random UUID for each batch, just before you send it the first time. Store it with the
+        Generate a random UUID for each batch before you send it the first time. Store it with the
         batch, so a retry can find it again.
       </p>
       <CodeBlock samples={pushSamples} title="Push with an Idempotency-Key" />
       <Callout type="tip" title="Deterministic keys work too">
         <p>
           If your batches have a natural identity, like &ldquo;the 2 a.m. import on 19 November, page
-          3&rdquo;, a key built from that (<code>nightly-2026-11-19-p3</code>) works well. The key just
+          3&rdquo;, a key built from that (<code>nightly-2026-11-19-p3</code>) works well. The key
           needs to be the same for retries of one batch and different for every other batch.
         </p>
       </Callout>

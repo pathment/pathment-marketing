@@ -25,7 +25,7 @@ export default function SendingAssessmentsPage() {
         &ldquo;Added&rdquo; to &ldquo;Assessment sent&rdquo;.
       </p>
       <p>
-        That&apos;s it. There&apos;s no separate call to make, and the job report tells you how many went out.
+        You don&apos;t make a separate call. The job report tells you how many emails went out.
       </p>
       <Callout type="note">
         <p>
@@ -79,17 +79,17 @@ export default function SendingAssessmentsPage() {
       <p>Pathment never sends someone the same assessment twice by accident. These people are left out:</p>
       <ul>
         <li>
-          <strong>Existing applicants</strong>{" "}that the job updated or left unchanged. Only people the job
-          created are emailed.
+          Existing applicants that the job updated or left unchanged. Only people the job created
+          are emailed.
         </li>
         <li>
-          <strong>Anyone already sent the assessment</strong>, or who has already submitted it.
+          Anyone who was already sent the assessment, or has already submitted it.
         </li>
         <li>
-          <strong>Records that failed or were skipped</strong>, including closed applicants.
+          Records that failed or were skipped, including closed applicants.
         </li>
         <li>
-          <strong>Everyone in a dry run.</strong>{" "}A dry run never sends anything.
+          Everyone in a dry run. A dry run never sends anything.
         </li>
       </ul>
 

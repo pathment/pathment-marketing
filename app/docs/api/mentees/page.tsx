@@ -48,8 +48,8 @@ export default function MenteesPage() {
               description: (
                 <p>
                   Your ID for them, when they came in through a{" "}
-                  <Link href="/docs/guides/syncing-users">sync</Link>. Handy for matching them back to your
-                  own system. <code>null</code>{" "}for people added another way.
+                  <Link href="/docs/guides/syncing-users">sync</Link>. Use it to match them back to your own
+                  system. <code>null</code>{" "}for people added another way.
                 </p>
               ),
             },
