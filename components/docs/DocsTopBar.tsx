@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { docsSections } from "../../lib/docs/nav";
 import { APP_LOGIN_URL } from "../../lib/links";
 import { ThemeToggle } from "../landing/ThemeToggle";
@@ -93,7 +94,9 @@ export function DocsTopBar() {
         </div>
       </div>
 
-      {drawerOpen ? (
+      {/* Portalled to <body>: the bar's backdrop blur would otherwise clip this
+          fixed layer to the bar itself. It sits under the bar (z-40 < z-50). */}
+      {drawerOpen ? createPortal(
         <div className="fixed inset-0 top-[var(--docs-topbar)] z-40 lg:hidden">
           <div className="absolute inset-0 bg-[#04110f]/40 dark:bg-black/70" onClick={() => setDrawerOpen(false)} aria-hidden />
           <div
@@ -123,7 +126,8 @@ export function DocsTopBar() {
             </ul>
             <DocsNav onNavigate={() => setDrawerOpen(false)} />
           </div>
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </header>
   );

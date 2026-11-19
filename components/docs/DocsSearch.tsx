@@ -3,6 +3,7 @@
 import { CornerDownLeft, FileText, Hash, Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useId, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { searchDocs, searchIndex, suggestedSearches, type SearchEntry } from "../../lib/docs/search";
 
 const noopSubscribe = () => () => {};
@@ -66,7 +67,9 @@ export function DocsSearch() {
       >
         <Search className="h-[1.05rem] w-[1.05rem]" aria-hidden />
       </button>
-      {open ? <SearchDialog onClose={() => setOpen(false)} /> : null}
+      {/* Rendered into <body>: the top bar's backdrop blur makes it the containing
+          block for fixed children, which would clip the overlay to the bar. */}
+      {open ? createPortal(<SearchDialog onClose={() => setOpen(false)} />, document.body) : null}
     </>
   );
 }
