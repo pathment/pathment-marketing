@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, Lock, MonitorSmartphone, PlayCircle, Sprout, UserX } from "lucide-react";
 import { APP_REGISTER_URL } from "../../lib/links";
 import { HeroActivity } from "./HeroActivity";
 import { proof } from "./site-content";
@@ -14,6 +14,13 @@ import { TrackedLink } from "./TrackedLink";
  * The product shot straddles the green band and the page below it, so the
  * hero flows into the proof band instead of ending in a box.
  */
+const trust = [
+  { icon: UserX, label: "Demo without signing up" },
+  { icon: Sprout, label: "Free Starter plan" },
+  { icon: MonitorSmartphone, label: "Web and Android" },
+  { icon: Lock, label: "We never sell your data" },
+] as const;
+
 export function Hero() {
   const members = proof.metrics[0];
 
@@ -80,9 +87,15 @@ export function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </TrackedLink>
           </div>
-          <p className="mt-4 text-[13px] text-white/55">
-            The demo needs no account. The Starter plan is free.
-          </p>
+          {/* Objections answered before the first scroll. */}
+          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-white/70">
+            {trust.map((item) => (
+              <li key={item.label} className="inline-flex items-center gap-1.5">
+                <item.icon className="h-3.5 w-3.5 text-[var(--leaf)]" />
+                {item.label}
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* The stage */}

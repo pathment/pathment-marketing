@@ -58,11 +58,14 @@ test("homepage keeps the narrative order from claim to ask", async () => {
   const order = [
     "<Hero />",
     "<ProofBand />",
+    "<ReplaceStack />",
     "<HowItWorks />",
     "<RoleWorkspaces />",
     "<Toolkit />",
     "<MobileExperience />",
-    "<PricingPreview />",
+    "<TrustAndShipped />",
+    "<PricingPreview",
+    "<HomeFaq />",
     "<FinalCta />",
   ];
   let cursor = -1;
@@ -79,7 +82,7 @@ test("every in-page nav target exists as a section id", async () => {
   );
   const home = (
     await Promise.all(
-      ["Hero", "ProofBand", "HowItWorks", "RoleWorkspaces", "Toolkit", "MobileExperience", "PricingPreview", "FinalCta"].map(
+      ["Hero", "ProofBand", "ReplaceStack", "HowItWorks", "RoleWorkspaces", "Toolkit", "MobileExperience", "TrustAndShipped", "PricingPreview", "HomeFaq", "FinalCta"].map(
         (name) => source(`components/landing/${name}.tsx`),
       )
     )

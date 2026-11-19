@@ -68,13 +68,16 @@ under `components/landing/`:
 | Section | Component | Job |
 | --- | --- | --- |
 | Announcement | `AnnouncementBar` | Dismissible Google Play launch notice, remembered in local storage (key `-v2`) |
-| Hero | `Hero` | Forest-green claim with demo and Start free CTAs, admin screen in a laptop frame |
+| Hero | `Hero` | Proof pill, centered claim, trust line, product shot with the Android phone and live activity card |
 | Proof | `ProofBand` | Dev Weekends with the verified headline and detail figures |
+| Problem | `ReplaceStack` | The five tools a program runs on today, against one record |
 | Mechanism | `HowItWorks` | Launch a cohort, keep everyone moving, prove the outcomes |
-| Product | `RoleWorkspaces` | Admin / Mentor / Mentee tabs over the real screenshots, with role highlights |
-| Capabilities | `Toolkit` | Four toolkit cards plus the audiences row the Solutions menu links to |
-| Reach | `MobileExperience` | Android band with real Google Play screens and the store badge |
-| Price | `PricingPreview` | Live plans from `/api/plans` as three compact cards |
+| Product | `RoleWorkspaces` | Admin / Mentor / Mentee tabs over the real screenshots |
+| Capabilities | `Toolkit` | Bento of code-drawn UI vignettes, plus the audiences row |
+| Reach | `MobileExperience` | Android band with the Google Play artwork |
+| Trust | `TrustAndShipped` | Verified privacy and security points, and a dated "recently shipped" log |
+| Price | `PricingPreview` | Live plans, server-rendered from `lib/plans.ts` and refreshed on the client |
+| Objections | `HomeFaq` | Disclosure rows, also emitted as FAQPage structured data |
 | Ask | `FinalCta` | Demo and free-workspace CTAs, with a link to the contact form |
 
 All copy lives in `components/landing/site-content.ts`. Edit that file to change

@@ -74,7 +74,7 @@ export const proof: {
     },
     {
       value: "22h",
-      label: "median submission to review",
+      label: "median time to review",
       note: "53% reviewed inside a day, 69% inside two",
     },
   ],
@@ -183,3 +183,52 @@ export const roleWorkspaces = [
     ],
   },
 ] as const;
+
+/* -------------------------------------------------------------------------- */
+/* FAQ                                                                         */
+/* -------------------------------------------------------------------------- */
+
+/** Rendered on the homepage and emitted as FAQPage structured data. */
+export const homeFaq = [
+  {
+    question: "Is the Starter plan really free?",
+    answer:
+      "Yes. Starter is free for one small community: run a cohort end to end before you commit. Its member, program and clan limits are published on the pricing page, and no card is needed.",
+  },
+  {
+    question: "What does Pathment replace?",
+    answer:
+      "Usually a spreadsheet for the roster, a form for intake, a chat group for support, a folder for submissions, and somebody's memory for who approved what. Pathment puts all five on one record.",
+  },
+  {
+    question: "Will volunteer mentors actually use it?",
+    answer:
+      "Mentors open to a review queue ordered by who has waited longest, and they can approve or request changes right on the work, on the web or from the Android app. There is nothing to set up on their side.",
+  },
+  {
+    question: "How do people join our workspace?",
+    answer:
+      "Applicants come in through a shareable apply link and your own assessment. Accepted members are invited or join through a clan link, so nobody creates an organization by accident.",
+  },
+  {
+    question: "What is a clan?",
+    answer:
+      "A mentor-led group inside your program. Mentees get a smaller circle for check-ins and peer support, and you get a unit you can review clan by clan instead of staring at 200 individuals.",
+  },
+  {
+    question: "Which AI does Pathment use?",
+    answer:
+      "Yours. Pathment is bring-your-own-key and works with any OpenAI-compatible provider, including OpenAI, Anthropic, Groq and OpenRouter. AI helps draft roadmaps and evaluations; it never makes the approval decision for a mentor.",
+  },
+  {
+    question: "Who owns our data?",
+    answer:
+      "You do. We do not sell personal information, connections are encrypted, and members can ask for a copy of their data or have their account deleted at any time.",
+  },
+  {
+    question: "Is there a mobile app?",
+    answer:
+      "Yes, a native Android app on Google Play for admins, mentors and mentees, on the same record as the web workspace. You can try every mobile screen in the browser demo first.",
+  },
+] as const;
+

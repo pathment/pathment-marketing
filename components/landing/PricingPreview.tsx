@@ -7,6 +7,12 @@ import { formatPrice, label, planHref, usePublishedPlans, type Plan } from "./Pu
 
 const planIcons = [Sprout, BarChart3, Layers] as const;
 
+const assurances = [
+  "No card, no automatic charge",
+  "A person confirms the plan fits before anything changes",
+  "Onboarding guidance on every plan",
+] as const;
+
 const count = (value: number) => (value < 0 ? "Unlimited" : value.toLocaleString("en"));
 
 /** Three short lines per plan, all derived from the published limits and features. */
@@ -35,8 +41,8 @@ function highlights(plan: Plan) {
  * Live plans on the homepage. Prices come from the published catalogue via
  * /api/plans, so the page cannot drift from what the product actually sells.
  */
-export function PricingPreview() {
-  const { plans, state, retry } = usePublishedPlans();
+export function PricingPreview({ initialPlans }: { initialPlans?: Plan[] | null }) {
+  const { plans, state, retry } = usePublishedPlans(initialPlans);
 
   return (
     <section id="pricing" aria-labelledby="pricing-heading" className="lp-bg scroll-mt-20">
@@ -50,8 +56,17 @@ export function PricingPreview() {
             Simple, transparent pricing for programs of any size.
           </h2>
           <p className="mt-4 text-sm leading-6 text-muted">
-            Get started for free, and scale as your program grows.
+            Get started for free, and scale as your program grows. Published
+            prices, no sales call required.
           </p>
+          <ul className="mt-5 space-y-2">
+            {assurances.map((item) => (
+              <li key={item} className="flex gap-2 text-[13px] leading-5 text-ink/80">
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--lp-green)]" strokeWidth={2.75} />
+                {item}
+              </li>
+            ))}
+          </ul>
           <Link
             href="/pricing"
             className="mt-5 inline-block text-sm font-semibold text-[var(--lp-green)] underline-offset-4 hover:underline"
