@@ -69,26 +69,26 @@ export function ReplaceStack() {
             </div>
           </Reveal>
 
-          <div aria-hidden className="mx-auto grid h-12 w-12 rotate-90 place-items-center rounded-full bg-[var(--forest)] text-[var(--leaf)] shadow-[0_14px_30px_-14px_rgba(7,42,32,0.9)] lg:rotate-0">
+          <div aria-hidden className="mx-auto grid h-11 w-11 rotate-90 place-items-center rounded-full border border-[var(--lp-green)]/30 bg-surface text-[var(--lp-green)] lg:rotate-0">
             <ArrowRight className="h-5 w-5" />
           </div>
 
           <Reveal delay={0.1}>
-            <div className="lp-panel rounded-2xl p-6 sm:p-8">
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--leaf)]">
+            <div className="rounded-2xl border border-[var(--lp-green)]/25 bg-[var(--lp-tint)] p-6 shadow-[0_24px_60px_-40px_rgba(23,120,75,0.6)] sm:p-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--lp-green)]">
                 With Pathment
               </p>
               <ul className="mt-5 space-y-3">
                 {after.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-[14.5px] text-white/90">
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[var(--leaf)] text-[var(--leaf-ink)]">
+                  <li key={item} className="flex items-center gap-3 text-[14.5px] text-ink">
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[var(--lp-green)] text-white dark:text-black">
                       <Check className="h-3 w-3" strokeWidth={3.5} />
                     </span>
                     {item}
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 text-[13px] leading-6 text-white/65">
+              <p className="mt-6 text-[13px] leading-6 text-muted">
                 The roadmap, the submission, the review and the roadblock live
                 on one record, visible to the person who needs it, when they
                 need it.

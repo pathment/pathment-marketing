@@ -3,16 +3,14 @@ import { FinalCta } from "../components/landing/FinalCta";
 import { Footer } from "../components/landing/Footer";
 import { Hero } from "../components/landing/Hero";
 import { HomeFaq } from "../components/landing/HomeFaq";
-import { HowItWorks } from "../components/landing/HowItWorks";
-import { MobileExperience } from "../components/landing/MobileExperience";
+import { Journey } from "../components/landing/Journey";
 import { Navbar } from "../components/landing/Navbar";
 import { PricingPreview } from "../components/landing/PricingPreview";
 import { ProofBand } from "../components/landing/ProofBand";
 import { ReplaceStack } from "../components/landing/ReplaceStack";
 import { RoleWorkspaces } from "../components/landing/RoleWorkspaces";
 import { homeFaq } from "../components/landing/site-content";
-import { Toolkit } from "../components/landing/Toolkit";
-import { TrustAndShipped } from "../components/landing/TrustAndShipped";
+import { TrustStrip } from "../components/landing/TrustStrip";
 import { ANDROID_APP_URL } from "../lib/links";
 import { getPublishedPlansOrNull } from "../lib/plans";
 
@@ -55,16 +53,15 @@ export default async function HomePage() {
       <AnnouncementBar />
       <Navbar />
       <main id="main-content">
-        {/* Claim → proof → the problem → the loop → each seat → the parts →
-            reach → trust → price → objections → ask. */}
+        {/* Claim → proof → the problem → one cohort's journey → each seat
+            (with Android) → trust → price → objections → ask. Green only
+            bookends the page: the hero and the closing call to action. */}
         <Hero />
         <ProofBand />
         <ReplaceStack />
-        <HowItWorks />
+        <Journey />
         <RoleWorkspaces />
-        <Toolkit />
-        <MobileExperience />
-        <TrustAndShipped />
+        <TrustStrip />
         <PricingPreview initialPlans={plans} />
         <HomeFaq />
         <FinalCta />

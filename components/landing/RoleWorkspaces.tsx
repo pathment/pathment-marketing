@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { GooglePlayButton } from "./GooglePlayButton";
 import { ArrowRight, Check, GraduationCap, UserCog, Users } from "lucide-react";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { roleWorkspaces } from "./site-content";
@@ -135,6 +137,40 @@ export function RoleWorkspaces() {
             Try the {workspace.label.toLowerCase()} workspace
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </TrackedLink>
+        </div>
+      </div>
+
+      {/* The same record on Android: one row, not a section of its own. */}
+      <div id="mobile" className="relative scroll-mt-24 border-t border-line bg-white/60 dark:bg-black/40">
+        <div className="shell flex flex-col items-center gap-6 py-8 sm:flex-row sm:gap-8">
+          <div className="lp-phone w-24 shrink-0 -rotate-3 sm:w-28">
+            <Image
+              src="/mobile/hero-mentor-home.webp"
+              alt="Pathment Android mentor home: who has waited longest for a review."
+              width={600}
+              height={1285}
+              unoptimized
+              className="h-auto w-full"
+            />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <p className="font-display text-lg font-semibold tracking-tight text-ink">
+              Every role, on the same record, from an Android phone.
+            </p>
+            <p className="mt-1 text-sm leading-6 text-muted">
+              Mentors review and approve between meetings; mentees see their next
+              step; admins clear the intake queue on the go.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-col items-center gap-2 sm:items-end">
+            <GooglePlayButton source="roles_android_row" />
+            <Link
+              href="/demo?device=mobile"
+              className="text-[13px] font-semibold text-[var(--lp-green)] underline-offset-4 hover:underline"
+            >
+              Try it in your browser
+            </Link>
+          </div>
         </div>
       </div>
     </section>

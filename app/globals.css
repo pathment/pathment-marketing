@@ -1204,6 +1204,11 @@ body {
   color: var(--lp-green);
 }
 
+/*
+ * Typography rule: every section heading (h2) on the page uses this serif.
+ * The hero and the closing call to action are the two bookends and use the
+ * sans display face; card titles, steps and UI text are always sans.
+ */
 .lp-heading {
   font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-weight: 700;

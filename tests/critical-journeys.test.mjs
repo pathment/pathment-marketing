@@ -15,12 +15,13 @@ test("canonical application destinations are centralized and correct", async () 
 
 test("homepage presents the interactive Android experience without test-phase copy", async () => {
   const page = await source("app/page.tsx");
-  const mobile = await source("components/landing/MobileExperience.tsx");
+  // The Android app lives as one row inside the role section.
+  const mobile = await source("components/landing/RoleWorkspaces.tsx");
   const product = await source("components/mobile/MobileProductDemo.tsx");
-  assert.match(page, /MobileExperience/);
+  assert.match(page, /RoleWorkspaces/);
   assert.match(mobile, /\/demo\?device=mobile/);
   assert.match(mobile, /GooglePlayButton/);
-  assert.match(mobile, /Google Play/);
+  assert.match(mobile, /Android/);
   assert.doesNotMatch(mobile, /closed test|testing phase|invited tester/i);
   for (const destination of ["Home", "Intake", "People", "Review", "Journey", "Inbox", "More"]) {
     assert.match(product, new RegExp(`label: "${destination}"`));
@@ -59,11 +60,9 @@ test("homepage keeps the narrative order from claim to ask", async () => {
     "<Hero />",
     "<ProofBand />",
     "<ReplaceStack />",
-    "<HowItWorks />",
+    "<Journey />",
     "<RoleWorkspaces />",
-    "<Toolkit />",
-    "<MobileExperience />",
-    "<TrustAndShipped />",
+    "<TrustStrip />",
     "<PricingPreview",
     "<HomeFaq />",
     "<FinalCta />",
@@ -82,7 +81,7 @@ test("every in-page nav target exists as a section id", async () => {
   );
   const home = (
     await Promise.all(
-      ["Hero", "ProofBand", "ReplaceStack", "HowItWorks", "RoleWorkspaces", "Toolkit", "MobileExperience", "TrustAndShipped", "PricingPreview", "HomeFaq", "FinalCta"].map(
+      ["Hero", "ProofBand", "ReplaceStack", "Journey", "RoleWorkspaces", "TrustStrip", "PricingPreview", "HomeFaq", "FinalCta"].map(
         (name) => source(`components/landing/${name}.tsx`),
       )
     )
