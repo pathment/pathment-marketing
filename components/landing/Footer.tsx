@@ -13,6 +13,7 @@ const columns = [
       { href: "/#lifecycle", label: "How it works" },
       { href: "/#mobile", label: "Android app" },
       { href: "/demo", label: "Interactive demo" },
+      { href: "/docs", label: "Developer docs" },
     ],
   },
   {

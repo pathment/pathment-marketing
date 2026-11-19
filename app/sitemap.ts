@@ -1,5 +1,13 @@
 import type { MetadataRoute } from "next";
+import { allDocPages } from "../lib/docs/nav";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["", "/demo", "/pricing", "/contact", "/privacy", "/account-deletion"].map((path) => ({ url: `https://pathment.me${path}`, lastModified: new Date(), changeFrequency: path === "" ? "weekly" : "monthly", priority: path === "" ? 1 : path === "/demo" ? 0.9 : 0.7 }));
+  const site: MetadataRoute.Sitemap = ["", "/demo", "/pricing", "/contact", "/privacy", "/account-deletion"].map((path) => ({ url: `https://pathment.me${path}`, lastModified: new Date(), changeFrequency: path === "" ? "weekly" : "monthly", priority: path === "" ? 1 : path === "/demo" ? 0.9 : 0.7 }));
+  const docs: MetadataRoute.Sitemap = allDocPages.map((page) => ({
+    url: `https://pathment.me${page.href}`,
+    lastModified: new Date(`${page.updated}T00:00:00Z`),
+    changeFrequency: "monthly",
+    priority: page.href === "/docs" ? 0.8 : 0.6,
+  }));
+  return [...site, ...docs];
 }
